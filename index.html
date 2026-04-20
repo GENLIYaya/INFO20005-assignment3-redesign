@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.2.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/5acb3a2d25.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="announcement" id="announcement"></div>
+
+<header class="site-header">
+  <div class="topbar shell" style="width: 100%; max-width: none;">
+    <button class="menu-toggle" id="menuOpen" aria-label="Open menu">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <a href="#home" class="brand" data-route="home">Jones &amp; Co</a>
+
+    <!-- 5-item desktop nav: Shop · Collections · Journal · About · Sale -->
+    <nav class="desktop-nav" aria-label="Primary">
+      <a href="#shop" data-route="shop">Shop</a>
+      <a href="#shop" data-route="shop">Collections</a>
+      <a href="#journal">Journal</a>
+      <a href="#about">About</a>
+      <a href="#shop" data-route="shop" data-filter="sale">Sale</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="btn-icon" id="searchOpen" aria-label="Search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+      <button class="btn-icon" id="wishOpen" aria-label="Wishlist">
+        <i class="fa-regular fa-heart"></i>
+      </button>
+      <button class="btn-icon" id="cartOpen" aria-label="Cart" data-route="cart">
+        <i class="fa-regular fa-cart-shopping"></i>
+        <span class="badge" id="cartBadge">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer-scrim" id="drawerScrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer-head">
+    <span class="brand">Jones &amp; Co</span>
+    <button class="drawer-close" id="menuClose" aria-label="Close menu">✕</button>
+  </div>
+  <ul class="drawer-nav">
+    <li><a href="#shop" data-route="shop">Shop</a></li>
+    <li>
+      <a href="#shop" data-route="shop">Collections</a>
+      <ul class="sub">
+        <li><a href="#shop" data-route="shop" data-filter="wallart">Wall Art</a></li>
+        <li><a href="#shop" data-route="shop" data-filter="decorating">Decorating</a></li>
+        <li><a href="#shop" data-route="shop" data-filter="tableware">Tableware</a></li>
+        <li><a href="#shop" data-route="shop" data-filter="sale">Sale</a></li>
+      </ul>
+    </li>
+    <li><a href="#journal">Journal</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#shop" data-route="shop" data-filter="sale">Sale</a></li>
+  </ul>
+  <div class="drawer-foot">
+    Free shipping over $75.<br>
+    Use <strong>JONES10</strong> or <strong>FIRST10</strong> for 10% off.
+  </div>
+</aside>
+
+
+</body>
+</html>
