@@ -12,6 +12,7 @@
     <script src="https://kit.fontawesome.com/5acb3a2d25.js" crossorigin="anonymous"></script>
 </head>
 <body>
+
     <div class="announcement" id="announcement"></div>
 
 <header class="site-header">
@@ -152,7 +153,7 @@
 
 const PRODUCTS = [
   { id:'sweetheart',
-    name:'Chino Mug — Sweetheart',
+    name:'Chino Mug Sweetheart',
     cat:'tableware',
     catLabel:'Tableware',
     price:33, 
@@ -187,7 +188,187 @@ const PRODUCTS = [
       shipping:'Free tracked shipping over $75. Ships in 1–2 business days.'
     }
   },
-  
+  { id:'love', 
+    name:'Love Notes Mug My Person', 
+    cat:'tableware', 
+    catLabel:'Tableware',
+    price:44, 
+    comparePrice:null, 
+    rating:4.9, 
+    reviews:36, 
+    stock:'in', 
+    isNew:false,
+    desc:'A cheerful everyday mug with expressive hand-painted lettering. Microwave and dishwasher safe.',
+    swatches:[{c:'#E26963',n:'Terracotta'},{c:'#84A59D',n:'Sage'}],
+    accordion:{
+      details:'Earthenware mug, approx. 350ml capacity. Blue striped handle.',
+      care:'Top-rack dishwasher safe. Microwave safe.',
+      shipping:'Free tracked shipping over $75.'
+    }
+  },
+  { id:'chino', 
+    name:'Chino Mug Navy Lines', 
+    cat:'tableware', 
+    catLabel:'Tableware',
+    price:33, 
+    comparePrice:null, 
+    rating:4.7, 
+    reviews:24, 
+    stock:'in', 
+    isNew:false,
+    desc:'The Chino Mug is the everyday hero — the right weight, the right size, beautiful enough to feel like a treat every morning.',
+    swatches:[{c:'#84A59D',n:'Navy Lines'},{c:'#F5CAC3',n:'Blush Spot'}],
+    accordion:{
+      details:'Striped earthenware mug, approx. 320ml.',
+      care:'Dishwasher and microwave safe.',
+      shipping:'Free tracked shipping over $75.'
+    }
+  },
+  { id:'inked', 
+    name:'Inked Mug — No Worries', 
+    cat:'tableware', 
+    catLabel:'Tableware',
+    price:33, 
+    comparePrice:null, 
+    rating:4.8, 
+    reviews:14, 
+    stock:'in', 
+    isNew:true,
+    desc:'Illustrated in bold graphic style, this mug carries a message that lands with warmth and humour.',
+    swatches:[{c:'#84A59D',n:'Blue White'},{c:'#F7F1E8',n:'Cream'}],
+    accordion:{
+      details:'Illustrated earthenware mug, approx. 320ml.',
+      care:'Top-rack dishwasher safe.',
+      shipping:'Free tracked shipping over $75.'
+    }
+  },
+  { id:'sage', 
+    name:'Sage Stem Vase', 
+    cat:'decorating', 
+    catLabel:'Decorating',
+    price:68, 
+    comparePrice:null, 
+    rating:4.9, 
+    reviews:41, 
+    stock:'in', 
+    isNew:true,
+    desc:'Slender bone china vase in a matte sage finish. Designed to hold a single stem or a small bunch.',
+    swatches:[{c:'#84A59D',n:'Sage'},{c:'#F7F1E8',n:'Cream'}],
+    accordion:{
+      details:'Bone china, approx. 22cm H. Hand wash. Limited edition.',
+      care:'Hand wash gently.',
+      shipping:'Free tracked shipping over $75.'
+    }
+  },
+  { id:'sunset', 
+    name:'Sunset Serving Bowl', 
+    cat:'tableware', 
+    catLabel:'Tableware',
+    price:45, 
+    comparePrice:null, 
+    rating:4.6, 
+    reviews:29, 
+    stock:'in', 
+    isNew:false,
+    desc:'Deep stoneware bowl glazed in a sunset gradient. Perfect for pasta, ramen or salad.',
+    swatches:[{c:'#F6B060',n:'Sunset'},{c:'#E26963',n:'Coral'}],
+    accordion:{
+      details:'Stoneware, approx. 800ml capacity. Food safe.',
+      care:'Dishwasher safe.',
+      shipping:'Free tracked shipping over $75.'
+    }
+  },
+  { id:'desert', 
+    name:'Desert Jug', 
+    cat:'decorating', 
+    catLabel:'Decorating',
+    price:78, 
+    comparePrice:null, 
+    rating:4.8, 
+    reviews:12, 
+    stock:'low', 
+    isNew:true,
+    desc:'Statement jug in a warm sand glaze. Functional as a water pitcher or sculptural on its own.',
+    swatches:[{c:'#F6B060',n:'Sand'},{c:'#F5CAC3',n:'Blush'}],
+    accordion:{
+      details:'Stoneware, 1.2L capacity.',
+      care:'Hand wash.',
+      shipping:'Free tracked shipping over $75.'
+    }
+  },
+  { id:'coral', 
+    name:'Coral Speckle Tumbler', 
+    cat:'tableware', 
+    catLabel:'Tableware',
+    price:24, 
+    comparePrice:null, 
+    rating:4.5, 
+    reviews:47, 
+    stock:'in', 
+    isNew:false,
+    ceramic:'mug blush',
+    desc:'Everyday tumbler in a soft coral glaze. Stackable and easy to hold.',
+    swatches:[{c:'#F5CAC3',n:'Coral'},{c:'#F6B060',n:'Honey'}],
+    accordion:{
+      details:'Stoneware, 280ml. Stackable.',
+      care:'Dishwasher safe.',
+      shipping:'Free tracked shipping over $75.'
+    }
+  },
+  { id:'capiz', 
+    name:'Capiz Shell Flower Wall Art', 
+    cat:'wallart', 
+    catLabel:'Wall Art',
+    price:129, 
+    comparePrice:null, 
+    rating:4.9, 
+    reviews:22, 
+    stock:'in', 
+    isNew:true,
+    desc:'Handmade Capiz shell flower — a signature Jones & Co wall piece. A bold and creative focal point for any room.',
+    swatches:[{c:'#F5CAC3',n:'Blush'},{c:'#84A59D',n:'Sage'}],
+    accordion:{
+      details:'Handmade Capiz shell and bamboo, approx. 40cm diameter. Handmade in the Philippines.',
+      care:'Dust with a soft cloth. Avoid direct sunlight.',
+      shipping:'Free tracked shipping over $75.'
+    }
+  },
+  { id:'zebra', 
+    name:'Zebra Finch Wall Print', 
+    cat:'wallart', 
+    catLabel:'Wall Art',
+    price:89, 
+    comparePrice:null, 
+    rating:4.7, 
+    reviews:16, 
+    stock:'in', 
+    isNew:false,
+    desc:'Vibrant illustration print — instantly lifts a living room, kid\'s room or gallery wall.',
+    swatches:[{c:'#84A59D',n:'Sage'},{c:'#F6B060',n:'Honey'}],
+    accordion:{
+      details:'Giclée print on archival paper, A3 size. Unframed.',
+      care:'Keep out of direct sunlight.',
+      shipping:'Free tracked shipping over $75.'
+    }
+  },
+  { id:'bloom', 
+    name:'Bloom Capiz Wall Disc', 
+    cat:'wallart', 
+    catLabel:'Wall Art',
+    price:95, 
+    comparePrice:null, 
+    rating:4.8, 
+    reviews:11, 
+    tock:'in', 
+    isNew:false,
+    desc:'Warm honey-toned Capiz shell wall disc. Catches light beautifully.',
+    swatches:[{c:'#F6B060',n:'Honey'},{c:'#E26963',n:'Coral'}],
+    accordion:{
+      details:'Capiz shell and bamboo, approx. 35cm diameter.',
+      care:'Dust with a soft cloth.',
+      shipping:'Free tracked shipping over $75.'
+    }
+  }
 
 ];
 </script>
