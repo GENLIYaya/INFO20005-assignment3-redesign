@@ -149,9 +149,48 @@
   </div>
 </footer>
 
-<script>
 
-const PRODUCTS = [
+
+<script>
+/* ---- CONFIG ---------------------------------------------------------- */
+const CONFIG = {
+  freeShippingOver: 75,
+  shippingFee: 9,
+  coupons: {
+    JONES10: { 
+      code: 'JONES10', 
+      percent: 10, 
+      label: '10% off your order' },
+    
+    FIRST10: { 
+      code: 'FIRST10', 
+      percent: 10, 
+      label: '10% off your first purchase' }
+  },
+
+  contact: {
+    email: 'hello@jonesandco.com.au',
+    phone: '+61 2 9699 1234',
+    address: 'Surry Hills, Sydney NSW 2010, Australia',
+    hours: 'Mon–Fri 9am–5pm AEST'
+  }
+};
+
+document.getElementById('announcement').innerHTML =
+  `Free shipping over $${CONFIG.freeShippingOver} · Use ` +
+  `<strong>${CONFIG.coupons.JONES10.code}</strong> or ` +
+  `<strong>${CONFIG.coupons.FIRST10.code}</strong> for 10% off`;
+
+
+/* ----PRODUCTS -------------------------------------------------------- */
+/* Real Jones & Co product names and categories from jonesandco.com.au.
+   `cat` values map to the task-oriented navigation:
+     wallart     — art prints, Capiz shell wall pieces
+     decorating  — vases, mugs, ornaments for display
+     tableware   — bowls, platters, jugs
+
+   `isNew` flags show the NEW ARRIVALS scroller content. */
+   const PRODUCTS = [
   { id:'sweetheart',
     name:'Chino Mug Sweetheart',
     cat:'tableware',
@@ -371,6 +410,10 @@ const PRODUCTS = [
   }
 
 ];
+
+
+
+
 </script>
 
 </body>
