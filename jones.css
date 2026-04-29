@@ -547,4 +547,80 @@ overflow hidden 保证图片也被圆角裁切
   color: var(--coral); 
   font-size: 16px; }
 
- 
+  /* ============================================================================
+   NEW ARRIVALS — horizontal scroller with arrow buttons
+   ----------------------------------------------------------------------------
+   Reference: robertgordonaustralia.com uses a horizontal rail for New in
+   and Best Sellers. We use scroll-snap so each swipe lands cleanly.
+   ========================================================================= */
+.scroller-wrap { position: relative; }
+.scroller {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - var(--sp-4)) / 2);
+  gap: var(--sp-4);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding-bottom: var(--sp-3);
+  scrollbar-width: none;
+}
+.scroller::-webkit-scrollbar { display: none; }
+.scroller > * { scroll-snap-align: start; }
+
+.scroller-arrows {
+  display: none; /* arrows appear on desktop only where they're useful */
+  gap: var(--sp-2);
+}
+.scroller-arrow {
+  width: 44px; height: 44px;
+  border-radius: 999px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  display: grid; place-items: center;
+  font-size: 18px; font-weight: 600;
+  color: var(--ink);
+  transition: background var(--t), transform var(--t);
+}
+.scroller-arrow:hover { background: var(--ink); color: var(--white); transform: translateY(-1px); }
+.scroller-arrow:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ============================================================================
+   SHOP BY CATEGORY (task-oriented: Wall Art · Decorating · Tableware · Sale)
+   ========================================================================= */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-4);
+}
+.cat-card {
+  position: relative;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: var(--sp-4);
+  display: flex; flex-direction: column; gap: var(--sp-3);
+  text-align: left;
+  overflow: hidden;
+  transition: transform var(--t), box-shadow var(--t);
+}
+.cat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.cat-icon {
+  width: 56px; height: 56px;
+  border-radius: var(--radius-sm);
+  display: grid; place-items: center;
+}
+.cat-icon.wallart    { background: var(--blush); }
+.cat-icon.decorating { background: var(--teal); }
+.cat-icon.tableware  { background: var(--honey); }
+.cat-icon.sale       { background: var(--coral); }
+.cat-name {
+  font-family: 'Fraunces', serif;
+  font-size: var(--fs-lg); font-weight: 600;
+  color: var(--ink);
+}
+.cat-sub {
+  font-size: 12px; color: var(--ink-70);
+  line-height: 1.45;
+}
