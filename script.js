@@ -360,24 +360,21 @@ function homePage() {
       <!-- Hero with floating text + Shop All button -->
       <section class="hero">
         <div class="hero-stage">
-          <div class="ceramic vase blush"></div>
-          <div class="ceramic mug honey"></div>
-          <div class="ceramic bowl teal"></div>
-          <div class="ceramic wall coral"></div>
-  
-          <div class="hero-float">
+        <img class="hero-img" src="assets/HERO.png" alt="Colourful Jones & Co ceramics styled in a home setting">
+
+        <div class="hero-float">
             <span class="eyebrow">Handmade in Vietnam &amp; the Philippines</span>
             <h1 class="hero-title serif">Decorative <em>joy</em><br>for the home.</h1>
             <p class="hero-sub">Designed in Australia, Jones &amp; Co makes hand-painted ceramics, Capiz shell wall art, tableware and gifts. Every piece is full of colour, pattern, life and energy.</p>
             <div class="hero-ctas">
-              <button class="btn btn-primary" data-route="shop">Shop All</button>
+            <button class="btn btn-primary" data-route="shop">Shop All</button>
             </div>
-          </div>
-  
-          <div class="hero-badge">
+        </div>
+
+        <div class="hero-badge">
             <strong>4.9★</strong>
             <span>1,200+ reviews<br>Trusted worldwide</span>
-          </div>
+        </div>
         </div>
   
         <!-- Static trust strip replaces the removed marquee -->
