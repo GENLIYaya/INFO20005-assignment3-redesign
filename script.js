@@ -544,6 +544,50 @@ function homePage() {
     `;
   }
 
+  /* Search chip */
+  const sc = e.target.closest('[data-search]');
+  if (sc) {
+    document.getElementById('searchInput').value = sc.dataset.search;
+    return;
+  };
+
+document.body.addEventListener('change', (e) => {
+  if (e.target.id === 'sortSel') {
+    state.sort = e.target.value;
+    render();
+  }
+});
+
+document.body.addEventListener('submit', (e) => {
+  if (e.target.id !== 'checkoutForm') return;
+  e.preventDefault();
+  const fields = e.target.querySelectorAll('.field');
+  let allOk = true;
+  fields.forEach(f => { if (!validateField(f)) allOk = false; });
+  if (!allOk) { toast('Please fix the highlighted fields'); return; }
+  go('confirmation');
+  state.cart = [];
+  state.appliedCoupon = null;
+  updateBadge();
+});
+document.body.addEventListener('blur', (e) => {
+  if (e.target.matches('#checkoutForm input')) validateField(e.target.closest('.field'));
+}, true);
+
+/* Drawer + search overlay */
+function openMenu()  { document.getElementById('drawer').classList.add('open');  document.getElementById('drawerScrim').classList.add('open');  document.body.classList.add('locked'); }
+function closeMenu() { document.getElementById('drawer').classList.remove('open'); document.getElementById('drawerScrim').classList.remove('open'); document.body.classList.remove('locked'); }
+function openSearch()  { document.getElementById('searchOverlay').classList.add('open'); }
+function closeSearch() { document.getElementById('searchOverlay').classList.remove('open'); }
+document.getElementById('menuOpen').addEventListener('click', openMenu);
+document.getElementById('menuClose').addEventListener('click', closeMenu);
+document.getElementById('drawerScrim').addEventListener('click', closeMenu);
+document.getElementById('searchOpen').addEventListener('click', openSearch);
+document.getElementById('searchClose').addEventListener('click', closeSearch);
+document.getElementById('searchOverlay').addEventListener('click', (e) => {
+  if (e.target.id === 'searchOverlay') closeSearch();
+}); 
+
 
 
 
