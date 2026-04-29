@@ -545,11 +545,13 @@ function homePage() {
   }
 
   /* Search chip */
-  const sc = e.target.closest('[data-search]');
-  if (sc) {
-    document.getElementById('searchInput').value = sc.dataset.search;
-    return;
-  };
+  document.body.addEventListener('click', (e) => {
+    const sc = e.target.closest('[data-search]');
+  
+    if (sc) {
+      document.getElementById('searchInput').value = sc.dataset.search;
+    }
+  });
 
 document.body.addEventListener('change', (e) => {
   if (e.target.id === 'sortSel') {
