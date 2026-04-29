@@ -543,3 +543,25 @@ function homePage() {
       </section>
     `;
   }
+
+
+
+
+  /* ---- put in last page RENDER + INIT --------------------------------------------------- */
+function render() {
+    const app = document.getElementById('app');
+    let html;
+    switch (state.route) {
+      case 'home':         html = homePage(); break;
+      case 'shop':         html = shopPage(); break;
+      case 'product':      html = productPage(); break;
+      case 'cart':         html = cartPage(); break;
+      case 'checkout':     html = checkoutPage(); break;
+      case 'confirmation': html = confirmationPage(); break;
+      default:             html = homePage();
+    }
+    app.innerHTML = `<div class="page-content">${html}</div>`;
+  }
+  
+  render();
+  updateBadge();
