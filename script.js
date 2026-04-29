@@ -350,3 +350,196 @@ function filtered() {
   if (state.sort === 'rating')    list.sort((a, b) => b.rating - a.rating);
   return list;
 }
+
+
+/* ----- HOME ----- */
+function homePage() {
+    const newArrivals = PRODUCTS.filter(p => p.isNew);
+    const bestSellers = PRODUCTS.filter(p => !p.isNew).slice(0, 4);
+    return `
+      <!-- Hero with floating text + Shop All button -->
+      <section class="hero">
+        <div class="hero-stage">
+          <div class="ceramic vase blush"></div>
+          <div class="ceramic mug honey"></div>
+          <div class="ceramic bowl teal"></div>
+          <div class="ceramic wall coral"></div>
+  
+          <div class="hero-float">
+            <span class="eyebrow">Handmade in Vietnam &amp; the Philippines</span>
+            <h1 class="hero-title serif">Decorative <em>joy</em><br>for the home.</h1>
+            <p class="hero-sub">Designed in Australia, Jones &amp; Co makes hand-painted ceramics, Capiz shell wall art, tableware and gifts. Every piece is full of colour, pattern, life and energy.</p>
+            <div class="hero-ctas">
+              <button class="btn btn-primary" data-route="shop">Shop All</button>
+            </div>
+          </div>
+  
+          <div class="hero-badge">
+            <strong>4.9★</strong>
+            <span>1,200+ reviews<br>Trusted worldwide</span>
+          </div>
+        </div>
+  
+        <!-- Static trust strip replaces the removed marquee -->
+        <div class="trust-strip">
+          <span>Hand-painted</span>
+          <span>Free shipping over $${CONFIG.freeShippingOver}</span>
+          <span>21-day returns</span>
+          <span>Designed in Sydney</span>
+        </div>
+      </section>
+  
+      <!-- NEW ARRIVALS — horizontal scroller with arrow controls -->
+      <section class="section">
+        <div class="section-head">
+          <div class="lhs">
+            <span class="eyebrow">Just landed</span>
+            <h2 class="section-title">New arrivals</h2>
+          </div>
+          <div style="display: flex; align-items: center; gap: var(--sp-4);">
+            <div class="scroller-arrows" id="newArrivalsArrows">
+              <button class="scroller-arrow" data-scroll="new" data-dir="-1" aria-label="Scroll left">‹</button>
+              <button class="scroller-arrow" data-scroll="new" data-dir="1" aria-label="Scroll right">›</button>
+            </div>
+            <a href="#shop" class="section-link" data-route="shop">View all →</a>
+          </div>
+        </div>
+        <div class="scroller-wrap">
+          <div class="scroller" id="newArrivalsScroller">
+            ${newArrivals.map(p => card(p)).join('')}
+          </div>
+        </div>
+      </section>
+  
+      <!-- FEATURED NEW COLLECTION editorial block (Chino Sweetheart) -->
+      <section class="section">
+        <div class="section-head">
+          <div class="lhs">
+            <span class="eyebrow">New collection</span>
+            <h2 class="section-title">Chino Mug — Sweetheart edition</h2>
+          </div>
+        </div>
+        <div class="collection-card">
+          <div class="collection-media">
+            <div class="ceramic mug coral"></div>
+          </div>
+          <div class="collection-copy">
+            <div class="collection-title">Small moments of joy, every day.</div>
+            <p class="collection-desc">That's exactly what our hand-painted Chino Mugs were made for, small unspoken moments of joy that repeat every single day. Our newest Sweetheart colourway is released in a limited run from our Vietnam factory — once it's gone, it's gone.</p>
+            <div style="display: flex; gap: var(--sp-3); flex-wrap: wrap;">
+              <button class="btn btn-primary" data-route="product" data-pid="sweetheart">Shop the collection</button>
+              <button class="btn btn-ghost" data-route="shop" data-filter="decorating">Explore all Chino Mugs</button>
+            </div>
+          </div>
+        </div>
+      </section>
+  
+      <!-- SHOP BY CATEGORY — task-oriented labels -->
+      <section class="section">
+        <div class="section-head">
+          <div class="lhs">
+            <span class="eyebrow">How do you want to shop?</span>
+            <h2 class="section-title">Shop by category</h2>
+          </div>
+        </div>
+        <div class="cat-grid">
+          <button class="cat-card" data-route="shop" data-filter="wallart">
+            <div class="cat-icon wallart"><div class="ceramic wall coral" style="width:36px;height:36px;"></div></div>
+            <div class="cat-name">Wall Art</div>
+            <div class="cat-sub">Capiz shell discs, prints and statement pieces to lift a room.</div>
+          </button>
+          <button class="cat-card" data-route="shop" data-filter="decorating">
+            <div class="cat-icon decorating"><div class="ceramic vase blush" style="width:22px;height:34px;"></div></div>
+            <div class="cat-name">Decorating</div>
+            <div class="cat-sub">Vases, mugs and ornaments for display and everyday style.</div>
+          </button>
+          <button class="cat-card" data-route="shop" data-filter="tableware">
+            <div class="cat-icon tableware"><div class="ceramic bowl honey" style="width:36px;height:18px;"></div></div>
+            <div class="cat-name">Tableware</div>
+            <div class="cat-sub">Bowls, jugs and platters, hand-finished for the dinner table.</div>
+          </button>
+          <button class="cat-card" data-route="shop" data-filter="sale">
+            <div class="cat-icon sale"><span style="color:white;font-family:'Fraunces',serif;font-weight:700;font-size:18px;">%</span></div>
+            <div class="cat-name">Sale</div>
+            <div class="cat-sub">Limited pieces at reduced prices — while stock lasts.</div>
+          </button>
+        </div>
+      </section>
+  
+      <!-- BEST SELLERS grid -->
+      <section class="section">
+        <div class="section-head">
+          <div class="lhs">
+            <span class="eyebrow">Best sellers</span>
+            <h2 class="section-title">Loved by Australian homes</h2>
+          </div>
+          <a href="#shop" class="section-link" data-route="shop">Shop all →</a>
+        </div>
+        <div class="product-grid">${bestSellers.map(p => card(p)).join('')}</div>
+      </section>
+  
+      <!-- CONTACT & FAQ block -->
+      <section class="section" id="contact">
+        <div class="contact-block">
+          <div class="contact-lhs">
+            <span class="eyebrow">Get in touch</span>
+            <h2>We'd love to hear from you.</h2>
+            <p>Our Customer Care team is based in Surry Hills, Sydney. If you have a question about a product, an order, or you'd like us to track something down from our stockists — please get in touch.</p>
+            <div class="contact-list">
+              <div class="contact-item">
+                <div class="icon">✉</div>
+                <div>
+                  <strong>${esc(CONFIG.contact.email)}</strong>
+                  <span>We reply within one business day.</span>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="icon">☎</div>
+                <div>
+                  <strong>${esc(CONFIG.contact.phone)}</strong>
+                  <span>${esc(CONFIG.contact.hours)}</span>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="icon">◉</div>
+                <div>
+                  <strong>${esc(CONFIG.contact.address)}</strong>
+                  <span>Warehouse &amp; showroom by appointment.</span>
+                </div>
+              </div>
+            </div>
+            <div class="contact-cta">
+              <a href="mailto:${esc(CONFIG.contact.email)}" class="btn btn-primary">Email us</a>
+              <a href="tel:${esc(CONFIG.contact.phone.replace(/\\s/g,''))}" class="btn btn-ghost">Call us</a>
+            </div>
+          </div>
+  
+          <div class="contact-rhs">
+            <span class="eyebrow" style="margin-bottom:var(--sp-3);display:inline-block;">Frequently asked</span>
+            <div class="faq-list">
+              <details>
+                <summary>How long does shipping take?</summary>
+                <p>Orders ship from our Sydney warehouse within 1–2 business days. Standard tracked shipping takes 3–7 business days within Australia. Free over $${CONFIG.freeShippingOver}.</p>
+              </details>
+              <details>
+                <summary>What's your returns policy?</summary>
+                <p>We want you to be completely happy with your purchase. You have 21 days from receiving the item to let us know you wish to return it. The item must be in saleable condition and unused. You cover the return postage unless the item is damaged or faulty.</p>
+              </details>
+              <details>
+                <summary>Where are your products made?</summary>
+                <p>Every piece is designed in Australia and handmade at our partner factories in Vietnam, the Philippines and Thailand. Because each item is hand-painted, lead times can be 90–180 days, with 4 weeks transport to Sydney.</p>
+              </details>
+              <details>
+                <summary>An item I wanted is sold out — what can I do?</summary>
+                <p>With all of our best-selling lines, another order is usually on its way. However, some items are only produced for a limited run and once they're gone, they're gone. If you're chasing something specific, contact our Customer Care team and we'll try to locate it for you among our stockists.</p>
+              </details>
+              <details>
+                <summary>Do you have a physical store?</summary>
+                <p>Our warehouse and showroom are in Surry Hills, Sydney — visits are by appointment. We also supply stockists across Australia; contact us and we'll point you to the one closest to you.</p>
+              </details>
+            </div>
+          </div>
+        </div>
+      </section>
+    `;
+  }
