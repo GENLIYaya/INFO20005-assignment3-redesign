@@ -360,7 +360,10 @@ function homePage() {
       <!-- Hero with floating text + Shop All button -->
       <section class="hero">
         <div class="hero-stage">
-        <img class="hero-img" src="assets/HERO.png" alt="Colourful Jones & Co ceramics styled in a home setting">
+        <picture class="hero-picture">
+            <source media="(min-width: 768px)" srcset="assets/HERO-desktop.png">
+            <img class="hero-img" src="assets/Hero-mobile.webp" alt="Colourful Jones & Co ceramics styled in a home setting">
+        </picture>
 
         <div class="hero-float">
             <span class="eyebrow">Handmade in Vietnam &amp; the Philippines</span>

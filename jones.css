@@ -405,10 +405,19 @@ overflow hidden 保证图片也被圆角裁切
 .hero-stage {
   position: relative;
   border-radius: var(--radius-lg);
-  aspect-ratio: 4 / 5;
   overflow: hidden;
   background: none;
+  aspect-ratio: 4 / 5;
 }
+
+.hero-picture,
+.hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
 
 .hero-img {
   position: absolute;
@@ -504,21 +513,16 @@ overflow hidden 保证图片也被圆角裁切
   color: var(--ink-70); 
   line-height: 1.3; 
 }
-
 @media (min-width: 768px) {
   .hero-stage {
     aspect-ratio: 16 / 9;
+    max-height: 620px;
   }
 
-  .hero-float {
-    padding: var(--sp-7);
-  }
-
-  .hero-title {
-    font-size: var(--fs-3xl);
+  .hero-img {
+    object-position: center center;
   }
 }
-
 /* Trust strip (replaces the removed marquee) — static, no motion */
 .trust-strip {
   display: flex; 
