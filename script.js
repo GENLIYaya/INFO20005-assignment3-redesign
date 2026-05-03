@@ -552,28 +552,39 @@ function homePage() {
           </div>
         </div>
         <div class="cat-grid">
-          <button class="cat-card" data-route="shop" data-filter="wallart">
-            <div class="cat-icon wallart"><div class="ceramic wall coral" style="width:36px;height:36px;"></div></div>
-            <div class="cat-name">Wall Art</div>
-            <div class="cat-sub">Capiz shell discs, prints and statement pieces to lift a room.</div>
-          </button>
-          <button class="cat-card" data-route="shop" data-filter="decorating">
-            <div class="cat-icon decorating"><div class="ceramic vase blush" style="width:22px;height:34px;"></div></div>
-            <div class="cat-name">Decorating</div>
-            <div class="cat-sub">Vases, mugs and ornaments for display and everyday style.</div>
-          </button>
-          <button class="cat-card" data-route="shop" data-filter="tableware">
-            <div class="cat-icon tableware"><div class="ceramic bowl honey" style="width:36px;height:18px;"></div></div>
-            <div class="cat-name">Tableware</div>
-            <div class="cat-sub">Bowls, jugs and platters, hand-finished for the dinner table.</div>
-          </button>
-          <button class="cat-card" data-route="shop" data-filter="sale">
-            <div class="cat-icon sale"><span style="color:white;font-family:'Fraunces',serif;font-weight:700;font-size:18px;">%</span></div>
-            <div class="cat-name">Sale</div>
-            <div class="cat-sub">Limited pieces at reduced prices — while stock lasts.</div>
-          </button>
+            <button class="cat-card" data-route="shop" data-filter="wallart">
+                <div class="cat-icon wallart">
+                <img class="cat-thumb" src="assets/products/FABLE SUN PINK HEART.webp" alt="Wall Art">
+                </div>
+                <div class="cat-name">Wall Art</div>
+                <div class="cat-sub">Capiz shell discs, prints and statement pieces to lift a room.</div>
+            </button>
+
+            <button class="cat-card" data-route="shop" data-filter="decorating">
+                <div class="cat-icon decorating">
+                <img class="cat-thumb" src="assets/products/vase1.webp" alt="Decorating">
+                </div>
+                <div class="cat-name">Decorating</div>
+                <div class="cat-sub">Vases, mugs and ornaments for display and everyday style.</div>
+            </button>
+
+            <button class="cat-card" data-route="shop" data-filter="tableware">
+                <div class="cat-icon tableware">
+                <img class="cat-thumb" src="assets/products/sweet-heart.webp" alt="Tableware">
+                </div>
+                <div class="cat-name">Tableware</div>
+                <div class="cat-sub">Bowls, jugs and platters, hand-finished for the dinner table.</div>
+            </button>
+
+            <button class="cat-card" data-route="shop" data-filter="sale">
+                <div class="cat-icon sale">
+                <span style="color:white;font-family:'Fraunces',serif;font-weight:700;font-size:18px;">%</span>
+                </div>
+                <div class="cat-name">Sale</div>
+                <div class="cat-sub">Limited pieces at reduced prices — while stock lasts.</div>
+            </button>
         </div>
-      </section>
+    </section>
   
       <!-- BEST SELLERS grid -->
       <section class="section">
@@ -833,7 +844,9 @@ function productPage() {
               const p = PRODUCTS.find(x => x.id === line.id);
               return `
                 <div class="cart-row" data-line="${p.id}">
-                  <div class="cart-thumb"><div class="ceramic ${p.ceramic}"></div></div>
+                  <div class="cart-thumb">
+                    <img class="cart-thumb-img" src="${esc(p.image)}" alt="${esc(p.imageAlt || p.name)}" loading="lazy">
+                  </div>
                   <div class="cart-row-info">
                     <div class="cart-row-name">${esc(p.name)}</div>
                     <div class="cart-row-meta">${esc(p.catLabel)} · ${dollars(p.price)} each</div>
@@ -888,7 +901,120 @@ function productPage() {
       `}
     `;
   }
+
+/* ----- CHECKOUT ----- */
+function checkoutPage() {
+    const totals = computeTotals();
+    return `
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <button class="back-btn" data-route="cart">Back</button>
+        <div class="crumbs">
+          <a href="#home" data-route="home">Home</a>
+          <span class="sep">›</span>
+          <a href="#cart" data-route="cart">Cart</a>
+          <span class="sep">›</span>
+          <span class="current">Checkout</span>
+        </div>
+      </nav>
   
+      <div class="stepper">
+        <div class="step done">1. Cart</div>
+        <div class="step active">2. Details &amp; payment</div>
+        <div class="step">3. Confirmation</div>
+      </div>
+  
+      <h1 class="serif" style="font-size: var(--fs-xl); margin-bottom: var(--sp-5);">Delivery &amp; payment</h1>
+  
+      <div class="cart-layout">
+        <form class="form-grid" id="checkoutForm" novalidate>
+          <div class="field">
+            <label for="fName">Full name</label>
+            <input id="fName" name="name" type="text" required minlength="2" autocomplete="name">
+            <span class="err">Please enter your full name.</span>
+          </div>
+          <div class="row-2">
+            <div class="field">
+              <label for="fEmail">Email</label>
+              <input id="fEmail" name="email" type="email" required autocomplete="email">
+              <span class="err">Please enter a valid email.</span>
+            </div>
+            <div class="field">
+              <label for="fPhone">Phone</label>
+              <input id="fPhone" name="phone" type="tel" required pattern="[0-9 +()-]{8,}" autocomplete="tel">
+              <span class="err">Please enter a valid phone number.</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="fAddr">Delivery address</label>
+            <input id="fAddr" name="addr" type="text" required minlength="6" autocomplete="street-address">
+            <span class="err">Please enter your delivery address.</span>
+          </div>
+          <div class="row-2">
+            <div class="field">
+              <label for="fCity">City</label>
+              <input id="fCity" name="city" type="text" required autocomplete="address-level2">
+              <span class="err">Please enter your city.</span>
+            </div>
+            <div class="field">
+              <label for="fPost">Postcode</label>
+              <input id="fPost" name="post" type="text" required pattern="[0-9]{4}" inputmode="numeric">
+              <span class="err">Please enter a 4-digit postcode.</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="fCard">Card number</label>
+            <input id="fCard" name="card" type="text" required pattern="[0-9 ]{13,19}" inputmode="numeric" placeholder="4242 4242 4242 4242" autocomplete="cc-number">
+            <span class="err">Please enter a valid card number.</span>
+          </div>
+          <div class="row-2">
+            <div class="field">
+              <label for="fExp">Expiry</label>
+              <input id="fExp" name="exp" type="text" required pattern="[0-9]{2}/[0-9]{2}" placeholder="MM/YY" autocomplete="cc-exp">
+              <span class="err">Format MM/YY.</span>
+            </div>
+            <div class="field">
+              <label for="fCvc">CVC</label>
+              <input id="fCvc" name="cvc" type="text" required pattern="[0-9]{3,4}" inputmode="numeric" autocomplete="cc-csc">
+              <span class="err">3–4 digits.</span>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary full-w">Place order — ${dollars(totals.total)}</button>
+        </form>
+  
+        <aside class="cart-summary">
+          <div class="summary-title">Order summary</div>
+          ${state.cart.map(line => {
+            const p = PRODUCTS.find(x => x.id === line.id);
+            return `<div class="summary-row"><span>${esc(p.name)} × ${line.qty}</span><span>${dollars(p.price * line.qty)}</span></div>`;
+          }).join('')}
+          <div class="summary-row"><span>Shipping</span><span>${totals.shipping === 0 ? 'Free' : dollars(totals.shipping)}</span></div>
+          ${state.appliedCoupon ? `<div class="summary-row discount"><span>Discount (${state.appliedCoupon.code})</span><span>−${dollars(totals.discount)}</span></div>` : ''}
+          <div class="summary-row total"><span>Total</span><span>${dollars(totals.total)}</span></div>
+          <div class="coupon-hint" style="margin-top:var(--sp-4)">
+            Use <code>${CONFIG.coupons.JONES10.code}</code> or
+            <code>${CONFIG.coupons.FIRST10.code}</code> at the cart for 10% off.
+          </div>
+        </aside>
+      </div>
+    `;
+  }
+  
+  /* ----- CONFIRMATION ----- */
+  function confirmationPage() {
+    const orderId = '#JC-' + Math.floor(100000 + Math.random() * 900000);
+    return `
+      <div class="confirmation">
+        <div class="check">✓</div>
+        <h1>Thank you, your order is confirmed.</h1>
+        <p>We've sent a confirmation to your email. Your hand-painted ceramics will be carefully packed and dispatched within 48 hours.</p>
+        <div class="order-id">${orderId}</div>
+        <div>
+          <button class="btn btn-primary" data-route="home">Continue shopping</button>
+        </div>
+      </div>
+    `;
+  }
+    
 
 
 
