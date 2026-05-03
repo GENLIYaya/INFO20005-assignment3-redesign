@@ -315,6 +315,72 @@ function toast(msg) {
 }
 
 
+// shopping cart， add to cart
+function addToCart(id, qty = 1) {
+    const line = state.cart.find(l => l.id === id);
+    if (line) {
+      line.qty += qty;
+    } else {
+      state.cart.push({ id, qty });
+    }
+    updateBadge();
+    toast('Added to cart ✓');
+    openMiniCart();
+  }
+  
+  function updateBadge() {
+    const count = state.cart.reduce((n, l) => n + l.qty, 0);
+    const el = document.getElementById('cartBadge');
+    if (!el) return;
+    el.textContent = count;
+  }
+  
+  function computeTotals() {
+    let subtotal = 0;
+  
+    state.cart.forEach(line => {
+      const p = PRODUCTS.find(x => x.id === line.id);
+      if (p) subtotal += p.price * line.qty;
+    });
+  
+    const shipping =
+      subtotal === 0 || subtotal >= CONFIG.freeShippingOver
+        ? 0
+        : CONFIG.shippingFee;
+  
+    const discount = state.appliedCoupon
+      ? subtotal * (state.appliedCoupon.percent / 100)
+      : 0;
+  
+    return {
+      subtotal,
+      shipping,
+      discount,
+      total: subtotal + shipping - discount
+    };
+  }
+  
+  function applyCoupon(code) {
+    const upper = code.trim().toUpperCase();
+    const found = CONFIG.coupons[upper];
+  
+    if (found) {
+      state.appliedCoupon = found;
+      toast(`Applied ${found.code} — ${found.label}`);
+    } else {
+      toast('Invalid code — try JONES10 or FIRST10');
+    }
+  }
+  
+  function validateField(fieldEl) {
+    const input = fieldEl.querySelector('input');
+    if (!input) return true;
+  
+    const ok = input.checkValidity();
+    fieldEl.classList.toggle('invalid', !ok);
+    return ok;
+  }
+
 /* ---- ROUTER ---------------------------------------------------------- */
 function go(route, productId) {
   state.route = route;
@@ -587,19 +653,131 @@ function homePage() {
     `;
   }
 
-  /* Search chip */
-  document.body.addEventListener('click', (e) => {
-    const sc = e.target.closest('[data-search]');
-  
-    if (sc) {
-      document.getElementById('searchInput').value = sc.dataset.search;
-    }
-  });
+document.body.addEventListener('click', (e) => {
+  /* Mini-cart close */
+  if (e.target.id === 'miniCartClose' || e.target.id === 'miniCartScrim') {
+    closeMiniCart();
+    return;
+  }
 
-document.body.addEventListener('change', (e) => {
-  if (e.target.id === 'sortSel') {
-    state.sort = e.target.value;
+  /* Scroller arrows */
+  const sa = e.target.closest('[data-scroll]');
+  if (sa) {
+    const scroller = document.getElementById('newArrivalsScroller');
+    if (scroller) {
+      const dir = parseInt(sa.dataset.dir, 10);
+      const cardW = scroller.querySelector('.card')?.offsetWidth || 220;
+      scroller.scrollBy({ left: dir * (cardW + 16), behavior: 'smooth' });
+    }
+    return;
+  }
+
+  /* Routing */
+  const rl = e.target.closest('[data-route]');
+  if (rl) {
+    e.preventDefault();
+    if (rl.dataset.filter) state.filter = rl.dataset.filter;
+    go(rl.dataset.route, rl.dataset.pid);
+    closeMiniCart();
+    return;
+  }
+
+  /* Quick add */
+  const qa = e.target.closest('[data-add]');
+  if (qa) {
+    e.stopPropagation();
+    addToCart(qa.dataset.add);
+    return;
+  }
+
+  /* Product card click */
+  const cd = e.target.closest('[data-product]');
+  if (cd && !e.target.closest('button')) {
+    go('product', cd.dataset.product);
+    return;
+  }
+
+  /* Wishlist */
+  const ws = e.target.closest('[data-wish]');
+  if (ws) {
+    e.stopPropagation();
+    const id = ws.dataset.wish;
+
+    if (state.wishlist.has(id)) {
+      state.wishlist.delete(id);
+      toast('Removed from wishlist');
+    } else {
+      state.wishlist.add(id);
+      toast('Saved to wishlist ♥');
+    }
+
     render();
+    return;
+  }
+
+  /* Filter chip */
+  const fc = e.target.closest('[data-filter]');
+  if (fc && state.route === 'shop') {
+    state.filter = fc.dataset.filter;
+    render();
+    return;
+  }
+
+  /* PDP quantity */
+  if (e.target.matches('[data-qty-delta]')) {
+    const delta = parseInt(e.target.dataset.qtyDelta, 10);
+    const v = document.getElementById('pdpQtyVal');
+    v.textContent = Math.max(1, parseInt(v.textContent, 10) + delta);
+    return;
+  }
+
+  /* PDP add */
+  if (e.target.id === 'pdpAdd') {
+    const qty = parseInt(document.getElementById('pdpQtyVal').textContent, 10);
+    addToCart(state.currentId, qty);
+    return;
+  }
+
+  /* Cart line actions */
+  const lineRow = e.target.closest('[data-line]');
+  if (lineRow) {
+    const id = lineRow.dataset.line;
+    const line = state.cart.find(l => l.id === id);
+
+    if (e.target.matches('[data-line-delta="1"]')) {
+      line.qty += 1;
+      render();
+      updateBadge();
+      return;
+    }
+
+    if (e.target.matches('[data-line-delta="-1"]')) {
+      line.qty = Math.max(1, line.qty - 1);
+      render();
+      updateBadge();
+      return;
+    }
+
+    if (e.target.matches('[data-remove]')) {
+      state.cart = state.cart.filter(l => l.id !== id);
+      render();
+      updateBadge();
+      return;
+    }
+  }
+
+  /* Promo */
+  if (e.target.id === 'promoApply') {
+    applyCoupon(document.getElementById('promoInput').value);
+    render();
+    return;
+  }
+
+  /* Search chip */
+  const sc = e.target.closest('[data-search]');
+  if (sc) {
+    document.getElementById('searchInput').value = sc.dataset.search;
+    return;
   }
 });
 
@@ -633,7 +811,78 @@ document.getElementById('searchOverlay').addEventListener('click', (e) => {
   if (e.target.id === 'searchOverlay') closeSearch();
 }); 
 
+// mini cart 
+let miniCartTimer = null;
 
+function renderMiniCart() {
+  const body = document.getElementById('miniCartBody');
+  const foot = document.getElementById('miniCartFoot');
+  if (!body || !foot) return;
+
+  if (state.cart.length === 0) {
+    body.innerHTML = '<div class="mini-cart-empty">Your bag is empty.</div>';
+    foot.hidden = true;
+    return;
+  }
+
+  foot.hidden = false;
+
+  body.innerHTML = state.cart.map(line => {
+    const p = PRODUCTS.find(x => x.id === line.id);
+    if (!p) return '';
+
+    return `
+      <div class="mini-line">
+        <div class="mini-line-img">
+          <img src="${esc(p.image)}" alt="${esc(p.imageAlt || p.name)}">
+        </div>
+        <div class="mini-line-info">
+          <div class="mini-line-name">${esc(p.name)}</div>
+          <div class="mini-line-qty">Qty ${line.qty}</div>
+        </div>
+        <div class="mini-line-price">${dollars(p.price * line.qty)}</div>
+      </div>
+    `;
+  }).join('');
+
+  const totals = computeTotals();
+  document.getElementById('miniCartSubtotal').textContent = dollars(totals.subtotal);
+
+  const shippingEl = document.getElementById('miniCartShipping');
+  if (totals.subtotal >= CONFIG.freeShippingOver) {
+    shippingEl.textContent = 'Free shipping unlocked ✓';
+  } else {
+    const left = CONFIG.freeShippingOver - totals.subtotal;
+    shippingEl.textContent = `Add ${dollars(left)} more for free shipping.`;
+  }
+}
+
+function openMiniCart() {
+  renderMiniCart();
+
+  const panel = document.getElementById('miniCart');
+  const scrim = document.getElementById('miniCartScrim');
+  if (!panel || !scrim) return;
+
+  panel.classList.add('open');
+  panel.setAttribute('aria-hidden', 'false');
+  scrim.classList.add('open');
+
+  clearTimeout(miniCartTimer);
+  miniCartTimer = setTimeout(closeMiniCart, 4000);
+}
+
+function closeMiniCart() {
+  const panel = document.getElementById('miniCart');
+  const scrim = document.getElementById('miniCartScrim');
+  if (!panel || !scrim) return;
+
+  panel.classList.remove('open');
+  panel.setAttribute('aria-hidden', 'true');
+  scrim.classList.remove('open');
+
+  clearTimeout(miniCartTimer);
+}
 
 
   /* ---- put in last page RENDER + INIT --------------------------------------------------- */
