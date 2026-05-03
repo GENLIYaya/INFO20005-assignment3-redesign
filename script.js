@@ -39,6 +39,8 @@ document.getElementById('announcement').innerHTML =
    const PRODUCTS = [
   { id:'sweetheart',
     name:'Chino Mug Sweetheart',
+    image:'assets/products/sweet-heart.webp',
+    imageAlt:'Chino Mug Sweetheart by Jones & Co',
     cat:'tableware',
     catLabel:'Tableware',
     price:33, 
@@ -57,6 +59,8 @@ document.getElementById('announcement').innerHTML =
   },
   { id:'fresco', 
     name:'Fresco Check Vase', 
+    image:'assets/products/vase1.webp',
+    imageAlt:'Fresco Check Vase by Jones & Co',
     cat:'decorating', 
     catLabel:'Decorating',
     price:55, 
@@ -75,6 +79,8 @@ document.getElementById('announcement').innerHTML =
   },
   { id:'love', 
     name:'Love Notes Mug My Person', 
+    image:'assets/products/mug1.webp',
+    imageAlt:'Love Notes Mug My Person',
     cat:'tableware', 
     catLabel:'Tableware',
     price:44, 
@@ -93,6 +99,8 @@ document.getElementById('announcement').innerHTML =
   },
   { id:'chino', 
     name:'Chino Mug Navy Lines', 
+    image:'assets/products/cup1.webp',
+    imageAlt:'Chino Mug Navy Lines',
     cat:'tableware', 
     catLabel:'Tableware',
     price:33, 
@@ -111,6 +119,8 @@ document.getElementById('announcement').innerHTML =
   },
   { id:'inked', 
     name:'Inked Mug — No Worries', 
+    image:'assets/products/gift-mug-1.webp',
+    imageAlt:'Inked Mug — No Worries',
     cat:'tableware', 
     catLabel:'Tableware',
     price:33, 
@@ -128,7 +138,9 @@ document.getElementById('announcement').innerHTML =
     }
   },
   { id:'sage', 
-    name:'Sage Stem Vase', 
+    name:'ATLANTIC TURTLE BOX', 
+    image:'assets/products/ATLANTIC TURTLE BOX.webp',
+    imageAlt:'ATLANTIC TURTLE BOX',
     cat:'decorating', 
     catLabel:'Decorating',
     price:68, 
@@ -146,7 +158,9 @@ document.getElementById('announcement').innerHTML =
     }
   },
   { id:'sunset', 
-    name:'Sunset Serving Bowl', 
+    name:'Tavola Bowl', 
+    image:'assets/products/plate2.webp',
+    imageAlt:'Tavola Bowl',
     cat:'tableware', 
     catLabel:'Tableware',
     price:45, 
@@ -165,6 +179,8 @@ document.getElementById('announcement').innerHTML =
   },
   { id:'desert', 
     name:'Desert Jug', 
+    image:'assets/products/jug.webp',
+    imageAlt:'Desert Jug',
     cat:'decorating', 
     catLabel:'Decorating',
     price:78, 
@@ -182,7 +198,9 @@ document.getElementById('announcement').innerHTML =
     }
   },
   { id:'coral', 
-    name:'Coral Speckle Tumbler', 
+    name:'Tovala Lemon Cup', 
+    image:'assets/products/lemon-cup.webp',
+    imageAlt:'Tovala Lemon Cup',
     cat:'tableware', 
     catLabel:'Tableware',
     price:24, 
@@ -201,7 +219,9 @@ document.getElementById('announcement').innerHTML =
     }
   },
   { id:'capiz', 
-    name:'Capiz Shell Flower Wall Art', 
+    name:'FABLE SUN PINK HEART', 
+    image:'assets/products/FABLE SUN PINK HEART.webp',
+    imageAlt:'FABLE SUN PINK HEART',
     cat:'wallart', 
     catLabel:'Wall Art',
     price:129, 
@@ -219,7 +239,9 @@ document.getElementById('announcement').innerHTML =
     }
   },
   { id:'zebra', 
-    name:'Zebra Finch Wall Print', 
+    name:'BEACH CLUB ORANGE CRAB', 
+    image:'assets/products/BEACH CLUB ORANGE CRAB.webp',
+    imageAlt:'BEACH CLUB ORANGE CRAB',
     cat:'wallart', 
     catLabel:'Wall Art',
     price:89, 
@@ -237,7 +259,9 @@ document.getElementById('announcement').innerHTML =
     }
   },
   { id:'bloom', 
-    name:'Bloom Capiz Wall Disc', 
+    name:'BEACH CLUB MINNOW', 
+    image:'assets/products/BEACH CLUB MINNOW.webp',
+    imageAlt:'BEACH CLUB MINNOW',
     cat:'wallart', 
     catLabel:'Wall Art',
     price:95, 
@@ -305,37 +329,51 @@ function go(route, productId) {
 
 /* Single card template used in every grid and every scroller. */
 function card(p, opts = {}) {
-  const stockClass = p.stock === 'low' ? 'low' : '';
-  const stockText  = p.stock === 'low' ? 'Low stock' : 'In stock';
-  const isSaved    = state.wishlist.has(p.id);
-  const newPill    = p.isNew && opts.showNew !== false ? '<span class="new-pill">New</span>' : '';
-  return `
-    <article class="card" data-product="${p.id}">
-      <div class="card-media">
-        ${newPill}
-        <span class="stock-pill ${stockClass}">${stockText}</span>
-        <button class="wish-btn ${isSaved ? 'saved' : ''}" data-wish="${p.id}" aria-label="Save to wishlist">
-         <i class="fa-regular fa-heart"></i>
-        </button>
-        <button class="quick-add" data-add="${p.id}" aria-label="Quick add ${esc(p.name)} to cart" title="Quick add">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2l1.5 3h9L18 2"/><path d="M3 6h18l-2 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L3 6z"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg>
-        </button>
-      
-      </div>
-      <div class="card-body">
-        <div class="card-cat">${esc(p.catLabel)}</div>
-        <div class="card-head">
-          <h3 class="card-title">${esc(p.name)}</h3>
-          <div class="card-price">${dollars(p.price)}</div>
+    const stockClass = p.stock === 'low' ? 'low' : '';
+    const stockText  = p.stock === 'low' ? 'Low stock' : 'In stock';
+    const isSaved    = state.wishlist.has(p.id);
+    const newPill    = p.isNew && opts.showNew !== false ? '<span class="new-pill">New</span>' : '';
+  
+    return `
+      <article class="card" data-product="${p.id}">
+        <div class="card-media">
+          <img
+            class="card-img"
+            src="${esc(p.image || 'assets/products/placeholder.jpg')}"
+            alt="${esc(p.imageAlt || p.name)}"
+            loading="lazy"
+          >
+          ${newPill}
+          <span class="stock-pill ${stockClass}">${stockText}</span>
+  
+          <button class="wish-btn ${isSaved ? 'saved' : ''}" data-wish="${p.id}" aria-label="Save to wishlist">
+            <i class="fa-regular fa-heart"></i>
+          </button>
+  
+          <button class="quick-add" data-add="${p.id}" aria-label="Quick add ${esc(p.name)} to cart" title="Quick add">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 2l1.5 3h9L18 2"/>
+              <path d="M3 6h18l-2 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L3 6z"/>
+              <line x1="12" y1="11" x2="12" y2="17"/>
+              <line x1="9" y1="14" x2="15" y2="14"/>
+            </svg>
+          </button>
         </div>
-        <div class="card-meta">
-          <span class="stars">${stars(p.rating)}</span>
-          <span>${p.reviews} reviews</span>
+  
+        <div class="card-body">
+          <div class="card-cat">${esc(p.catLabel)}</div>
+          <div class="card-head">
+            <h3 class="card-title">${esc(p.name)}</h3>
+            <div class="card-price">${dollars(p.price)}</div>
+          </div>
+          <div class="card-meta">
+            <span class="stars">${stars(p.rating)}</span>
+            <span>${p.reviews} reviews</span>
+          </div>
         </div>
-      </div>
-    </article>
-  `;
-}
+      </article>
+    `;
+  }
 
 function filtered() {
   let list = PRODUCTS.slice();
@@ -361,7 +399,7 @@ function homePage() {
       <section class="hero">
         <div class="hero-stage">
         <picture class="hero-picture">
-            <source media="(min-width: 768px)" srcset="assets/HERO-desktop.png">
+            <source media="(min-width: 768px)" srcset="assets/HERO.png">
             <img class="hero-img" src="assets/Hero-mobile.webp" alt="Colourful Jones & Co ceramics styled in a home setting">
         </picture>
 
@@ -420,9 +458,14 @@ function homePage() {
           </div>
         </div>
         <div class="collection-card">
-          <div class="collection-media">
-            <div class="ceramic mug coral"></div>
-          </div>
+            <div class="collection-media">
+            <img
+                class="collection-img"
+                src="assets/collection.jpg"
+                alt="Chino Mug Sweetheart edition"
+                loading="lazy"
+            >
+            </div>
           <div class="collection-copy">
             <div class="collection-title">Small moments of joy, every day.</div>
             <p class="collection-desc">That's exactly what our hand-painted Chino Mugs were made for, small unspoken moments of joy that repeat every single day. Our newest Sweetheart colourway is released in a limited run from our Vietnam factory — once it's gone, it's gone.</p>

@@ -107,7 +107,28 @@
   </div>
 </div>
 
+<div class="mini-cart-scrim" id="miniCartScrim"></div>
 
+<aside class="mini-cart" id="miniCart" aria-hidden="true" aria-label="Shopping bag preview">
+  <div class="mini-cart-head">
+    <h3>Added to bag</h3>
+    <button class="mini-cart-close" id="miniCartClose" aria-label="Close mini cart">✕</button>
+  </div>
+
+  <div class="mini-cart-body" id="miniCartBody"></div>
+
+  <div class="mini-cart-foot" id="miniCartFoot" hidden>
+    <div class="mini-cart-subtotal">
+      <span>Subtotal</span>
+      <span id="miniCartSubtotal">$0</span>
+    </div>
+    <div class="mini-cart-shipping" id="miniCartShipping">Free shipping over $75.</div>
+    <div class="mini-cart-ctas">
+      <button class="btn btn-ghost" data-route="cart">View cart</button>
+      <button class="btn btn-primary" data-route="checkout">Checkout</button>
+    </div>
+  </div>
+</aside>
 
 <footer class="site-footer">
   <div class="shell">

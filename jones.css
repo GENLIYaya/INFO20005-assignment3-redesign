@@ -416,6 +416,7 @@ overflow hidden 保证图片也被圆角裁切
   inset: 0;
   width: 100%;
   height: 100%;
+  display: block;
 }
 
 
@@ -458,6 +459,7 @@ overflow hidden 保证图片也被圆角裁切
   text-shadow: 0 2px 12px rgba(44, 36, 22, 0.4);
   margin-bottom: var(--sp-3);
 }
+
 
 .hero-title em { 
   font-style: italic; 
@@ -624,7 +626,376 @@ overflow hidden 保证图片也被圆角裁切
   font-size: 12px; color: var(--ink-70);
   line-height: 1.45;
 }
+/* ============================================================================
+   NEW ARRIVALS — horizontal scroller with arrow buttons
+   ----------------------------------------------------------------------------
+   Reference: robertgordonaustralia.com uses a horizontal rail for New in
+   and Best Sellers. We use scroll-snap so each swipe lands cleanly.
+   ========================================================================= */
+   .scroller-wrap { position: relative; }
+   .scroller {
+     display: grid;
+     grid-auto-flow: column;
+     grid-auto-columns: calc((100% - var(--sp-4)) / 2);
+     gap: var(--sp-4);
+     overflow-x: auto;
+     overflow-y: hidden;
+     scroll-snap-type: x mandatory;
+     scroll-behavior: smooth;
+     padding-bottom: var(--sp-3);
+     scrollbar-width: none;
+   }
+   .scroller::-webkit-scrollbar { display: none; }
+   .scroller > * { scroll-snap-align: start; }
+   
+   .scroller-arrows {
+     display: none; /* arrows appear on desktop only where they're useful */
+     gap: var(--sp-2);
+   }
+   .scroller-arrow {
+     width: 44px; 
+     height: 44px;
+     border-radius: 999px;
+     background: var(--white);
+     border: 1px solid var(--line);
+     display: grid; 
+     place-items: center;
+     font-size: 18px; 
+     font-weight: 600;
+     color: var(--ink);
+     transition: background var(--t), transform var(--t);
+   }
+   .scroller-arrow:hover { 
+    background: var(--ink); 
+    color: var(--white); 
+    transform: translateY(-1px); 
+  }
+   .scroller-arrow:disabled { 
+    opacity: 0.4; 
+    cursor: not-allowed; }
+   
+   /* ============================================================================
+      SHOP BY CATEGORY (task-oriented: Wall Art · Decorating · Tableware · Sale)
+      ========================================================================= */
+   .cat-grid {
+     display: grid;
+     grid-template-columns: repeat(2, 1fr);
+     gap: var(--sp-4);
+   }
+   .cat-card {
+     position: relative;
+     background: var(--white);
+     border: 1px solid var(--line);
+     border-radius: var(--radius-md);
+     padding: var(--sp-4);
+     display: flex; 
+     flex-direction: column; 
+     gap: var(--sp-3);
+     text-align: left;
+     overflow: hidden;
+     transition: transform var(--t), box-shadow var(--t);
+   }
+   .cat-card:hover { 
+    transform: translateY(-3px); 
+    box-shadow: var(--shadow-md); }
+   .cat-icon {
+     width: 56px; 
+     height: 56px;
+     border-radius: var(--radius-sm);
+     display: grid; 
+     place-items: center;
+   }
+   .cat-icon.wallart    { 
+    background: var(--blush); 
+  }
+   .cat-icon.decorating { 
+    background: var(--teal); 
+  }
+   .cat-icon.tableware  { 
+    background: var(--honey); 
+  }
+   .cat-icon.sale       { 
+    background: var(--coral); 
+  }
+   .cat-name {
+     font-family: 'Fraunces', serif;
+     font-size: var(--fs-lg); 
+     font-weight: 600;
+     color: var(--ink);
+   }
+   .cat-sub {
+     font-size: 12px; 
+     color: var(--ink-70);
+     line-height: 1.45;
+   }
 
+
+
+
+   /* ============================================================================
+   PRODUCT CARD (single source of truth — one template used everywhere)
+   ========================================================================= */
+.card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex; 
+  flex-direction: column;
+  cursor: pointer;
+  transition: transform var(--t), box-shadow var(--t);
+}
+.card:hover { 
+  transform: translateY(-3px); 
+  box-shadow: var(--shadow-md); }
+.card-media {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background: var(--cream);
+  display: grid; 
+  place-items: center;
+  overflow: hidden;
+}
+.stock-pill {
+  position: absolute; 
+  top: 10px; 
+  right: 10px;
+  background: var(--ok); 
+  color: var(--white);
+  font-size: 10px; 
+  font-weight: 700;
+  padding: 4px 9px; 
+  border-radius: 999px;
+  text-transform: uppercase; 
+  letter-spacing: 0.04em;
+  z-index: 2;
+}
+.stock-pill.low { 
+  background: var(--warn); 
+}
+.new-pill {
+  position: absolute; 
+  top: 10px; left: 10px;
+  background: var(--ink); 
+  color: var(--honey);
+  font-size: 10px; 
+  font-weight: 800;
+  padding: 4px 9px; 
+  border-radius: 999px;
+  text-transform: uppercase; 
+  letter-spacing: 0.06em;
+  z-index: 2;
+}
+.wish-btn {
+  position: absolute; 
+  top: 52px; 
+  left: 10px;
+  width: 36px; 
+  height: 36px;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 999px;
+  display: grid; 
+  place-items: center;
+  z-index: 2;
+  transition: background var(--t);
+}
+.wish-btn:hover { 
+  background: var(--white); }
+.wish-btn svg {
+  width: 16px; 
+  height: 16px; 
+  stroke: var(--ink); 
+  fill: none; 
+  stroke-width: 1.8;
+}
+.wish-btn.saved svg { 
+  fill: var(--coral); 
+  stroke: var(--coral); }
+
+.card-body {
+  padding: var(--sp-4);
+  display: flex; 
+  flex-direction: column;
+  gap: var(--sp-2);
+  flex: 1;
+}
+.card-head {
+  display: flex; 
+  justify-content: space-between; 
+  align-items: flex-start;
+  gap: var(--sp-3);
+}
+.card-title {
+  font-family: 'Fraunces', serif;
+  font-size: var(--fs-md); 
+  font-weight: 600;
+  color: var(--ink); 
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.card-price { 
+  font-size: var(--fs-md); 
+  font-weight: 700; 
+  color: var(--ink); 
+  white-space: nowrap; }
+.card-cat { 
+  font-size: 11px; 
+  color: var(--ink-70); 
+  text-transform: uppercase; 
+  letter-spacing: 0.05em; }
+.card-meta {
+  margin-top: auto;
+  padding-top: var(--sp-3);
+  border-top: 1px solid var(--line);
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between;
+  gap: var(--sp-2);
+  font-size: 11px; 
+  color: var(--ink-70);
+}
+.card-meta .stars { 
+  color: var(--honey); 
+  letter-spacing: 1px; 
+  font-size: 12px; 
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-4);
+}
+.card-media {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--cream-2);
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card-media .new-pill,
+.card-media .stock-pill,
+.card-media .wish-btn,
+.card-media .quick-add {
+  position: absolute;
+  z-index: 2;
+}
+
+
+/* ---------- Homepage card sizing fix ---------- */
+@media (min-width: 768px) {
+  .product-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--sp-5);
+  }
+
+  .scroller {
+    grid-auto-columns: calc((100% - (var(--sp-4) * 3)) / 4);
+  }
+
+  .scroller-arrows {
+    display: flex;
+  }
+}
+
+@media (min-width: 1200px) {
+  .product-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+/* ============================================================================
+    FEATURED COLLECTION (homepage editorial block)
+    给 .collection-card 加 desktop 的 grid-template-columns
+给 .collection-media 一个固定高度或最小高度
+给 .collection-copy 加 justify-content: center。让图片还有文字左右分布： grid-template-columns: 1.15fr 1fr;
+   ========================================================================= */
+   .collection-card {
+    display: grid;
+    gap: 0;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  
+  .collection-media {
+    position: relative;
+    overflow: hidden;
+    background: var(--cream-2);
+    min-height: 220px;
+  }
+  
+  .collection-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+  
+  .collection-copy {
+    padding: var(--sp-6);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--sp-3);
+  }
+  
+  .collection-title {
+    font-family: 'Fraunces', serif;
+    font-size: var(--fs-xl);
+    font-weight: 600;
+  }
+  
+  .collection-desc {
+    font-size: 14px;
+    color: var(--ink-70);
+    line-height: 1.7;
+  }
+  
+  /* desktop: side-by-side like fig 2 */
+  @media (min-width: 768px) {
+    .collection-card {
+      grid-template-columns: 1.15fr 1fr;
+      align-items: stretch;
+    }
+  
+    .collection-media {
+      min-height: 420px;
+    }
+  
+    .collection-copy {
+      padding: var(--sp-6);
+    }
+  }
+
+   /* ============================================================================
+   SECTION HEADER
+   ========================================================================= */
+.section { padding: var(--sp-7) 0; }
+.section-head {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  gap: var(--sp-4); flex-wrap: wrap;
+  margin-bottom: var(--sp-5);
+}
+.section-head .lhs { display: flex; flex-direction: column; gap: var(--sp-2); }
+.section-title {
+  font-family: 'Fraunces', serif;
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.section-link {
+  font-size: 14px; font-weight: 600; color: var(--coral);
+}
+.section-link:hover { text-decoration: underline; }
 
 /* ============================================================================
    CONTACT & FAQ BLOCK (homepage)
@@ -726,7 +1097,7 @@ overflow hidden 保证图片也被圆角裁切
     content: '−'; 
   }
   /* 在 FAQ 里，它用来判断 <details> 是否已经展开，然后把 summary 后面的符号从 + 改成 −。 */
-  
+
   /* 一般 FAQ 会有一个加号/减号效果。FAQ 关闭时：显示 +FAQ 打开时：显示 − */
   .faq-list details p {
     padding-top: var(--sp-3);
