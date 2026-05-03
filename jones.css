@@ -44,8 +44,22 @@
 }
 
 
+/* eyebrow label — small uppercase tag above section titles */
+.eyebrow {
+font-size: 11px;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 0.08em;
+color: var(--teal-d);
+display: inline-block;
+padding: 4px 10px;
+background: rgba(62, 102, 96, 0.1);
+border-radius: 999px;
+}
+
 /* body and based setting */
 html { scroll-behavior: smooth; }
+main { padding-top: var(--sp-3); }
 body {
 font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
 font-size: var(--fs-md);
@@ -275,22 +289,45 @@ text-align: center;
 
 /* buttons */
 .btn {
-display: inline-flex; 
-align-items: center; 
+display: inline-flex;
+align-items: center;
 justify-content: center;
 gap: var(--sp-2);
 min-height: 48px;
 padding: 0 var(--sp-5);
 border-radius: var(--radius-md);
 font-weight: 600; font-size: var(--fs-md);
-transition: transform var(--t);
-background:  var(--t), box-shadow var(--t);
+transition: background var(--t), color var(--t), box-shadow var(--t), transform var(--t);
+border: 1.5px solid transparent;
 }
 .btn:focus-visible {
 outline: 3px solid rgba(226, 105, 99, 0.4);
 outline-offset: 2px;
 }
 .btn:active { transform: scale(0.98); }
+
+.btn-primary {
+background: var(--coral);
+color: var(--white);
+border-color: var(--coral);
+}
+.btn-primary:hover { background: var(--coral-d); border-color: var(--coral-d); }
+
+.btn-ghost {
+background: transparent;
+color: var(--ink);
+border-color: var(--ink);
+}
+.btn-ghost:hover { background: var(--ink); color: var(--white); }
+
+.btn-secondary {
+background: var(--cream-2);
+color: var(--ink);
+border-color: var(--line-md);
+}
+.btn-secondary:hover { background: var(--cream); border-color: var(--ink-30); }
+
+.full-w { width: 100%; justify-content: center; }
 
 .btn-icon {
 width: 44px; height: 44px;
@@ -507,13 +544,14 @@ flex-wrap: wrap;
 }
 
 .hero-ctas .btn-primary {
-background: var(--white); 
+background: var(--white);
 color: var(--ink);
+border-color: var(--white);
 box-shadow: 0 4px 16px rgba(44, 36, 22, 0.2);
 }
-
-.hero-ctas .btn-primary:hover { 
-background: var(--honey); 
+.hero-ctas .btn-primary:hover {
+background: var(--honey);
+border-color: var(--honey);
 }
 
 .hero-badge {
@@ -643,6 +681,13 @@ display: grid; place-items: center;
 .cat-icon.decorating { background: var(--teal); }
 .cat-icon.tableware  { background: var(--honey); }
 .cat-icon.sale       { background: var(--coral); }
+.cat-icon img.cat-thumb {
+width: 100%;
+height: 100%;
+object-fit: cover;
+border-radius: var(--radius-sm);
+display: block;
+}
 .cat-name {
 font-family: 'Fraunces', serif;
 font-size: var(--fs-lg); font-weight: 600;
@@ -652,110 +697,6 @@ color: var(--ink);
 font-size: 12px; color: var(--ink-70);
 line-height: 1.45;
 }
-/* ============================================================================
-NEW ARRIVALS — horizontal scroller with arrow buttons
-----------------------------------------------------------------------------
-Reference: robertgordonaustralia.com uses a horizontal rail for New in
-and Best Sellers. We use scroll-snap so each swipe lands cleanly.
-========================================================================= */
-.scroller-wrap { position: relative; }
-.scroller {
-display: grid;
-grid-auto-flow: column;
-grid-auto-columns: calc((100% - var(--sp-4)) / 2);
-gap: var(--sp-4);
-overflow-x: auto;
-overflow-y: hidden;
-scroll-snap-type: x mandatory;
-scroll-behavior: smooth;
-padding-bottom: var(--sp-3);
-scrollbar-width: none;
-}
-.scroller::-webkit-scrollbar { display: none; }
-.scroller > * { scroll-snap-align: start; }
-
-.scroller-arrows {
-display: none; /* arrows appear on desktop only where they're useful */
-gap: var(--sp-2);
-}
-.scroller-arrow {
-width: 44px; 
-height: 44px;
-border-radius: 999px;
-background: var(--white);
-border: 1px solid var(--line);
-display: grid; 
-place-items: center;
-font-size: 18px; 
-font-weight: 600;
-color: var(--ink);
-transition: background var(--t), transform var(--t);
-}
-.scroller-arrow:hover { 
-background: var(--ink); 
-color: var(--white); 
-transform: translateY(-1px); 
-}
-.scroller-arrow:disabled { 
-opacity: 0.4; 
-cursor: not-allowed; }
-
-/* ============================================================================
-SHOP BY CATEGORY (task-oriented: Wall Art · Decorating · Tableware · Sale)
-========================================================================= */
-.cat-grid {
-display: grid;
-grid-template-columns: repeat(2, 1fr);
-gap: var(--sp-4);
-}
-.cat-card {
-position: relative;
-background: var(--white);
-border: 1px solid var(--line);
-border-radius: var(--radius-md);
-padding: var(--sp-4);
-display: flex; 
-flex-direction: column; 
-gap: var(--sp-3);
-text-align: left;
-overflow: hidden;
-transition: transform var(--t), box-shadow var(--t);
-}
-.cat-card:hover { 
-transform: translateY(-3px); 
-box-shadow: var(--shadow-md); }
-.cat-icon {
-width: 56px; 
-height: 56px;
-border-radius: var(--radius-sm);
-display: grid; 
-place-items: center;
-}
-.cat-icon.wallart    { 
-background: var(--blush); 
-}
-.cat-icon.decorating { 
-background: var(--teal); 
-}
-.cat-icon.tableware  { 
-background: var(--honey); 
-}
-.cat-icon.sale       { 
-background: var(--coral); 
-}
-.cat-name {
-font-family: 'Fraunces', serif;
-font-size: var(--fs-lg); 
-font-weight: 600;
-color: var(--ink);
-}
-.cat-sub {
-font-size: 12px; 
-color: var(--ink-70);
-line-height: 1.45;
-}
-
-
 
 
 /* ============================================================================
@@ -1442,17 +1383,6 @@ color: var(--ink);
 18. PRODUCT DETAIL PAGE
 ========================================================================= */
 .pdp-layout { display: grid; gap: var(--sp-5); }
-.pdp-media {
-background: var(--cream-2);
-border-radius: var(--radius-lg);
-aspect-ratio: 1 / 1;
-display: grid; place-items: center;
-padding: var(--sp-7);
-}
-.pdp-media .ceramic.vase { width: 50%; height: 75%; }
-.pdp-media .ceramic.mug  { width: 55%; height: 55%; }
-.pdp-media .ceramic.bowl { width: 70%; height: 35%; }
-.pdp-media .ceramic.wall { width: 60%; height: 60%; }
 
 .pdp-info { 
 display: flex; 
@@ -1951,7 +1881,88 @@ to   { opacity: 1; transform: translateY(0); }
   position: sticky; 
   top: 100px; }
 
-.footer-grid { 
-  grid-template-columns: 1.4fr 1fr 1fr 1fr; 
+.footer-grid {
+  grid-template-columns: 1.2fr 1fr 1fr 1fr 1fr;
   gap: var(--sp-6); }
+}
+
+/* ============================================================================
+  TOAST
+  ========================================================================= */
+.toast {
+position: fixed;
+bottom: var(--sp-6);
+left: 50%;
+transform: translateX(-50%) translateY(12px);
+background: var(--ink);
+color: var(--white);
+padding: 12px 20px;
+border-radius: var(--radius-md);
+font-size: 14px;
+font-weight: 500;
+opacity: 0;
+pointer-events: none;
+transition: opacity 220ms, transform 220ms;
+z-index: 400;
+white-space: nowrap;
+box-shadow: var(--shadow-lg);
+}
+.toast.show {
+opacity: 1;
+transform: translateX(-50%) translateY(0);
+}
+
+/* ============================================================================
+  FOOTER SOCIAL BUTTONS
+  ========================================================================= */
+.footer-actions {
+display: flex;
+gap: var(--sp-3);
+margin-top: var(--sp-5);
+padding-top: var(--sp-5);
+border-top: 1px solid rgba(247, 241, 232, 0.15);
+align-items: center;
+flex-wrap: wrap;
+}
+
+.footer-actions .btn-icon {
+background: rgba(247, 241, 232, 0.08);
+border-color: rgba(247, 241, 232, 0.2);
+color: rgba(247, 241, 232, 0.75);
+font-size: 18px;
+transition: background var(--t), color var(--t), transform var(--t);
+}
+.footer-actions .btn-icon:hover {
+transform: translateY(-2px);
+color: var(--white);
+}
+
+#insOpen:hover {
+background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+border-color: transparent;
+color: var(--white);
+}
+#facebookOpen:hover {
+background: #1877F2;
+border-color: transparent;
+color: var(--white);
+}
+#pinterestOpen:hover {
+background: #E60023;
+border-color: transparent;
+color: var(--white);
+}
+#spoOpen:hover {
+background: #1DB954;
+border-color: transparent;
+color: var(--white);
+}
+
+/* cart badge style fix for the SVG icon */
+#cartOpen .svg {
+stroke: currentColor;
+fill: none;
+stroke-width: 1.8;
+stroke-linecap: round;
+stroke-linejoin: round;
 }

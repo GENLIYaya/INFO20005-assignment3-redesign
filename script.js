@@ -43,14 +43,18 @@ document.getElementById('announcement').innerHTML =
     imageAlt:'Chino Mug Sweetheart by Jones & Co',
     cat:'tableware',
     catLabel:'Tableware',
-    price:33, 
-    comparePrice:null, 
-    rating:4.9, 
-    reviews:8, 
-    stock:'low', 
+    price:33,
+    comparePrice:null,
+    rating:4.9,
+    reviews:8,
+    stock:'low',
     isNew:true,
     desc:'L: 10cm W: 10cm H: 7cm',
-    swatches:[{c:'#E26963',n:'Sweetheart'},{c:'#F5CAC3',n:'Blush'}],
+    swatches:[{c:'#C0282A',n:'Sweetheart Red'},{c:'#F5CAC3',n:'Blush Pink'}],
+    swatchImages:[
+      'assets/products/sweet-heart.webp',
+      'assets/products/sweet-heart-2.webp'
+    ],
     accordion:{
       details:'A hidden "Sweet Heart" message awaits at the bottom of the indigo-striped interior of this Chino mug, offering a moment of unexpected joy with your final sip. The exterior is dotted with hand painted red love hearts, creating a sweet pattern. Each piece is shaped from durable earthenware by skilled Vietnamese craftspeople working from our Sydney designs, the deep blue stripes and hearts applied by hand with practiced precision.',
       care:'For tabletop items these are microwave and dishwasher safe. For decorative items, clean with a soft cloth to remove dust or spot clean with mild detergent.',
@@ -97,63 +101,73 @@ document.getElementById('announcement').innerHTML =
       shipping:'Free tracked shipping over $75.'
     }
   },
-  { id:'chino', 
-    name:'Chino Mug Navy Lines', 
+  { id:'chino',
+    name:'Chino Mug Navy Lines',
     image:'assets/products/cup1.webp',
     imageAlt:'Chino Mug Navy Lines',
-    cat:'tableware', 
+    cat:'tableware',
     catLabel:'Tableware',
-    price:33, 
-    comparePrice:null, 
-    rating:4.7, 
-    reviews:24, 
-    stock:'in', 
+    price:33,
+    comparePrice:null,
+    rating:4.7,
+    reviews:24,
+    stock:'in',
     isNew:false,
     desc:'The Chino Mug is the everyday hero — the right weight, the right size, beautiful enough to feel like a treat every morning.',
-    swatches:[{c:'#84A59D',n:'Navy Lines'},{c:'#F5CAC3',n:'Blush Spot'}],
+    swatches:[{c:'#2B4580',n:'Navy Lines'},{c:'#4A9460',n:'Forest Green'},{c:'#C94040',n:'Cherry Red'},{c:'#D4A820',n:'Mustard'}],
+    swatchImages:[
+      'assets/products/cup1.webp',
+      'assets/products/cup1-green.webp',
+      'assets/products/cup1-red.webp',
+      'assets/products/cup1-yellow.webp'
+    ],
     accordion:{
       details:'Striped earthenware mug, approx. 320ml.',
       care:'Dishwasher and microwave safe.',
       shipping:'Free tracked shipping over $75.'
     }
   },
-  { id:'inked', 
-    name:'Inked Mug — No Worries', 
+  { id:'inked',
+    name:'Inked Mug — No Worries',
     image:'assets/products/gift-mug-1.webp',
     imageAlt:'Inked Mug — No Worries',
-    cat:'tableware', 
+    cat:'tableware',
     catLabel:'Tableware',
-    price:33, 
-    comparePrice:null, 
-    rating:4.8, 
-    reviews:14, 
-    stock:'in', 
+    price:33,
+    comparePrice:null,
+    rating:4.8,
+    reviews:14,
+    stock:'in',
     isNew:true,
     desc:'Illustrated in bold graphic style, this mug carries a message that lands with warmth and humour.',
-    swatches:[{c:'#84A59D',n:'Blue White'},{c:'#F7F1E8',n:'Cream'}],
+    swatches:[{c:'#4A7DB5',n:'Blue White'},{c:'#F7F1E8',n:'Cream'}],
+    swatchImages:[
+      'assets/products/gift-mug-1.webp',
+      'assets/products/inked-mug.webp'
+    ],
     accordion:{
       details:'Illustrated earthenware mug, approx. 320ml.',
       care:'Top-rack dishwasher safe.',
       shipping:'Free tracked shipping over $75.'
     }
   },
-  { id:'sage', 
-    name:'ATLANTIC TURTLE BOX', 
+  { id:'sage',
+    name:'Atlantic Turtle Box',
     image:'assets/products/ATLANTIC TURTLE BOX.webp',
-    imageAlt:'ATLANTIC TURTLE BOX',
-    cat:'decorating', 
+    imageAlt:'Atlantic Turtle Box by Jones & Co',
+    cat:'decorating',
     catLabel:'Decorating',
-    price:68, 
-    comparePrice:null, 
-    rating:4.9, 
-    reviews:41, 
-    stock:'in', 
+    price:68,
+    comparePrice:null,
+    rating:4.9,
+    reviews:41,
+    stock:'in',
     isNew:true,
-    desc:'Slender bone china vase in a matte sage finish. Designed to hold a single stem or a small bunch.',
-    swatches:[{c:'#84A59D',n:'Sage'},{c:'#F7F1E8',n:'Cream'}],
+    desc:'A beautifully crafted decorative box featuring an Atlantic turtle motif. Hand-painted in earthy teal tones — a statement piece for a shelf, coffee table or bedside.',
+    swatches:[{c:'#3A8A7C',n:'Teal'},{c:'#F7F1E8',n:'Cream'}],
     accordion:{
-      details:'Bone china, approx. 22cm H. Hand wash. Limited edition.',
-      care:'Hand wash gently.',
+      details:'Hand-painted earthenware box with lid, approx. 12cm × 8cm. Decorative use.',
+      care:'Wipe with a soft dry cloth.',
       shipping:'Free tracked shipping over $75.'
     }
   },
@@ -197,21 +211,20 @@ document.getElementById('announcement').innerHTML =
       shipping:'Free tracked shipping over $75.'
     }
   },
-  { id:'coral', 
-    name:'Tovala Lemon Cup', 
+  { id:'coral',
+    name:'Tovala Lemon Cup',
     image:'assets/products/lemon-cup.webp',
     imageAlt:'Tovala Lemon Cup',
-    cat:'tableware', 
+    cat:'tableware',
     catLabel:'Tableware',
-    price:24, 
-    comparePrice:null, 
-    rating:4.5, 
-    reviews:47, 
-    stock:'in', 
+    price:24,
+    comparePrice:null,
+    rating:4.5,
+    reviews:47,
+    stock:'in',
     isNew:false,
-    ceramic:'mug blush',
-    desc:'Everyday tumbler in a soft coral glaze. Stackable and easy to hold.',
-    swatches:[{c:'#F5CAC3',n:'Coral'},{c:'#F6B060',n:'Honey'}],
+    desc:'Everyday tumbler featuring a cheerful lemon illustration. Stackable and easy to hold.',
+    swatches:[{c:'#E8C840',n:'Lemon Yellow'},{c:'#F6B060',n:'Honey'}],
     accordion:{
       details:'Stoneware, 280ml. Stackable.',
       care:'Dishwasher safe.',
@@ -767,9 +780,12 @@ function productPage() {
           <p class="pdp-desc">${esc(p.desc)}</p>
   
           <div class="pdp-options">
-            <span class="opt-label">Colour: ${esc(p.swatches[0].n)}</span>
+            <span class="opt-label" id="pdpColourLabel">Colour: ${esc(p.swatches[0].n)}</span>
             <div class="swatches">
-              ${p.swatches.map((s, i) => `<button class="swatch ${i === 0 ? 'is-active' : ''}" style="background:${s.c}" aria-label="${esc(s.n)}"></button>`).join('')}
+              ${p.swatches.map((s, i) => {
+                const imgSrc = p.swatchImages && p.swatchImages[i] ? p.swatchImages[i] : p.image;
+                return `<button class="swatch ${i === 0 ? 'is-active' : ''}" style="background:${s.c}" aria-label="${esc(s.n)}" data-swatch-img="${esc(imgSrc)}" data-swatch-name="${esc(s.n)}" title="${esc(s.n)}"></button>`;
+              }).join('')}
             </div>
           </div>
   
@@ -1092,6 +1108,21 @@ document.body.addEventListener('click', (e) => {
   if (fc && state.route === 'shop') {
     state.filter = fc.dataset.filter;
     render();
+    return;
+  }
+
+  /* PDP swatch click → swap image + update colour label */
+  if (e.target.matches('.swatch')) {
+    document.querySelectorAll('.swatch').forEach(s => s.classList.remove('is-active'));
+    e.target.classList.add('is-active');
+    const pdpImg = document.querySelector('.pdp-img');
+    if (pdpImg && e.target.dataset.swatchImg) {
+      pdpImg.src = e.target.dataset.swatchImg;
+    }
+    const colLabel = document.getElementById('pdpColourLabel');
+    if (colLabel && e.target.dataset.swatchName) {
+      colLabel.textContent = `Colour: ${e.target.dataset.swatchName}`;
+    }
     return;
   }
 
