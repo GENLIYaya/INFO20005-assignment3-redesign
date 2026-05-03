@@ -624,3 +624,113 @@ overflow hidden 保证图片也被圆角裁切
   font-size: 12px; color: var(--ink-70);
   line-height: 1.45;
 }
+
+
+/* ============================================================================
+   CONTACT & FAQ BLOCK (homepage)
+   ----------------------------------------------------------------------------
+   Quoted from real jonesandco.com.au FAQ page so the copy reads authentic.
+   ========================================================================= */
+   .contact-block {
+    background: var(--cream-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-5);
+    display: grid;
+    gap: var(--sp-5);
+  }
+  .contact-lhs { 
+    display: flex; 
+    flex-direction: column; 
+    gap: var(--sp-3); 
+  }
+  .contact-lhs h2 {
+    font-family: 'Fraunces', serif;
+    font-size: var(--fs-xl); 
+    font-weight: 600;
+  }
+  .contact-lhs p {
+    font-size: 14px; 
+    color: var(--ink-70); 
+    line-height: 1.7;
+  }
+  .contact-list { 
+    display: flex; 
+    flex-direction: column; 
+    gap: var(--sp-3); 
+    margin-top: var(--sp-3); 
+  }
+  .contact-item {
+    display: flex; 
+    gap: var(--sp-3); 
+    align-items: flex-start;
+  }
+  .contact-item .icon {
+    width: 40px; 
+    height: 40px; 
+    flex-shrink: 0;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    display: grid; 
+    place-items: center;
+    font-size: 16px;
+  }
+  .contact-item strong { 
+    display: block; 
+    font-size: 13px; 
+    margin-bottom: 2px; 
+  }
+  .contact-item span { 
+    font-size: 13px; 
+    color: var(--ink-70); 
+  }
+  .contact-cta { 
+    display: flex; gap: 
+    var(--sp-3); 
+    flex-wrap: wrap; 
+    margin-top: var(--sp-3); }
+  
+  .faq-list { 
+    display: flex; 
+    flex-direction: column; 
+    gap: var(--sp-2); 
+  }
+  .faq-list details {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: var(--sp-4);
+  }
+  .faq-list summary {
+    font-family: 'Fraunces', serif;
+    font-size: 15px; 
+    font-weight: 600;
+    list-style: none;
+    cursor: pointer;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    gap: var(--sp-3);
+  }
+  .faq-list summary::after { 
+    content: '+'; 
+    font-size: 20px; 
+    font-weight: 300; 
+  }
+
+  /* 打开后，浏览器会自动给它加一个 open 属性：只选中那些带有 open 属性的 details。
+  details[open]=选中有 open 属性的 <details> 本身。
+  details open选中 <details> 里面叫 <open> 的子元素。但 HTML 里根本没有 <open> 这个标签，所以这样写不对。 */
+  .faq-list details[open] summary::after { 
+    content: '−'; 
+  }
+  /* 在 FAQ 里，它用来判断 <details> 是否已经展开，然后把 summary 后面的符号从 + 改成 −。 */
+  
+  /* 一般 FAQ 会有一个加号/减号效果。FAQ 关闭时：显示 +FAQ 打开时：显示 − */
+  .faq-list details p {
+    padding-top: var(--sp-3);
+    font-size: 13px; 
+    color: var(--ink-70); 
+    line-height: 1.7;
+  }
