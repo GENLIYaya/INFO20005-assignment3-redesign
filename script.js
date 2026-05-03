@@ -716,6 +716,189 @@ function shopPage() {
     `;
   }
 
+
+/* ----- PRODUCT DETAIL (with "You May Also Like" rail, non-AI) ----- */
+function productPage() {
+    const p = PRODUCTS.find(x => x.id === state.currentId) || PRODUCTS[0];
+    // Related = same category, exclude self, top 4 by rating
+    const related = PRODUCTS
+      .filter(x => x.cat === p.cat && x.id !== p.id)
+      .sort((a, b) => b.rating - a.rating)
+      .slice(0, 4);
+    return `
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <button class="back-btn" data-route="shop">Back</button>
+        <div class="crumbs">
+          <a href="#home" data-route="home">Home</a>
+          <span class="sep">›</span>
+          <a href="#shop" data-route="shop">Shop</a>
+          <span class="sep">›</span>
+          <span class="current">${esc(p.name)}</span>
+        </div>
+      </nav>
+  
+      <div class="pdp-layout">
+        <div class="pdp-media">
+          <img class="pdp-img" src="${esc(p.image)}" alt="${esc(p.imageAlt || p.name)}" loading="lazy">
+        </div>
+  
+        <div class="pdp-info">
+          <span class="pdp-cat">${esc(p.catLabel)}</span>
+          <h1 class="pdp-title">${esc(p.name)}</h1>
+          <div class="pdp-rating">
+            <span class="stars">${stars(p.rating)}</span>
+            <span>${p.rating} (${p.reviews} reviews)</span>
+          </div>
+          <div class="pdp-price-row">
+            <div class="pdp-price">${dollars(p.price)}</div>
+            ${p.comparePrice ? `<div class="pdp-compare">${dollars(p.comparePrice)}</div>` : ''}
+          </div>
+          <p class="pdp-desc">${esc(p.desc)}</p>
+  
+          <div class="pdp-options">
+            <span class="opt-label">Colour: ${esc(p.swatches[0].n)}</span>
+            <div class="swatches">
+              ${p.swatches.map((s, i) => `<button class="swatch ${i === 0 ? 'is-active' : ''}" style="background:${s.c}" aria-label="${esc(s.n)}"></button>`).join('')}
+            </div>
+          </div>
+  
+          <div class="pdp-options">
+            <span class="opt-label">Quantity</span>
+            <div class="qty-row" id="pdpQty">
+              <button data-qty-delta="-1">−</button>
+              <span id="pdpQtyVal">1</span>
+              <button data-qty-delta="1">+</button>
+            </div>
+          </div>
+  
+          <div class="pdp-actions">
+            <button class="btn btn-primary" id="pdpAdd">Add to cart</button>
+            <button class="btn btn-secondary" data-route="cart">View cart</button>
+          </div>
+  
+          <div class="pdp-accordion">
+            <details open>
+              <summary>Product details</summary>
+              <p>${esc(p.accordion.details)}</p>
+            </details>
+            <details>
+              <summary>Care &amp; use</summary>
+              <p>${esc(p.accordion.care)}</p>
+            </details>
+            <details>
+              <summary>Shipping &amp; returns</summary>
+              <p>${esc(p.accordion.shipping)}</p>
+            </details>
+          </div>
+        </div>
+      </div>
+  
+      ${related.length ? `
+        <section class="related-rail">
+          <h2>You may also like</h2>
+          <div class="product-grid">
+            ${related.map(x => card(x, { showNew: false })).join('')}
+          </div>
+        </section>
+      ` : ''}
+    `;
+  }
+  
+  /* ----- CART ----- */
+  function cartPage() {
+    const totals = computeTotals();
+    const empty = state.cart.length === 0;
+    return `
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <button class="back-btn" data-route="shop">Back</button>
+        <div class="crumbs">
+          <a href="#home" data-route="home">Home</a>
+          <span class="sep">›</span>
+          <span class="current">Shopping cart</span>
+        </div>
+      </nav>
+  
+      <h1 class="serif" style="font-size: var(--fs-2xl); margin-bottom: var(--sp-5);">Your cart</h1>
+  
+      ${empty ? `
+        <div class="empty">
+          <h3 class="serif">Your cart is empty</h3>
+          <p>Browse our collection and add a piece you love.</p>
+          <button class="btn btn-primary" style="margin-top: var(--sp-4);" data-route="shop">Shop now</button>
+        </div>
+      ` : `
+        <div class="cart-layout">
+          <div class="cart-rows">
+            ${state.cart.map(line => {
+              const p = PRODUCTS.find(x => x.id === line.id);
+              return `
+                <div class="cart-row" data-line="${p.id}">
+                  <div class="cart-thumb"><div class="ceramic ${p.ceramic}"></div></div>
+                  <div class="cart-row-info">
+                    <div class="cart-row-name">${esc(p.name)}</div>
+                    <div class="cart-row-meta">${esc(p.catLabel)} · ${dollars(p.price)} each</div>
+                    <div class="cart-row-bottom">
+                      <div class="qty-row">
+                        <button data-line-delta="-1">−</button>
+                        <span>${line.qty}</span>
+                        <button data-line-delta="1">+</button>
+                      </div>
+                      <div style="display:flex; align-items:center; gap: var(--sp-3);">
+                        <button class="remove-link" data-remove>Remove</button>
+                        <div class="cart-row-price">${dollars(p.price * line.qty)}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+  
+          <aside class="cart-summary">
+            <div class="summary-title">Order summary</div>
+            <div class="summary-row"><span>Subtotal</span><span>${dollars(totals.subtotal)}</span></div>
+            <div class="summary-row"><span>Shipping</span><span>${totals.shipping === 0 ? 'Free' : dollars(totals.shipping)}</span></div>
+            ${state.appliedCoupon ? `
+              <div class="summary-row discount">
+                <span>Discount (${state.appliedCoupon.code})</span>
+                <span>−${dollars(totals.discount)}</span>
+              </div>` : ''}
+            <div class="summary-row total"><span>Total</span><span>${dollars(totals.total)}</span></div>
+  
+            <div class="promo-input-row">
+              <input class="promo-input" id="promoInput" placeholder="Try ${CONFIG.coupons.JONES10.code} or ${CONFIG.coupons.FIRST10.code}">
+              <button class="promo-apply" id="promoApply">Apply</button>
+            </div>
+            <div class="coupon-hint">
+              Use <code>${CONFIG.coupons.JONES10.code}</code> or
+              <code>${CONFIG.coupons.FIRST10.code}</code> for 10% off your order.
+            </div>
+  
+            <button class="btn btn-primary full-w" style="margin-top: var(--sp-4);" data-route="checkout">
+              Proceed to checkout
+            </button>
+  
+            <div class="trust-cues">
+              <div><strong>Secure</strong><span>SSL checkout</span></div>
+              <div><strong>21-day</strong><span>Returns</span></div>
+              <div><strong>48-hour</strong><span>Dispatch</span></div>
+            </div>
+          </aside>
+        </div>
+      `}
+    `;
+  }
+  
+
+
+
+
+
+
+
+
+
+
 document.body.addEventListener('click', (e) => {
   /* Mini-cart close */
   if (e.target.id === 'miniCartClose' || e.target.id === 'miniCartScrim') {
