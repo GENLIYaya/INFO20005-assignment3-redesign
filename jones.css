@@ -57,6 +57,11 @@ background: rgba(62, 102, 96, 0.1);
 border-radius: 999px;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 /* body and based setting */
 html { scroll-behavior: smooth; }
 main { padding-top: var(--sp-3); }
