@@ -653,6 +653,69 @@ function homePage() {
     `;
   }
 
+
+
+/* ----- SHOP ----- */
+function shopPage() {
+    const items = filtered();
+    const filterChip = (key, label) => `
+      <button class="chip ${state.filter === key ? 'is-active' : ''}" data-filter="${key}">${esc(label)}</button>
+    `;
+    const titleMap = {
+      all: 'All collections',
+      wallart: 'Wall Art',
+      decorating: 'Decorating',
+      tableware: 'Tableware',
+      sale: 'Sale'
+    };
+    return `
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <button class="back-btn" data-route="home">Back</button>
+        <div class="crumbs">
+          <a href="#home" data-route="home">Home</a>
+          <span class="sep">›</span>
+          <span class="current">${titleMap[state.filter] || 'Shop'}</span>
+        </div>
+      </nav>
+  
+      <div class="shop-layout">
+        <aside class="filter-sidebar">
+          <div class="filter-group">
+            <div class="filter-label">Collection</div>
+            <div class="chip-stack">
+              ${filterChip('all', 'All collections')}
+              ${filterChip('wallart', 'Wall Art')}
+              ${filterChip('decorating', 'Decorating')}
+              ${filterChip('tableware', 'Tableware')}
+            </div>
+          </div>
+          <div class="filter-group">
+            <div class="filter-label">Offers</div>
+            <div class="chip-row">
+              ${filterChip('sale', 'On sale')}
+            </div>
+          </div>
+        </aside>
+  
+        <div class="shop-results">
+          <h1 class="serif">${esc(titleMap[state.filter] || 'Shop')}</h1>
+          <div class="shop-toolbar">
+            <span class="results-count">${items.length} product${items.length !== 1 ? 's' : ''} found</span>
+            <select class="sort-select" id="sortSel">
+              <option value="featured" ${state.sort === 'featured' ? 'selected' : ''}>Sort: Featured</option>
+              <option value="priceAsc" ${state.sort === 'priceAsc' ? 'selected' : ''}>Price: Low to High</option>
+              <option value="priceDesc" ${state.sort === 'priceDesc' ? 'selected' : ''}>Price: High to Low</option>
+              <option value="rating" ${state.sort === 'rating' ? 'selected' : ''}>Top Rated</option>
+            </select>
+          </div>
+          ${items.length
+            ? `<div class="product-grid">${items.map(p => card(p)).join('')}</div>`
+            : `<div class="empty"><h3 class="serif">No products found</h3><p>Try a different collection.</p></div>`}
+        </div>
+      </div>
+    `;
+  }
+
 document.body.addEventListener('click', (e) => {
   /* Mini-cart close */
   if (e.target.id === 'miniCartClose' || e.target.id === 'miniCartScrim') {
