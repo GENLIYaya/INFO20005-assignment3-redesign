@@ -1131,7 +1131,7 @@ font-size: 13px;
 color: var(--ink-70); 
 line-height: 1.7;
 }
-/* quick add */
+/* mini cart */
 .mini-cart-scrim {
 position: fixed;
 inset: 0;
@@ -1309,7 +1309,7 @@ width: 100%;
 justify-content: center;
 }
 
-
+/* quick add */
 .quick-add {
 position: absolute;
 bottom: 10px;
@@ -1817,3 +1817,141 @@ font-weight: 700;
 margin-bottom: var(--sp-5);
 }
 
+
+/* ============================================================================
+CART BADGE BUMP (pulse when item added)
+========================================================================= */
+@keyframes badgeBump {
+0%   { transform: scale(1); }
+30%  { transform: scale(1.35); }
+60%  { transform: scale(0.92); }
+100% { transform: scale(1); }
+}
+.btn-icon .badge.bump {
+animation: badgeBump 420ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+.btn-icon .badge.bump { animation: none; }
+.mini-cart, .mini-cart-scrim { transition: none; }
+.quick-add { transition: none; }
+}
+
+/* ============================================================================
+  23. PAGE TRANSITION
+  ========================================================================= */
+.page-content { animation: pageIn 280ms cubic-bezier(0.4, 0, 0.2, 1) both; }
+@keyframes pageIn {
+from { opacity: 0; transform: translateY(8px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================================
+  24. DESKTOP BREAKPOINT (≥900px) — ADAPTS, does not just scale
+  ========================================================================= */
+@media (min-width: 900px) {
+.menu-toggle { display: none; }
+.desktop-nav {
+  display: flex; gap: var(--sp-5);
+  margin-left: var(--sp-6);
+}
+.desktop-nav a {
+  padding: 8px 4px;
+  font-size: 14px; 
+  font-weight: 600;
+  color: var(--ink);
+  border-bottom: 2px solid transparent;
+  transition: border-color var(--t), color var(--t);
+}
+.desktop-nav a:hover, .desktop-nav a.active {
+  color: var(--coral);
+  border-bottom-color: var(--coral);
+}
+.topbar { padding: 0 var(--sp-6); 
+  height: 80px; }
+.brand { font-size: 26px; }
+
+/* Hero becomes a wider landscape stage on desktop */
+.hero-stage {
+  aspect-ratio: 16 / 7;
+  min-height: 520px;
+}
+.hero-stage .ceramic.vase  { top: 22%; left: 18%; width: 180px; height: 260px; }
+.hero-stage .ceramic.mug   { top: 42%; right: 18%; width: 180px; height: 180px; }
+.hero-stage .ceramic.bowl  { bottom: 16%; left: 32%; width: 220px; height: 100px; }
+.hero-stage .ceramic.wall  { top: 14%; right: 28%; width: 140px; height: 140px; }
+.hero-float {
+  padding: var(--sp-7);
+  justify-content: center;
+  width: 60%;
+  background: linear-gradient(to right,
+    rgba(44, 36, 22, 0.55) 0%,
+    rgba(44, 36, 22, 0.25) 60%,
+    rgba(44, 36, 22, 0) 100%);
+}
+.hero-title { font-size: var(--fs-3xl); }
+.hero-sub { font-size: 17px; max-width: 50ch; }
+
+/* New arrivals scroller shows 4 cards at once */
+.scroller {
+  grid-auto-columns: calc((100% - (var(--sp-4) * 3)) / 4);
+}
+.scroller-arrows { display: flex; }
+
+/* Category grid = 4 across */
+.cat-grid { 
+  grid-template-columns: repeat(4, 1fr); 
+  gap: var(--sp-5); }
+.cat-icon { 
+  width: 72px; 
+  height: 72px; }
+
+/* Featured collection = 2 col (media left, copy right) */
+.collection-card { 
+  grid-template-columns: 1.1fr 1fr; 
+  gap: 0; }
+.collection-media { 
+  aspect-ratio: auto; 
+  height: 100%; }
+.collection-copy { 
+  padding: var(--sp-7); 
+  justify-content: center; }
+
+/* Contact block = 2 col */
+.contact-block {
+  grid-template-columns: 1fr 1fr;
+  padding: var(--sp-7);
+  gap: var(--sp-7);
+}
+
+.product-grid { 
+  grid-template-columns: repeat(4, 1fr); 
+  gap: var(--sp-5); }
+
+.shop-layout {
+  grid-template-columns: 240px 1fr;
+  gap: var(--sp-6);
+  align-items: start;
+}
+.filter-sidebar { 
+  position: sticky; 
+  top: 100px; }
+
+.pdp-layout {
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-7);
+  align-items: start;
+}
+
+.cart-layout {
+  grid-template-columns: 1.6fr 1fr;
+  gap: var(--sp-6);
+  align-items: start;
+}
+.cart-summary { 
+  position: sticky; 
+  top: 100px; }
+
+.footer-grid { 
+  grid-template-columns: 1.4fr 1fr 1fr 1fr; 
+  gap: var(--sp-6); }
+}
