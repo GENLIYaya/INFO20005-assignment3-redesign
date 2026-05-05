@@ -552,7 +552,7 @@ function homePage() {
             <p class="collection-desc">That's exactly what our hand-painted Chino Mugs were made for, small unspoken moments of joy that repeat every single day. Our newest Sweetheart colourway is released in a limited run from our Vietnam factory — once it's gone, it's gone.</p>
             <div style="display: flex; gap: var(--sp-3); flex-wrap: wrap;">
               <button class="btn btn-primary" data-route="product" data-pid="sweetheart">Shop the collection</button>
-              <button class="btn btn-ghost" data-route="shop" data-filter="decorating">Explore all Chino Mugs</button>
+              <button class="btn btn-ghost" data-route="chino">Explore all Chino Mugs</button>
             </div>
           </div>
         </div>
@@ -1119,6 +1119,94 @@ function checkoutPage() {
 
 
 
+/* ----- CHINO COLLECTION ----- */
+function chinoPage() {
+  const mugs = PRODUCTS.filter(p =>
+    p.name.toLowerCase().includes('mug') ||
+    p.name.toLowerCase().includes('cup') ||
+    p.name.toLowerCase().includes('chino')
+  );
+  const avgRating = (mugs.reduce((s, p) => s + p.rating, 0) / mugs.length).toFixed(1);
+  const totalReviews = mugs.reduce((s, p) => s + p.reviews, 0);
+  return `
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <button class="back-btn" data-route="home">Back</button>
+      <div class="crumbs">
+        <a href="#home" data-route="home">Home</a>
+        <span class="sep">›</span>
+        <a href="#shop" data-route="shop">Collections</a>
+        <span class="sep">›</span>
+        <span class="current">Chino Mug</span>
+      </div>
+    </nav>
+
+    <div class="chino-hero">
+      <div class="chino-hero-media">
+        <img src="assets/collection.jpg" alt="The Jones &amp; Co Chino Mug collection" loading="lazy">
+      </div>
+      <div class="chino-hero-copy">
+        <span class="eyebrow">Signature Collection</span>
+        <h1 class="serif">The Chino Mug</h1>
+        <p>The piece that started it all. Our hand-painted Chino Mug has been at the heart of Jones &amp; Co since the very beginning — made in Vietnam from quality earthenware, with every stripe and motif applied by hand. It's the mug you reach for every morning, the one that feels like a small ritual.</p>
+        <p>Available in a range of colourways, from the classic Navy Lines to the new limited-edition Sweetheart. Each piece is unique — a small variation that tells you a person made this, not a machine.</p>
+        <div style="display:flex;gap:var(--sp-3);flex-wrap:wrap;">
+          <button class="btn btn-primary" data-route="product" data-pid="sweetheart">Shop Sweetheart edition</button>
+          <button class="btn btn-ghost" data-route="product" data-pid="chino">Shop Navy Lines</button>
+        </div>
+        <div class="chino-hero-stats">
+          <div class="chino-stat">
+            <strong>${avgRating}★</strong>
+            <span>Avg rating</span>
+          </div>
+          <div class="chino-stat">
+            <strong>${totalReviews}+</strong>
+            <span>Reviews</span>
+          </div>
+          <div class="chino-stat">
+            <strong>Free</strong>
+            <span>Shipping over $${CONFIG.freeShippingOver}</span>
+          </div>
+          <div class="chino-stat">
+            <strong>Hand</strong>
+            <span>Painted in Vietnam</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-head" style="margin-top:var(--sp-7);margin-bottom:var(--sp-5);">
+      <div class="lhs">
+        <span class="eyebrow">The full range</span>
+        <h2 class="section-title">All Chino Mugs &amp; Cups</h2>
+      </div>
+      <span class="results-count">${mugs.length} piece${mugs.length !== 1 ? 's' : ''}</span>
+    </div>
+    <div class="product-grid" style="margin-bottom:var(--sp-7);">
+      ${mugs.map(p => card(p)).join('')}
+    </div>
+
+    <div class="chino-story">
+      <div class="chino-story-text">
+        <span class="eyebrow">Made by hand</span>
+        <h2 class="serif">Every stripe, every heart — painted one at a time.</h2>
+        <p>Each Chino Mug begins as a plain earthenware body at our partner workshop in Vietnam. The stripes, motifs and colour accents are all applied by hand using practiced brushwork — the kind of steady, repetitive skill that takes years to develop.</p>
+        <p>Because each piece is hand-painted, there will always be a small variation between mugs. That's not a flaw. It's the thing that makes each one yours. The mug holds approximately 320ml and is both microwave and dishwasher safe — made to be used every single day.</p>
+        <div style="margin-top:var(--sp-3);">
+          <button class="btn btn-primary" data-route="product" data-pid="sweetheart">Shop the Sweetheart edition →</button>
+        </div>
+      </div>
+      <div class="chino-story-imgs">
+        <div class="chino-story-img-main">
+          <img src="assets/products/sweet-heart.webp" alt="Chino Mug Sweetheart — hand-painted hearts detail" loading="lazy">
+        </div>
+        <div class="chino-story-img-alt">
+          <img src="assets/products/cup1.webp" alt="Chino Mug Navy Lines — classic stripe detail" loading="lazy">
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 /* ----- JOURNAL ----- */
 function journalPage() {
   const articles = [
@@ -1676,6 +1764,7 @@ function render() {
       case 'checkout':     html = checkoutPage(); break;
       case 'confirmation': html = confirmationPage(); break;
       case 'account':      html = accountPage(); break;
+      case 'chino':        html = chinoPage(); break;
       case 'journal':      html = journalPage(); break;
       case 'about':        html = aboutPage(); break;
       default:             html = homePage();
