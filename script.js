@@ -191,14 +191,14 @@ document.getElementById('announcement').innerHTML =
       shipping:'Free tracked shipping over $75.'
     }
   },
-  { id:'desert', 
-    name:'Desert Jug', 
+  { id:'desert',
+    name:'Desert Jug',
     image:'assets/products/jug.webp',
     imageAlt:'Desert Jug',
-    cat:'decorating', 
+    cat:'decorating',
     catLabel:'Decorating',
-    price:78, 
-    comparePrice:null, 
+    price:78,
+    comparePrice:98, 
     rating:4.8, 
     reviews:12, 
     stock:'low', 
@@ -218,7 +218,7 @@ document.getElementById('announcement').innerHTML =
     cat:'tableware',
     catLabel:'Tableware',
     price:24,
-    comparePrice:null,
+    comparePrice:38,
     rating:4.5,
     reviews:47,
     stock:'in',
@@ -271,14 +271,14 @@ document.getElementById('announcement').innerHTML =
       shipping:'Free tracked shipping over $75.'
     }
   },
-  { id:'bloom', 
-    name:'BEACH CLUB MINNOW', 
+  { id:'bloom',
+    name:'BEACH CLUB MINNOW',
     image:'assets/products/BEACH CLUB MINNOW.webp',
     imageAlt:'BEACH CLUB MINNOW',
-    cat:'wallart', 
+    cat:'wallart',
     catLabel:'Wall Art',
-    price:95, 
-    comparePrice:null, 
+    price:95,
+    comparePrice:120, 
     rating:4.8, 
     reviews:11, 
     tock:'in', 
@@ -1119,6 +1119,222 @@ function checkoutPage() {
 
 
 
+/* ----- JOURNAL ----- */
+function journalPage() {
+  const articles = [
+    {
+      img: 'assets/products/cup1.webp',
+      cat: 'Home Styling',
+      title: 'How to style ceramics on an open shelf',
+      excerpt: 'Open shelving is one of the best ways to let handmade pieces breathe. Here\'s how we\'d approach building a shelf that feels layered, warm and genuinely yours.',
+      date: '12 Apr 2026'
+    },
+    {
+      img: 'assets/products/FABLE SUN PINK HEART.webp',
+      cat: 'Our Makers',
+      title: 'Capiz shell: a tradition from the Philippines',
+      excerpt: 'The Capiz shell has been gathered, cleaned and crafted into objects of beauty in the Philippines for generations. We visited our making partners to see it first-hand.',
+      date: '3 Mar 2026'
+    },
+    {
+      img: 'assets/products/sweet-heart.webp',
+      cat: 'New Arrivals',
+      title: 'The colour story behind our Sweetheart collection',
+      excerpt: 'Every collection begins with a mood board, a conversation, and a question: what does joy look like in 2026? Our design team shares how Sweetheart came to life.',
+      date: '18 Feb 2026'
+    },
+    {
+      img: 'assets/products/vase1.webp',
+      cat: 'Lifestyle',
+      title: 'Small rituals: how ceramics shape your morning',
+      excerpt: 'There\'s something about reaching for a favourite mug that signals the start of the day. We asked five customers to share the pieces they use every morning.',
+      date: '28 Jan 2026'
+    }
+  ];
+  return `
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <button class="back-btn" data-route="home">Back</button>
+      <div class="crumbs">
+        <a href="#home" data-route="home">Home</a>
+        <span class="sep">›</span>
+        <span class="current">Journal</span>
+      </div>
+    </nav>
+
+    <div class="journal-header">
+      <span class="eyebrow">Stories &amp; Ideas</span>
+      <h1 class="serif">The Jones &amp; Co Journal</h1>
+      <p>Behind the scenes, styling inspiration and the stories that shape our world.</p>
+    </div>
+
+    <div class="journal-featured">
+      <div class="journal-featured-img">
+        <img src="assets/HERO.png" alt="Jones &amp; Co ceramics in a home setting" loading="lazy">
+      </div>
+      <div class="journal-featured-copy">
+        <span class="journal-cat">Behind the Scenes</span>
+        <h2 class="serif">The story behind the Chino Mug — twenty years of a morning ritual</h2>
+        <p>It started with a sketch on a Sydney dining table and a conviction that a mug should make you feel something every morning. Two decades on, the Chino Mug is still hand-painted the same way it always was — by skilled craftspeople in Vietnam, one stripe at a time.</p>
+        <p>We sat down with founder Kate Jones to talk about the origins of the piece that started it all, and why she still reaches for it every single morning.</p>
+        <div style="margin-top:var(--sp-2);">
+          <span class="journal-card-date">28 Apr 2026</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-head" style="margin-top:var(--sp-7); margin-bottom:var(--sp-5);">
+      <div class="lhs">
+        <span class="eyebrow">More stories</span>
+        <h2 class="section-title">Latest from the journal</h2>
+      </div>
+    </div>
+    <div class="journal-grid">
+      ${articles.map(a => `
+        <article class="journal-card">
+          <div class="journal-card-img">
+            <img src="${esc(a.img)}" alt="${esc(a.title)}" loading="lazy">
+          </div>
+          <div class="journal-card-body">
+            <span class="journal-card-cat">${esc(a.cat)}</span>
+            <h3 class="journal-card-title">${esc(a.title)}</h3>
+            <p class="journal-card-excerpt">${esc(a.excerpt)}</p>
+            <div class="journal-card-date">${esc(a.date)}</div>
+          </div>
+        </article>
+      `).join('')}
+    </div>
+  `;
+}
+
+/* ----- ABOUT ----- */
+function aboutPage() {
+  const timeline = [
+    { year: '2004', text: "Jones & Co is founded by Kate Jones in Surry Hills, Sydney, with a belief that everyday objects should bring genuine joy." },
+    { year: '2006', text: "The brand's first stockists come on board across New South Wales and Victoria. Word spreads quickly about the quality and character of the pieces." },
+    { year: '2010', text: "The Capiz shell wall art range launches, bringing a new material and a new craft tradition — handmade in the Philippines — into the Jones & Co family." },
+    { year: '2015', text: "Jones & Co launches its online store, taking handmade Australian-designed ceramics to homes across the country and internationally." },
+    { year: '2020', text: "The Chino Mug series expands with new colourways, cementing it as one of Australia's most recognised ceramic pieces." },
+    { year: '2024', text: "Twenty years of Jones & Co. The brand is still designing from Surry Hills, still handmade, and still bringing colour to Australian homes." }
+  ];
+  return `
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <button class="back-btn" data-route="home">Back</button>
+      <div class="crumbs">
+        <a href="#home" data-route="home">Home</a>
+        <span class="sep">›</span>
+        <span class="current">About</span>
+      </div>
+    </nav>
+
+    <div class="about-hero">
+      <img src="assets/HERO.png" alt="Jones &amp; Co ceramics — handmade joy for the home" loading="lazy">
+      <div class="about-hero-overlay">
+        <span class="eyebrow" style="color:var(--white);background:rgba(255,255,255,0.18);margin-bottom:var(--sp-3);">Our Story</span>
+        <h1 class="serif">Made with love.<br>Designed in Sydney.</h1>
+      </div>
+    </div>
+
+    <div class="about-story">
+      <div class="about-story-text">
+        <span class="eyebrow">Who we are</span>
+        <h2 class="serif">Bringing colour and character to Australian homes since 2004.</h2>
+        <p>Jones &amp; Co was born out of a belief that the objects we surround ourselves with every day should carry character. Founded by Kate Jones in Sydney's Surry Hills, we set out to design hand-painted ceramics that felt genuinely joyful — full of colour, pattern and life.</p>
+        <p>Twenty years on, our pieces sit on dining tables, open shelves and walls across Australia and around the world. Every mug, vase, bowl and Capiz shell wall piece is still designed here in Sydney and made by craftspeople we've worked with for years.</p>
+        <p>We are not a fast-fashion homewares brand. We do not design for trends. We design for the long haul — for the mug you reach for every morning, the vase that makes the corner of a room feel alive, the wall piece your guests always ask about.</p>
+      </div>
+      <div class="about-story-img">
+        <img src="assets/collection.jpg" alt="Jones &amp; Co ceramics collection" loading="lazy">
+      </div>
+    </div>
+
+    <div class="about-mission">
+      <p class="about-mission-quote">"We make things that make people happy. That sounds simple, but it's genuinely hard to do — and it requires good design, honest colour, quality materials, and the skill of the people who paint each piece by hand."</p>
+      <p class="about-mission-attr">— Kate Jones, Founder</p>
+    </div>
+
+    <div class="about-values">
+      <h2 class="serif">What we stand for</h2>
+      <div class="about-values-grid">
+        <div class="about-value-card">
+          <div class="about-value-icon">✦</div>
+          <h3 class="serif">Handmade character</h3>
+          <p>Every item is painted by hand. That means no two pieces are exactly alike — each one carries the mark of the person who made it.</p>
+        </div>
+        <div class="about-value-card">
+          <div class="about-value-icon">◉</div>
+          <h3 class="serif">Designed in Australia</h3>
+          <p>All our designs originate in our Surry Hills studio. Our team works from colour studies, pattern research and a love of objects that make everyday life better.</p>
+        </div>
+        <div class="about-value-card">
+          <div class="about-value-icon">♡</div>
+          <h3 class="serif">Made with care</h3>
+          <p>We work with long-term factory partners in Vietnam and the Philippines — skilled family workshops we've collaborated with for years, who bring our designs to life.</p>
+        </div>
+        <div class="about-value-card">
+          <div class="about-value-icon">⊛</div>
+          <h3 class="serif">Built to last</h3>
+          <p>Our ceramics aren't trend pieces. They're made from quality earthenware and stoneware, designed to be used every day, season after season.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-makers">
+      <div class="section-head">
+        <div class="lhs">
+          <span class="eyebrow">Where it's made</span>
+          <h2 class="section-title serif">Skilled hands, two countries.</h2>
+        </div>
+      </div>
+      <div class="makers-grid">
+        <div class="maker-card">
+          <div class="maker-card-img">
+            <img src="assets/products/sweet-heart.webp" alt="Ceramic workshop — Vietnam" loading="lazy">
+          </div>
+          <div class="maker-card-copy">
+            <span class="eyebrow">Vietnam</span>
+            <h3 class="serif">Ceramic tableware &amp; decorating</h3>
+            <p>Our ceramic tableware and decorative pieces are handmade at our partner workshops in Vietnam's ceramic heartland. Each piece is shaped and painted by craftspeople who have worked in this industry for generations.</p>
+            <p>The deep industry knowledge, the confident brushstrokes, the consistency across every run — these are the things that simply cannot be replicated by machine. It's why we've worked with the same factories since the beginning.</p>
+          </div>
+        </div>
+        <div class="maker-card">
+          <div class="maker-card-img">
+            <img src="assets/products/FABLE SUN PINK HEART.webp" alt="Capiz shell craft — Philippines" loading="lazy">
+          </div>
+          <div class="maker-card-copy">
+            <span class="eyebrow">Philippines</span>
+            <h3 class="serif">Capiz shell wall art</h3>
+            <p>Our Capiz shell wall art is handmade in the Philippines, where traditional shell crafting has been practiced for generations. Each panel and disc is assembled by hand from individually cleaned and prepared Capiz shells.</p>
+            <p>The natural variation in each shell — its translucency, the way it catches light — makes every piece genuinely unique. No two wall pieces will ever be exactly the same.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-timeline">
+      <h2 class="serif">Twenty years in the making</h2>
+      <div class="timeline-list">
+        ${timeline.map(t => `
+          <div class="timeline-item">
+            <div class="timeline-year">${esc(t.year)}</div>
+            <p class="timeline-text">${esc(t.text)}</p>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+
+    <div class="about-cta">
+      <span class="eyebrow" style="color:var(--honey)">Ready to explore?</span>
+      <h2 class="serif">Find your next favourite piece.</h2>
+      <p>Browse our latest collections — from hand-painted Chino Mugs to Capiz shell wall art. Designed in Sydney, made with love.</p>
+      <div style="display:flex;gap:var(--sp-3);flex-wrap:wrap;justify-content:center;">
+        <button class="btn btn-primary" data-route="shop">Shop all collections</button>
+        <button class="btn btn-ghost" data-route="journal">Read the journal</button>
+      </div>
+    </div>
+  `;
+}
+
 document.body.addEventListener('click', (e) => {
   /* Mini-cart close */
   if (e.target.id === 'miniCartClose' || e.target.id === 'miniCartScrim') {
@@ -1460,6 +1676,8 @@ function render() {
       case 'checkout':     html = checkoutPage(); break;
       case 'confirmation': html = confirmationPage(); break;
       case 'account':      html = accountPage(); break;
+      case 'journal':      html = journalPage(); break;
+      case 'about':        html = aboutPage(); break;
       default:             html = homePage();
     }
     app.innerHTML = `<div class="page-content">${html}</div>`;
