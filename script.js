@@ -303,6 +303,8 @@ const state = {
   currentId: null,
   cart: [],
   wishlist: new Set(),
+  orders: [],
+  currentOrderId: null,
   filter: 'all',
   sort: 'featured',
   appliedCoupon: null
@@ -749,6 +751,7 @@ function productPage() {
       .filter(x => x.cat === p.cat && x.id !== p.id)
       .sort((a, b) => b.rating - a.rating)
       .slice(0, 4);
+    const galleryImgs = (p.swatchImages && p.swatchImages.length > 1) ? p.swatchImages : [p.image];
     return `
       <nav class="breadcrumb" aria-label="Breadcrumb">
         <button class="back-btn" data-route="shop">Back</button>
@@ -763,7 +766,18 @@ function productPage() {
   
       <div class="pdp-layout">
         <div class="pdp-media">
-          <img class="pdp-img" src="${esc(p.image)}" alt="${esc(p.imageAlt || p.name)}" loading="lazy">
+          <div class="pdp-main-img-wrap">
+            <img class="pdp-img" src="${esc(p.image)}" alt="${esc(p.imageAlt || p.name)}" loading="lazy">
+          </div>
+          ${galleryImgs.length > 1 ? `
+            <div class="pdp-thumbs">
+              ${galleryImgs.map((src, i) => `
+                <button class="pdp-thumb ${i === 0 ? 'is-active' : ''}" data-thumb-src="${esc(src)}" aria-label="View image ${i + 1}">
+                  <img src="${esc(src)}" alt="${esc(p.name)} view ${i + 1}" loading="lazy">
+                </button>
+              `).join('')}
+            </div>
+          ` : ''}
         </div>
   
         <div class="pdp-info">
@@ -1017,15 +1031,79 @@ function checkoutPage() {
   
   /* ----- CONFIRMATION ----- */
   function confirmationPage() {
-    const orderId = '#JC-' + Math.floor(100000 + Math.random() * 900000);
+    const orderId = state.currentOrderId || ('#JC-' + Math.floor(100000 + Math.random() * 900000));
     return `
       <div class="confirmation">
         <div class="check">✓</div>
         <h1>Thank you, your order is confirmed.</h1>
         <p>We've sent a confirmation to your email. Your hand-painted ceramics will be carefully packed and dispatched within 48 hours.</p>
         <div class="order-id">${orderId}</div>
-        <div>
+        <div style="display:flex;gap:var(--sp-3);justify-content:center;flex-wrap:wrap;">
+          <button class="btn btn-ghost" data-route="account">View order</button>
           <button class="btn btn-primary" data-route="home">Continue shopping</button>
+        </div>
+      </div>
+    `;
+  }
+
+  /* ----- ACCOUNT / ORDER HISTORY ----- */
+  function accountPage() {
+    return `
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <button class="back-btn" data-route="home">Back</button>
+        <div class="crumbs">
+          <a href="#home" data-route="home">Home</a>
+          <span class="sep">›</span>
+          <span class="current">My Account</span>
+        </div>
+      </nav>
+
+      <div class="account-layout">
+        <aside class="account-sidebar">
+          <div class="account-avatar"><i class="fa-regular fa-user"></i></div>
+          <div class="account-name">My Account</div>
+          <div class="account-meta">
+            <span>${state.orders.length} order${state.orders.length !== 1 ? 's' : ''}</span>
+            <span>·</span>
+            <span>${state.wishlist.size} saved</span>
+          </div>
+          <button class="btn btn-ghost full-w" data-route="shop" style="margin-top:var(--sp-3);">Continue shopping</button>
+        </aside>
+
+        <div class="account-main">
+          <h2 class="serif account-section-title">Order History</h2>
+          ${state.orders.length === 0 ? `
+            <div class="empty">
+              <h3 class="serif">No orders yet</h3>
+              <p>Your completed orders will appear here.</p>
+              <button class="btn btn-primary" style="margin-top:var(--sp-4);" data-route="shop">Start shopping</button>
+            </div>
+          ` : `
+            <div class="order-history-list">
+              ${state.orders.map(order => `
+                <div class="order-history-card">
+                  <div class="order-history-head">
+                    <div class="order-history-id-wrap">
+                      <span class="order-history-label">Order</span>
+                      <span class="order-history-ref">${esc(order.id)}</span>
+                    </div>
+                    <div class="order-history-date">${esc(order.date)}</div>
+                    <div class="order-history-total">${dollars(order.total)}</div>
+                    <span class="order-history-status">Dispatched</span>
+                  </div>
+                  <div class="order-history-items">
+                    ${order.items.map(item => `
+                      <div class="order-history-item">
+                        <span class="order-history-item-name">${esc(item.name)}</span>
+                        <span class="order-history-item-qty">× ${item.qty}</span>
+                        <span class="order-history-item-price">${dollars(item.price * item.qty)}</span>
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          `}
         </div>
       </div>
     `;
@@ -1111,6 +1189,16 @@ document.body.addEventListener('click', (e) => {
     return;
   }
 
+  /* PDP thumbnail click → swap main image */
+  const th = e.target.closest('.pdp-thumb');
+  if (th) {
+    document.querySelectorAll('.pdp-thumb').forEach(t => t.classList.remove('is-active'));
+    th.classList.add('is-active');
+    const pdpImg = document.querySelector('.pdp-img');
+    if (pdpImg && th.dataset.thumbSrc) pdpImg.src = th.dataset.thumbSrc;
+    return;
+  }
+
   /* PDP swatch click → swap image + update colour label */
   if (e.target.matches('.swatch')) {
     document.querySelectorAll('.swatch').forEach(s => s.classList.remove('is-active'));
@@ -1176,10 +1264,20 @@ document.body.addEventListener('click', (e) => {
     return;
   }
 
+  /* Search result item → go to product */
+  const sr = e.target.closest('.search-result-item');
+  if (sr) {
+    closeSearch();
+    go('product', sr.dataset.pid);
+    return;
+  }
+
   /* Search chip */
   const sc = e.target.closest('[data-search]');
   if (sc) {
-    document.getElementById('searchInput').value = sc.dataset.search;
+    const val = sc.dataset.search;
+    document.getElementById('searchInput').value = val;
+    renderSearchResults(val);
     return;
   }
 });
@@ -1191,6 +1289,18 @@ document.body.addEventListener('submit', (e) => {
   let allOk = true;
   fields.forEach(f => { if (!validateField(f)) allOk = false; });
   if (!allOk) { toast('Please fix the highlighted fields'); return; }
+  const _totals = computeTotals();
+  const _oid = '#JC-' + Math.floor(100000 + Math.random() * 900000);
+  state.currentOrderId = _oid;
+  state.orders.unshift({
+    id: _oid,
+    date: new Date().toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' }),
+    items: state.cart.map(l => {
+      const p = PRODUCTS.find(x => x.id === l.id);
+      return { name: p.name, qty: l.qty, price: p.price };
+    }),
+    total: _totals.total
+  });
   go('confirmation');
   state.cart = [];
   state.appliedCoupon = null;
@@ -1199,12 +1309,51 @@ document.body.addEventListener('submit', (e) => {
 document.body.addEventListener('blur', (e) => {
   if (e.target.matches('#checkoutForm input')) validateField(e.target.closest('.field'));
 }, true);
+document.body.addEventListener('change', (e) => {
+  if (e.target.id === 'sortSel') { state.sort = e.target.value; render(); }
+});
 
 /* Drawer + search overlay */
 function openMenu()  { document.getElementById('drawer').classList.add('open');  document.getElementById('drawerScrim').classList.add('open');  document.body.classList.add('locked'); }
 function closeMenu() { document.getElementById('drawer').classList.remove('open'); document.getElementById('drawerScrim').classList.remove('open'); document.body.classList.remove('locked'); }
 function openSearch()  { document.getElementById('searchOverlay').classList.add('open'); }
-function closeSearch() { document.getElementById('searchOverlay').classList.remove('open'); }
+function closeSearch() {
+  document.getElementById('searchOverlay').classList.remove('open');
+  const inp = document.getElementById('searchInput');
+  if (inp) inp.value = '';
+  const res = document.getElementById('searchResults');
+  if (res) { res.hidden = true; res.innerHTML = ''; }
+}
+
+function renderSearchResults(query) {
+  const el = document.getElementById('searchResults');
+  if (!el) return;
+  const q = query.trim().toLowerCase();
+  if (!q) { el.hidden = true; el.innerHTML = ''; return; }
+  const matches = PRODUCTS.filter(p =>
+    p.name.toLowerCase().includes(q) ||
+    p.catLabel.toLowerCase().includes(q) ||
+    (p.desc && p.desc.toLowerCase().includes(q))
+  ).slice(0, 6);
+  el.hidden = false;
+  if (matches.length === 0) {
+    el.innerHTML = '<p class="search-no-results">No products found for "' + esc(query) + '"</p>';
+    return;
+  }
+  el.innerHTML = matches.map(p => `
+    <button class="search-result-item" data-pid="${esc(p.id)}">
+      <div class="search-result-img">
+        <img src="${esc(p.image)}" alt="${esc(p.imageAlt || p.name)}" loading="lazy">
+      </div>
+      <div class="search-result-info">
+        <div class="search-result-name">${esc(p.name)}</div>
+        <div class="search-result-cat">${esc(p.catLabel)}</div>
+      </div>
+      <div class="search-result-price">${dollars(p.price)}</div>
+    </button>
+  `).join('');
+}
+
 document.getElementById('menuOpen').addEventListener('click', openMenu);
 document.getElementById('menuClose').addEventListener('click', closeMenu);
 document.getElementById('drawerScrim').addEventListener('click', closeMenu);
@@ -1212,7 +1361,17 @@ document.getElementById('searchOpen').addEventListener('click', openSearch);
 document.getElementById('searchClose').addEventListener('click', closeSearch);
 document.getElementById('searchOverlay').addEventListener('click', (e) => {
   if (e.target.id === 'searchOverlay') closeSearch();
-}); 
+});
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  renderSearchResults(e.target.value);
+});
+document.getElementById('searchInput').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    const q = e.target.value.trim().toLowerCase();
+    const first = PRODUCTS.find(p => p.name.toLowerCase().includes(q) || p.catLabel.toLowerCase().includes(q));
+    if (first) { closeSearch(); go('product', first.id); }
+  }
+});
 
 // mini cart 
 let miniCartTimer = null;
@@ -1289,6 +1448,7 @@ function closeMiniCart() {
 
 
   /* ---- put in last page RENDER + INIT --------------------------------------------------- */
+//   看 state.route 是什么如果是 home → 调用 homePage()，如果是 shop → 调用 shopPage()。如果是 product → 调用 productPage()...最后把得到的 HTML 放进 #app
 function render() {
     const app = document.getElementById('app');
     let html;
@@ -1299,6 +1459,7 @@ function render() {
       case 'cart':         html = cartPage(); break;
       case 'checkout':     html = checkoutPage(); break;
       case 'confirmation': html = confirmationPage(); break;
+      case 'account':      html = accountPage(); break;
       default:             html = homePage();
     }
     app.innerHTML = `<div class="page-content">${html}</div>`;
@@ -1306,3 +1467,5 @@ function render() {
   
   render();
   updateBadge();
+
+//   render pages first, then update numbers on shopping icon

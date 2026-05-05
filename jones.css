@@ -62,9 +62,18 @@ border-radius: 999px;
 *::after {
   box-sizing: border-box;
 }
+
 /* body and based setting */
-html { scroll-behavior: smooth; }
-main { padding-top: var(--sp-3); }
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html { 
+  scroll-behavior: smooth; }
+main { 
+  padding-top: var(--sp-3); }
 body {
 font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
 font-size: var(--fs-md);
@@ -87,11 +96,7 @@ background: none;
 color: inherit;
 }
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-}
+
 
 a { 
 color: inherit; 
@@ -427,9 +432,82 @@ border-radius: 999px;
 font-size: 12px; 
 font-weight: 500;
 }
-.search-chip:hover { 
-background: var(--blush); 
-border-color: var(--coral); 
+.search-chip:hover {
+background: var(--blush);
+border-color: var(--coral);
+}
+
+.search-results {
+margin-top: var(--sp-4);
+border-top: 1px solid var(--line);
+padding-top: var(--sp-3);
+display: flex;
+flex-direction: column;
+gap: 2px;
+max-height: 340px;
+overflow-y: auto;
+}
+
+.search-no-results {
+font-size: 13px;
+color: var(--ink-70);
+padding: var(--sp-3) var(--sp-2);
+text-align: center;
+}
+
+.search-result-item {
+display: flex;
+align-items: center;
+gap: var(--sp-3);
+padding: var(--sp-2) var(--sp-3);
+border-radius: var(--radius-sm);
+text-align: left;
+width: 100%;
+transition: background var(--t);
+}
+
+.search-result-item:hover { background: var(--cream); }
+
+.search-result-img {
+width: 48px;
+height: 48px;
+border-radius: var(--radius-sm);
+overflow: hidden;
+background: var(--cream);
+flex-shrink: 0;
+}
+
+.search-result-img img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+display: block;
+}
+
+.search-result-info { flex: 1; min-width: 0; }
+
+.search-result-name {
+font-size: 14px;
+font-weight: 600;
+color: var(--ink);
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+.search-result-cat {
+font-size: 11px;
+color: var(--ink-70);
+text-transform: uppercase;
+letter-spacing: 0.04em;
+margin-top: 2px;
+}
+
+.search-result-price {
+font-size: 14px;
+font-weight: 700;
+color: var(--ink);
+white-space: nowrap;
 }
 
 /* ============================================================================
@@ -1319,8 +1397,17 @@ transform: none;
 .pdp-media {
 background: var(--cream-2);
 border-radius: var(--radius-lg);
+overflow: hidden;
+display: flex;
+flex-direction: column;
+gap: var(--sp-3);
+}
+
+.pdp-main-img-wrap {
 aspect-ratio: 1 / 1;
 overflow: hidden;
+border-radius: var(--radius-lg);
+background: var(--cream-2);
 }
 
 .pdp-img {
@@ -1329,6 +1416,34 @@ height: 100%;
 object-fit: cover;
 display: block;
 }
+
+.pdp-thumbs {
+display: flex;
+gap: var(--sp-2);
+flex-wrap: wrap;
+}
+
+.pdp-thumb {
+width: 64px;
+height: 64px;
+border-radius: var(--radius-sm);
+overflow: hidden;
+border: 2px solid transparent;
+outline: 1px solid var(--line);
+outline-offset: 1px;
+flex-shrink: 0;
+transition: border-color var(--t), outline-color var(--t);
+}
+
+.pdp-thumb img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+display: block;
+}
+
+.pdp-thumb:hover { outline-color: var(--ink-30); }
+.pdp-thumb.is-active { border-color: var(--ink); outline-color: var(--ink); }
 
 
 
@@ -1967,6 +2082,178 @@ color: var(--white);
 background: #1DB954;
 border-color: transparent;
 color: var(--white);
+}
+
+/* ============================================================================
+  ACCOUNT / ORDER HISTORY PAGE
+  ========================================================================= */
+.account-layout {
+  display: grid;
+  gap: var(--sp-5);
+  padding: var(--sp-4) 0 var(--sp-7);
+}
+
+.account-sidebar {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: var(--sp-5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--sp-3);
+}
+
+.account-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 999px;
+  background: var(--cream-2);
+  border: 2px solid var(--line);
+  display: grid;
+  place-items: center;
+  font-size: 28px;
+  color: var(--ink-50);
+}
+
+.account-name {
+  font-family: 'Fraunces', serif;
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.account-meta {
+  display: flex;
+  gap: var(--sp-2);
+  align-items: center;
+  font-size: 13px;
+  color: var(--ink-70);
+}
+
+.account-section-title {
+  font-size: var(--fs-xl);
+  font-weight: 600;
+  margin-bottom: var(--sp-4);
+}
+
+.order-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.order-history-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.order-history-head {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+  padding: var(--sp-4);
+  background: var(--cream-2);
+  border-bottom: 1px solid var(--line);
+}
+
+.order-history-id-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 120px;
+}
+
+.order-history-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-50);
+  font-weight: 600;
+}
+
+.order-history-ref {
+  font-family: monospace;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.order-history-date {
+  font-size: 13px;
+  color: var(--ink-70);
+}
+
+.order-history-total {
+  font-family: 'Fraunces', serif;
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.order-history-status {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  background: rgba(62, 124, 90, 0.1);
+  color: var(--ok);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.order-history-items {
+  padding: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.order-history-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  font-size: 14px;
+  padding: var(--sp-2) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.order-history-item:last-child { border-bottom: none; }
+
+.order-history-item-name {
+  flex: 1;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.order-history-item-qty {
+  color: var(--ink-70);
+  font-size: 13px;
+}
+
+.order-history-item-price {
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+@media (min-width: 900px) {
+  .account-layout {
+    grid-template-columns: 260px 1fr;
+    gap: var(--sp-6);
+    align-items: start;
+  }
+  .account-sidebar {
+    position: sticky;
+    top: 100px;
+  }
 }
 
 /* cart badge style fix for the SVG icon */
