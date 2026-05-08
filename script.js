@@ -36,84 +36,95 @@ document.getElementById('announcement').innerHTML =
      tableware   — bowls, platters, jugs
 
    `isNew` flags show the NEW ARRIVALS scroller content. */
-   const PRODUCTS = [
+const PRODUCTS = [
+
+  /* ── TABLEWARE ─────────────────────────────────────────────────────── */
+
   { id:'sweetheart',
-    name:'Chino Mug Sweetheart',
+    name:'Chino Mug — Sweetheart',
     image:'assets/products/sweet-heart.webp',
-    imageAlt:'Chino Mug Sweetheart by Jones & Co',
-    cat:'tableware',
-    catLabel:'Tableware',
-    price:33,
-    comparePrice:null,
-    rating:4.9,
-    reviews:8,
-    stock:'low',
-    isNew:true,
-    desc:'L: 10cm W: 10cm H: 7cm',
+    imageAlt:'Chino Mug Sweetheart — hand-painted red hearts on cream earthenware',
+    cat:'tableware', catLabel:'Tableware',
+    price:33, comparePrice:null,
+    rating:4.9, reviews:8, stock:'low', isNew:true,
+    desc:'A hidden "Sweet Heart" message waits at the bottom of the indigo-striped interior, discovered only on the final sip. The exterior is hand-painted with scattered red love hearts across a warm cream ground — cheerful, intimate and made to be used every single morning. Released in a limited run from our Vietnam factory in partnership with skilled local craftspeople. Each mug is individually painted; minor variation between pieces is part of the character. Once it\'s gone, it\'s gone.',
     swatches:[{c:'#C0282A',n:'Sweetheart Red'},{c:'#F5CAC3',n:'Blush Pink'}],
     swatchImages:[
       'assets/products/sweet-heart.webp',
       'assets/products/sweet-heart-2.webp'
     ],
+    galleryImages:[
+      'assets/products/sweet-heart.webp',
+      'assets/products/sweet-heart-1.webp',
+      'assets/products/sweet-heart-2.webp',
+      'assets/products/sweet-heart-3.webp'
+    ],
     accordion:{
-      details:'A hidden "Sweet Heart" message awaits at the bottom of the indigo-striped interior of this Chino mug, offering a moment of unexpected joy with your final sip. The exterior is dotted with hand painted red love hearts, creating a sweet pattern. Each piece is shaped from durable earthenware by skilled Vietnamese craftspeople working from our Sydney designs, the deep blue stripes and hearts applied by hand with practiced precision.',
-      care:'For tabletop items these are microwave and dishwasher safe. For decorative items, clean with a soft cloth to remove dust or spot clean with mild detergent.',
-      shipping:'Free tracked shipping over $75. Ships from our Surry Hills warehouse in 1–2 business days.'
+      details:'Hand-painted earthenware. Approx. 320ml capacity. H 7cm × W 10cm. Hidden "Sweet Heart" message fired into the base. Designed in Sydney; each piece painted individually in Vietnam.',
+      care:'Microwave and top-rack dishwasher safe. The hand-painted decoration is kiln-fired and will not fade with normal use.',
+      shipping:'Free tracked shipping over $75. Ships from our Surry Hills warehouse in 1–2 business days, packed in tissue inside a branded Jones & Co box.'
     }
   },
-  { id:'fresco', 
-    name:'Fresco Check Vase', 
-    image:'assets/products/vase1.webp',
-    imageAlt:'Fresco Check Vase by Jones & Co',
-    cat:'decorating', 
-    catLabel:'Decorating',
-    price:55, 
-    comparePrice:110, 
-    rating:4.8, 
-    reviews:18, 
-    stock:'in', 
-    isNew:false,
-    desc:'A decorative ceramic vase with a softly nostalgic check finish, generous statement scale, and the warm hand-painted character Jones & Co is known for.',
-    swatches:[{c:'#F5CAC3',n:'Blush Check'},{c:'#F7F1E8',n:'Natural'}],
+
+  { id:'love',
+    name:'Love Notes Mug — My Person',
+    image:'assets/products/mug1.webp',
+    imageAlt:'Love Notes Mug My Person by Jones & Co',
+    cat:'tableware', catLabel:'Tableware',
+    price:44, comparePrice:null,
+    rating:4.9, reviews:36, stock:'in', isNew:false,
+    desc:'Part of our Love Notes series — bold, expressive hand-painted lettering across a generous earthenware mug. "My Person" is the message that needs no explanation. A warm cream exterior, a bold blue striped handle and the kind of sentiment that makes it an equally brilliant gift and a daily companion. Made at our Vietnam factory; each letter is painted by hand, giving every mug its own subtle character.',
+    swatches:[{c:'#E26963',n:'Terracotta'},{c:'#84A59D',n:'Sage'}],
+    swatchImages:[
+      'assets/products/mug1.webp',
+      'assets/products/lovenotes.webp'
+    ],
+    galleryImages:[
+      'assets/products/mug1.webp',
+      'assets/products/mug1-expend.webp',
+      'assets/products/mug1-expend2.webp',
+      'assets/products/lovenotes.webp'
+    ],
     accordion:{
-      details:'Hand-painted earthenware, approx. 28cm H × 20cm W. Decorative use only.',
-      care:'Wipe gently with a dry cloth. Avoid water. Pair with dried stems.',
+      details:'Hand-painted earthenware. Approx. 350ml capacity. Bold lettering and striped handle applied by hand in Vietnam.',
+      care:'Top-rack dishwasher safe. Microwave safe. Hand-painted decoration is kiln-fired for durability.',
+      shipping:'Free tracked shipping over $75. Ships in 1–2 business days — a great choice for gifting, packed ready to give.'
+    }
+  },
+
+  { id:'mug2-p',
+    name:'Love Notes Mug — Cheat Day',
+    image:'assets/products/mug2.webp',
+    imageAlt:'Love Notes Mug Cheat Day by Jones & Co',
+    cat:'tableware', catLabel:'Tableware',
+    price:44, comparePrice:null,
+    rating:4.8, reviews:19, stock:'in', isNew:false,
+    desc:'The Love Notes mug that says everything on a Saturday morning. "Cheat Day" — two words that capture the particular joy of a morning with nowhere to be and something indulgent on the plate. Bold hand-painted lettering on a cream earthenware body, made at our Vietnam factory where each letter is applied by hand. Pairs perfectly with a long black and absolutely no guilt whatsoever.',
+    swatches:[{c:'#E26963',n:'Terracotta'},{c:'#2B4580',n:'Navy'}],
+    swatchImages:[
+      'assets/products/mug2.webp',
+      'assets/products/mug2-expend2.webp'
+    ],
+    galleryImages:[
+      'assets/products/mug2.webp',
+      'assets/products/mug2-expend2.webp',
+      'assets/products/mug2-expend3.webp'
+    ],
+    accordion:{
+      details:'Hand-painted earthenware. Approx. 350ml. Part of the Love Notes mug series. Lettering applied by hand in Vietnam.',
+      care:'Top-rack dishwasher safe. Microwave safe.',
       shipping:'Free tracked shipping over $75. Ships in 1–2 business days.'
     }
   },
-  { id:'love', 
-    name:'Love Notes Mug My Person', 
-    image:'assets/products/mug1.webp',
-    imageAlt:'Love Notes Mug My Person',
-    cat:'tableware', 
-    catLabel:'Tableware',
-    price:44, 
-    comparePrice:null, 
-    rating:4.9, 
-    reviews:36, 
-    stock:'in', 
-    isNew:false,
-    desc:'A cheerful everyday mug with expressive hand-painted lettering. Microwave and dishwasher safe.',
-    swatches:[{c:'#E26963',n:'Terracotta'},{c:'#84A59D',n:'Sage'}],
-    accordion:{
-      details:'Earthenware mug, approx. 350ml capacity. Blue striped handle.',
-      care:'Top-rack dishwasher safe. Microwave safe.',
-      shipping:'Free tracked shipping over $75.'
-    }
-  },
+
   { id:'chino',
-    name:'Chino Mug Navy Lines',
+    name:'Chino Mug — Navy Lines',
     image:'assets/products/cup1.webp',
-    imageAlt:'Chino Mug Navy Lines',
-    cat:'tableware',
-    catLabel:'Tableware',
-    price:33,
-    comparePrice:null,
-    rating:4.7,
-    reviews:24,
-    stock:'in',
-    isNew:false,
-    desc:'The Chino Mug is the everyday hero — the right weight, the right size, beautiful enough to feel like a treat every morning.',
+    imageAlt:'Chino Mug Navy Lines by Jones & Co',
+    cat:'tableware', catLabel:'Tableware',
+    price:33, comparePrice:null,
+    rating:4.7, reviews:24, stock:'in', isNew:false,
+    desc:'The original Jones & Co mug and still the one we reach for every morning. Striped in our signature navy blue, the Chino Mug is the piece that started everything — the right weight, the right size, beautiful enough to feel like a treat every single day. Each stripe is painted by hand at our Vietnam factory. Available in four colourways: Navy Lines, Forest Green, Cherry Red and Mustard. Mix and match across the range or commit to one.',
     swatches:[{c:'#2B4580',n:'Navy Lines'},{c:'#4A9460',n:'Forest Green'},{c:'#C94040',n:'Cherry Red'},{c:'#D4A820',n:'Mustard'}],
     swatchImages:[
       'assets/products/cup1.webp',
@@ -121,174 +132,472 @@ document.getElementById('announcement').innerHTML =
       'assets/products/cup1-red.webp',
       'assets/products/cup1-yellow.webp'
     ],
+    galleryImages:[
+      'assets/products/cup1.webp',
+      'assets/products/cup1-1.webp',
+      'assets/products/cup1-2.webp'
+    ],
     accordion:{
-      details:'Striped earthenware mug, approx. 320ml.',
-      care:'Dishwasher and microwave safe.',
-      shipping:'Free tracked shipping over $75.'
+      details:'Hand-painted earthenware. Approx. 320ml capacity. Available in four colourways — each painted by hand in Vietnam. Minor variation between pieces is a mark of the handmade process.',
+      care:'Dishwasher and microwave safe. Stripes are kiln-fired and will not fade with daily use.',
+      shipping:'Free tracked shipping over $75. Ships in 1–2 business days.'
     }
   },
+
   { id:'inked',
     name:'Inked Mug — No Worries',
     image:'assets/products/gift-mug-1.webp',
-    imageAlt:'Inked Mug — No Worries',
-    cat:'tableware',
-    catLabel:'Tableware',
-    price:33,
-    comparePrice:null,
-    rating:4.8,
-    reviews:14,
-    stock:'in',
-    isNew:true,
-    desc:'Illustrated in bold graphic style, this mug carries a message that lands with warmth and humour.',
+    imageAlt:'Inked Mug No Worries by Jones & Co',
+    cat:'tableware', catLabel:'Tableware',
+    price:33, comparePrice:null,
+    rating:4.8, reviews:14, stock:'in', isNew:true,
+    desc:'Illustrated in our bold Inked graphic style, this mug carries a message that lands with warmth and a little humour. The Inked range takes its cues from ink-print illustration — confident lines, bold marks and messages worth reading at 7am. "No Worries" is the reminder the morning deserves. Hand-painted at our Vietnam factory; available in Blue White and Cream. A reliable gift, a brilliant everyday mug.',
     swatches:[{c:'#4A7DB5',n:'Blue White'},{c:'#F7F1E8',n:'Cream'}],
     swatchImages:[
       'assets/products/gift-mug-1.webp',
       'assets/products/inked-mug.webp'
     ],
+    galleryImages:[
+      'assets/products/gift-mug-1.webp',
+      'assets/products/gift-mug-1-1.webp',
+      'assets/products/gift-mug-1-2.webp',
+      'assets/products/inked-mug.webp',
+      'assets/products/inked-mug-2.webp',
+      'assets/products/inked-mug-3.webp'
+    ],
     accordion:{
-      details:'Illustrated earthenware mug, approx. 320ml.',
-      care:'Top-rack dishwasher safe.',
-      shipping:'Free tracked shipping over $75.'
+      details:'Hand-painted earthenware. Approx. 320ml. Bold graphic illustration applied by hand in Vietnam. Available in Blue White and Cream colourways.',
+      care:'Top-rack dishwasher safe. Microwave safe.',
+      shipping:'Free tracked shipping over $75. Ships in 1–2 business days, packed in a branded Jones & Co gift box.'
     }
   },
+
+  { id:'dot-mug-p',
+    name:'Dot Mug',
+    image:'assets/products/dot-mug.webp',
+    imageAlt:'Dot Mug by Jones & Co — hand-painted polka dots on cream earthenware',
+    cat:'tableware', catLabel:'Tableware',
+    price:33, comparePrice:null,
+    rating:4.7, reviews:12, stock:'in', isNew:false,
+    desc:'Bold, graphic and quietly joyful — the Dot Mug takes one of the simplest motifs in design and makes it the whole point. Hand-painted dots on a clean cream ground, each one placed with the kind of considered irregularity that separates a handmade piece from a machine-printed one. A quiet counterpoint to the more expressive mugs in the Love Notes and Inked ranges — and just as satisfying to hold every morning.',
+    swatches:[{c:'#E26963',n:'Coral Dot'},{c:'#2B4580',n:'Navy Dot'}],
+    galleryImages:[
+      'assets/products/dot-mug.webp',
+      'assets/products/dot-mug-1.webp'
+    ],
+    accordion:{
+      details:'Hand-painted earthenware. Approx. 320ml. Dot pattern applied by hand in Vietnam.',
+      care:'Top-rack dishwasher safe. Microwave safe.',
+      shipping:'Free tracked shipping over $75. Ships in 1–2 business days.'
+    }
+  },
+
+  { id:'cup2-p',
+    name:'Tavola Trellis Cup',
+    image:'assets/products/cup2.webp',
+    imageAlt:'Tavola Trellis Cup by Jones & Co',
+    cat:'tableware', catLabel:'Tableware',
+    price:28, comparePrice:null,
+    rating:4.6, reviews:22, stock:'in', isNew:false,
+    desc:'Part of the Tavola table collection — a compact hand-painted cup with a bold trellis pattern in deep blue and cream. The right size for an espresso, a macchiato or a late-afternoon tea. Designed to mix and match across the full Tavola range; the trellis pattern and colour palette coordinate with the Tavola bowls, plates and jugs. Sturdy enough for daily use and considered enough to feel like an occasion.',
+    swatches:[{c:'#2B4580',n:'Navy Trellis'},{c:'#F7F1E8',n:'Cream'}],
+    galleryImages:[
+      'assets/products/cup2.webp',
+      'assets/products/cup2-2.webp',
+      'assets/products/cup2-3.webp'
+    ],
+    accordion:{
+      details:'Hand-painted earthenware. Approx. 200ml. Trellis pattern kiln-fired for durability. Part of the Tavola collection.',
+      care:'Dishwasher and microwave safe.',
+      shipping:'Free tracked shipping over $75. Ships in 1–2 business days.'
+    }
+  },
+
+  { id:'coral',
+    name:'Tavola Lemon Cup',
+    image:'assets/products/lemon-cup.webp',
+    imageAlt:'Tavola Lemon Cup by Jones & Co',
+    cat:'tableware', catLabel:'Tableware',
+    price:24, comparePrice:38,
+    rating:4.5, reviews:47, stock:'in', isNew:false,
+    desc:'From the Tavola table collection — a cheerful cup with a bold hand-painted lemon illustration. Stackable, sturdy and just the right size for a strong espresso or a small cold drink. The kind of piece that makes a table feel like a considered occasion without any effort at all. An easy gift, a happy daily ritual and the piece everyone reaches for first when it\'s on the shelf.',
+    swatches:[{c:'#E8C840',n:'Lemon Yellow'},{c:'#F6B060',n:'Honey'}],
+    galleryImages:['assets/products/lemon-cup.webp'],
+    accordion:{
+      details:'Hand-painted earthenware. Approx. 280ml. Stackable. Lemon illustration kiln-fired at high temperature. Part of the Tavola collection.',
+      care:'Dishwasher and microwave safe.',
+      shipping:'Free tracked shipping over $75. Ships in 1–2 business days.'
+    }
+  },
+
+  { id:'sunset',
+    name:'Tavola Bowl',
+    image:'assets/products/plate2.webp',
+    imageAlt:'Tavola Bowl by Jones & Co',
+    cat:'tableware', catLabel:'Tableware',
+    price:45, comparePrice:null,
+    rating:4.6, reviews:29, stock:'in', isNew:false,
+    desc:'From the Tavola collection — a generous, deep-sided stoneware bowl with a warm hand-painted finish that makes every meal feel worth sitting down for. The right depth for pasta, ramen, a salad or morning oats — and beautiful enough to go straight from the kitchen to the table without a second thought. Food safe and fully dishwasher safe. An honest, everyday piece that improves with use.',
+    swatches:[{c:'#F6B060',n:'Warm Terracotta'},{c:'#E26963',n:'Coral'}],
+    galleryImages:[
+      'assets/products/plate2.webp',
+      'assets/products/plate2-1.webp',
+      'assets/products/plate2-2.webp'
+    ],
+    accordion:{
+      details:'Stoneware bowl. Approx. 800ml capacity. Food safe. Part of the Tavola collection.',
+      care:'Dishwasher and microwave safe. Food safe for daily use.',
+      shipping:'Free tracked shipping over $75. Ships in 1–2 business days.'
+    }
+  },
+
+  { id:'plate4-p',
+    name:'Granada Plate',
+    image:'assets/products/plate4.webp',
+    imageAlt:'Granada Plate by Jones & Co — bold geometric hand-painted earthenware',
+    cat:'tableware', catLabel:'Tableware',
+    price:52, comparePrice:null,
+    rating:4.8, reviews:17, stock:'in', isNew:true,
+    desc:'From the Granada collection — a hand-painted earthenware dinner plate drawing its pattern vocabulary from the bold geometry and warm colour of the Spanish south. Deep terracotta and cobalt blue, applied by hand at our Vietnam factory. Use it as a dinner plate, a serving piece or displayed on a plate stand — it looks extraordinary doing all three. Each plate carries a small variation that confirms a person painted it.',
+    swatches:[{c:'#E26963',n:'Terracotta'},{c:'#2B4580',n:'Cobalt'}],
+    galleryImages:[
+      'assets/products/plate4.webp',
+      'assets/products/plate4-1.webp',
+      'assets/products/plate4-2.webp',
+      'assets/products/plate4-3.webp'
+    ],
+    accordion:{
+      details:'Hand-painted earthenware. Approx. 28cm diameter. Part of the Granada collection. Each plate painted by hand in Vietnam.',
+      care:'Dishwasher safe. Food safe. Hand wash recommended to preserve pattern longevity.',
+      shipping:'Free tracked shipping over $75. Ships in 1–2 business days, packed carefully to prevent breakage.'
+    }
+  },
+
+  /* ── DECORATING ────────────────────────────────────────────────────── */
+
+  { id:'fresco',
+    name:'Fresco Check Vase',
+    image:'assets/products/vase1.webp',
+    imageAlt:'Fresco Check Vase by Jones & Co',
+    cat:'decorating', catLabel:'Decorating',
+    price:55, comparePrice:110,
+    rating:4.8, reviews:18, stock:'in', isNew:false,
+    desc:'A bold check pattern in faded blush and cream — nostalgic, generous in scale and full of the warm hand-painted character Jones & Co is known for. This vase works beautifully alone as a statement piece or paired with dried or faux stems for a softer, more layered finish. Hand-painted earthenware designed in Sydney and made at our Vietnam factory. A piece that works in almost any room and improves every shelf it inhabits.',
+    swatches:[{c:'#F5CAC3',n:'Blush Check'},{c:'#F7F1E8',n:'Natural'}],
+    galleryImages:[
+      'assets/products/vase1.webp',
+      'assets/products/vase1-expand.webp',
+      'assets/products/vase1-expand2.webp'
+    ],
+    accordion:{
+      details:'Hand-painted earthenware vase. Approx. H 28cm × W 20cm. Decorative use only — not watertight. Best used with dried or faux stems.',
+      care:'Wipe with a soft dry cloth. Avoid contact with water or liquids on the interior.',
+      shipping:'Free tracked shipping over $75. Ships in 1–2 business days. Packed with care for fragile ceramics.'
+    }
+  },
+
   { id:'sage',
     name:'Atlantic Turtle Box',
     image:'assets/products/ATLANTIC TURTLE BOX.webp',
     imageAlt:'Atlantic Turtle Box by Jones & Co',
-    cat:'decorating',
-    catLabel:'Decorating',
-    price:68,
-    comparePrice:null,
-    rating:4.9,
-    reviews:41,
-    stock:'in',
-    isNew:true,
-    desc:'A beautifully crafted decorative box featuring an Atlantic turtle motif. Hand-painted in earthy teal tones — a statement piece for a shelf, coffee table or bedside.',
+    cat:'decorating', catLabel:'Decorating',
+    price:68, comparePrice:null,
+    rating:4.9, reviews:41, stock:'in', isNew:true,
+    desc:'From the Atlantic collection — a beautifully crafted decorative ceramic box with a hand-painted Atlantic turtle across the lid on a deep earthy teal ground. The lid fits neatly; the interior is glazed in a complementary warm cream. Use it on a coffee table, a bedside or a shelf — it\'s the kind of piece that prompts conversation and makes a corner of a room feel genuinely considered. Made by hand in Vietnam, each turtle painted individually.',
     swatches:[{c:'#3A8A7C',n:'Teal'},{c:'#F7F1E8',n:'Cream'}],
+    galleryImages:['assets/products/ATLANTIC TURTLE BOX.webp'],
     accordion:{
-      details:'Hand-painted earthenware box with lid, approx. 12cm × 8cm. Decorative use.',
-      care:'Wipe with a soft dry cloth.',
-      shipping:'Free tracked shipping over $75.'
+      details:'Hand-painted earthenware box with lid. Approx. 12cm × 8cm × 6cm. Glazed interior. Part of the Atlantic collection. Painted by hand in Vietnam.',
+      care:'Wipe exterior with a soft dry cloth. Avoid contact with liquids on the painted surface.',
+      shipping:'Free tracked shipping over $75. Ships in 1–2 business days.'
     }
   },
-  { id:'sunset', 
-    name:'Tavola Bowl', 
-    image:'assets/products/plate2.webp',
-    imageAlt:'Tavola Bowl',
-    cat:'tableware', 
-    catLabel:'Tableware',
-    price:45, 
-    comparePrice:null, 
-    rating:4.6, 
-    reviews:29, 
-    stock:'in', 
-    isNew:false,
-    desc:'Deep stoneware bowl glazed in a sunset gradient. Perfect for pasta, ramen or salad.',
-    swatches:[{c:'#F6B060',n:'Sunset'},{c:'#E26963',n:'Coral'}],
-    accordion:{
-      details:'Stoneware, approx. 800ml capacity. Food safe.',
-      care:'Dishwasher safe.',
-      shipping:'Free tracked shipping over $75.'
-    }
-  },
+
   { id:'desert',
     name:'Desert Jug',
     image:'assets/products/jug.webp',
-    imageAlt:'Desert Jug',
-    cat:'decorating',
-    catLabel:'Decorating',
-    price:78,
-    comparePrice:98, 
-    rating:4.8, 
-    reviews:12, 
-    stock:'low', 
-    isNew:true,
-    desc:'Statement jug in a warm sand glaze. Functional as a water pitcher or sculptural on its own.',
+    imageAlt:'Desert Jug by Jones & Co',
+    cat:'decorating', catLabel:'Decorating',
+    price:78, comparePrice:98,
+    rating:4.8, reviews:12, stock:'low', isNew:true,
+    desc:'A statement jug in a warm sand glaze with hand-applied brush marks that give it genuine sculptural presence. Use it as a water pitcher at the table, a vessel for tall dried stems on a sideboard or simply as a standalone object on a shelf. The Desert Jug sits beautifully in neutral interiors but carries enough presence to anchor a more colourful room. Made from quality stoneware at our Vietnam factory; low stock, this one won\'t last.',
     swatches:[{c:'#F6B060',n:'Sand'},{c:'#F5CAC3',n:'Blush'}],
+    galleryImages:[
+      'assets/products/jug.webp',
+      'assets/products/jug1-1.webp',
+      'assets/products/jug1-2.webp'
+    ],
     accordion:{
-      details:'Stoneware, 1.2L capacity.',
-      care:'Hand wash.',
-      shipping:'Free tracked shipping over $75.'
+      details:'Stoneware jug. Approx. 1.2L capacity. H 28cm. Hand-glazed finish. Functional as a water jug or decorative with dried stems.',
+      care:'Hand wash only. Not dishwasher or microwave safe. Dry thoroughly before storing.',
+      shipping:'Free tracked shipping over $75. Ships in 1–2 business days.'
     }
   },
-  { id:'coral',
-    name:'Tovala Lemon Cup',
-    image:'assets/products/lemon-cup.webp',
-    imageAlt:'Tovala Lemon Cup',
-    cat:'tableware',
-    catLabel:'Tableware',
-    price:24,
-    comparePrice:38,
-    rating:4.5,
-    reviews:47,
-    stock:'in',
-    isNew:false,
-    desc:'Everyday tumbler featuring a cheerful lemon illustration. Stackable and easy to hold.',
-    swatches:[{c:'#E8C840',n:'Lemon Yellow'},{c:'#F6B060',n:'Honey'}],
+
+  { id:'decor1-p',
+    name:'Paradis Jug — Blue Stripe',
+    image:'assets/products/decor1.webp',
+    imageAlt:'Paradis Jug Blue Stripe by Jones & Co',
+    cat:'decorating', catLabel:'Decorating',
+    price:72, comparePrice:null,
+    rating:4.7, reviews:9, stock:'in', isNew:false,
+    desc:'From the Paradis collection — a hand-painted ceramic jug in deep cobalt and cream stripes, with the quiet confidence of a piece that knows exactly what it is. The Paradis range draws its colour story from the warm blues, creams and earthy terracottas of the Mediterranean coast. Works beautifully filled with dried or seasonal stems, or styled alone as a sculptural object on a shelf, kitchen counter or dining table.',
+    swatches:[{c:'#2B4580',n:'Cobalt Stripe'},{c:'#F7F1E8',n:'Cream'}],
+    galleryImages:[
+      'assets/products/decor1.webp',
+      'assets/products/decor1-2.webp',
+      'assets/products/decor1-3.webp'
+    ],
     accordion:{
-      details:'Stoneware, 280ml. Stackable.',
-      care:'Dishwasher safe.',
-      shipping:'Free tracked shipping over $75.'
+      details:'Hand-painted earthenware jug. Part of the Paradis collection. Decorative use — designed for dried or faux stems.',
+      care:'Wipe with a soft dry cloth. Not intended for liquid use.',
+      shipping:'Free tracked shipping over $75. Ships in 1–2 business days.'
     }
   },
-  { id:'capiz', 
-    name:'FABLE SUN PINK HEART', 
+
+  { id:'jug2-p',
+    name:'Paradis Jug — Spot',
+    image:'assets/products/jug2.webp',
+    imageAlt:'Paradis Jug Spot by Jones & Co',
+    cat:'decorating', catLabel:'Decorating',
+    price:65, comparePrice:null,
+    rating:4.8, reviews:8, stock:'in', isNew:false,
+    desc:'A smaller-scaled jug from the Paradis collection, hand-painted with a bold spot pattern in deep blue on a warm cream ground. Use it as a table pourer for water or juice, or style it with short dried stems on a kitchen shelf. Designed to coordinate with the full Paradis range — the spot pattern and colour palette sit naturally alongside the Paradis trays, boxes and stripe jug. Four sizes to collect, one colour family to live in.',
+    swatches:[{c:'#2B4580',n:'Blue Spot'},{c:'#F7F1E8',n:'Cream'}],
+    galleryImages:[
+      'assets/products/jug2.webp',
+      'assets/products/jug2-2.webp',
+      'assets/products/jug2-3.webp',
+      'assets/products/jug2-4.webp'
+    ],
+    accordion:{
+      details:'Hand-painted earthenware. Approx. 600ml. Part of the Paradis collection. Suitable for cold liquid use or dried stems.',
+      care:'Hand wash only. Not dishwasher or microwave safe.',
+      shipping:'Free tracked shipping over $75. Ships in 1–2 business days.'
+    }
+  },
+
+  { id:'jug3-p',
+    name:'Paradis Jug — Large',
+    image:'assets/products/jug3.webp',
+    imageAlt:'Paradis Large Jug by Jones & Co',
+    cat:'decorating', catLabel:'Decorating',
+    price:88, comparePrice:null,
+    rating:4.9, reviews:6, stock:'in', isNew:true,
+    desc:'The statement piece of the Paradis collection. Hand-painted in the rich blues and creams of the range, this large-format jug commands attention on any surface — a dining table set for guests, a sideboard, a kitchen shelf that needs a focal point. Its generous proportions take a full bouquet of dried stems as naturally as they hold water for the table. A piece that improves every surface it occupies.',
+    swatches:[{c:'#2B4580',n:'Paradis Blue'},{c:'#84A59D',n:'Sage'}],
+    galleryImages:[
+      'assets/products/jug3.webp',
+      'assets/products/jug3-2.webp',
+      'assets/products/jug3-31.webp'
+    ],
+    accordion:{
+      details:'Hand-painted earthenware. Approx. 1.5L. H 32cm. Part of the Paradis collection.',
+      care:'Hand wash only. Not dishwasher or microwave safe.',
+      shipping:'Free tracked shipping over $75. Ships in 1–2 business days.'
+    }
+  },
+
+  { id:'samira-box',
+    name:'Samira Short Box — Blue Flower',
+    image:'assets/products/SAMIRA SHORT BOX BLUE FLOWER .webp',
+    imageAlt:'Samira Short Box Blue Flower by Jones & Co',
+    cat:'decorating', catLabel:'Decorating',
+    price:65, comparePrice:null,
+    rating:4.9, reviews:14, stock:'in', isNew:true,
+    desc:'From the Samira collection — a hand-painted ceramic box with a bold blue flower motif that fills every surface with confidence and joy. The lid lifts to reveal a glazed interior; it can hold small jewellery, a ring, keys or simply sit closed as a beautiful object. Every surface of the Samira range is treated as a canvas — there is no back, no side that has been overlooked. Made by hand in Vietnam; each flower painted by a single craftsperson.',
+    swatches:[{c:'#2B4580',n:'Blue Flower'},{c:'#84A59D',n:'Sage Flower'}],
+    galleryImages:[
+      'assets/products/SAMIRA SHORT BOX BLUE FLOWER .webp',
+      'assets/products/SAMIRA SHORT BOX BLUE FLOWER 2.webp',
+      'assets/products/SAMIRA SHORT BOX BLUE FLOWER 3.webp',
+      'assets/products/SAMIRA SHORT BOX BLUE FLOWER 4.webp',
+      'assets/products/SAMIRA SHORT BOX BLUE FLOWER 5.webp'
+    ],
+    accordion:{
+      details:'Hand-painted earthenware box with lid. Approx. 14cm × 10cm × 6cm. Glazed interior. Part of the Samira collection. Painted by hand in Vietnam.',
+      care:'Wipe exterior with a soft dry cloth. Avoid contact with liquids on the painted surface.',
+      shipping:'Free tracked shipping over $75. Ships in 1–2 business days, packed in tissue inside a Jones & Co box.'
+    }
+  },
+
+  { id:'gift-decor-2-p',
+    name:'Inked Vase — No Worries',
+    image:'assets/products/gift-decor-2.webp',
+    imageAlt:'Inked Vase No Worries by Jones & Co',
+    cat:'decorating', catLabel:'Decorating',
+    price:55, comparePrice:null,
+    rating:4.7, reviews:11, stock:'in', isNew:false,
+    desc:'From the Inked decorating range — a ceramic vase carrying the bold graphic illustration and message of our Inked series. Bold confident line work on a warm cream ground, with the same "No Worries" sentiment that made the Inked Mug so popular. Works beautifully with short dried stems or on its own as a small, characterful statement piece on a desk, shelf or windowsill. Available in Cream and Blue.',
+    swatches:[{c:'#F7F1E8',n:'Cream'},{c:'#2B4580',n:'Blue'}],
+    swatchImages:[
+      'assets/products/gift-decor-2.webp',
+      'assets/products/gift-decor-2-blue.webp'
+    ],
+    galleryImages:[
+      'assets/products/gift-decor-2.webp',
+      'assets/products/gift-decor-2-2.webp',
+      'assets/products/gift-decor-2-blue.webp'
+    ],
+    accordion:{
+      details:'Hand-painted earthenware vase. Decorative use only. Part of the Inked decorating range. Available in Cream and Blue.',
+      care:'Wipe with a soft dry cloth. Decorative use only — not watertight.',
+      shipping:'Free tracked shipping over $75. Ships in 1–2 business days.'
+    }
+  },
+
+  /* ── WALL ART ───────────────────────────────────────────────────────── */
+
+  { id:'capiz',
+    name:'Fable Sun — Pink Heart',
     image:'assets/products/FABLE SUN PINK HEART.webp',
-    imageAlt:'FABLE SUN PINK HEART',
-    cat:'wallart', 
-    catLabel:'Wall Art',
-    price:129, 
-    comparePrice:null, 
-    rating:4.9, 
-    reviews:22, 
-    stock:'in', 
-    isNew:true,
-    desc:'Handmade Capiz shell flower — a signature Jones & Co wall piece. A bold and creative focal point for any room.',
-    swatches:[{c:'#F5CAC3',n:'Blush'},{c:'#84A59D',n:'Sage'}],
+    imageAlt:'Fable Sun Pink Heart — Capiz shell wall art by Jones & Co',
+    cat:'wallart', catLabel:'Wall Art',
+    price:129, comparePrice:null,
+    rating:4.9, reviews:22, stock:'in', isNew:true,
+    desc:'One of our signature Capiz shell wall pieces — the Fable Sun Pink Heart is handmade in the Philippines from individually prepared Capiz shells arranged into a bold flower-sun form. Each shell catches light differently, creating a subtle shimmer that shifts through the day from morning to evening. A confident focal point for a living room, bedroom or entrance. Because every shell varies in natural translucency and tone, no two pieces are ever exactly alike.',
+    swatches:[{c:'#F5CAC3',n:'Blush Pink'},{c:'#84A59D',n:'Sage'}],
+    galleryImages:[
+      'assets/products/FABLE SUN PINK HEART.webp',
+      'assets/products/wallart.webp',
+      'assets/products/wallart1.webp'
+    ],
     accordion:{
-      details:'Handmade Capiz shell and bamboo, approx. 40cm diameter. Handmade in the Philippines.',
-      care:'Dust with a soft cloth. Avoid direct sunlight.',
-      shipping:'Free tracked shipping over $75.'
+      details:'Handmade Capiz shell and bamboo frame. Approx. 40cm diameter. Handmade in the Philippines — each piece is unique. Includes hanging hardware.',
+      care:'Dust with a soft dry cloth. Avoid prolonged direct sunlight as shells may fade over time. Do not wet.',
+      shipping:'Free tracked shipping over $75. Ships in 1–2 business days, packed with extra care for fragile wall art.'
     }
   },
-  { id:'zebra', 
-    name:'BEACH CLUB ORANGE CRAB', 
+
+  { id:'zebra',
+    name:'Beach Club — Orange Crab',
     image:'assets/products/BEACH CLUB ORANGE CRAB.webp',
-    imageAlt:'BEACH CLUB ORANGE CRAB',
-    cat:'wallart', 
-    catLabel:'Wall Art',
-    price:89, 
-    comparePrice:null, 
-    rating:4.7, 
-    reviews:16, 
-    stock:'in', 
-    isNew:false,
-    desc:'Vibrant illustration print — instantly lifts a living room, kid\'s room or gallery wall.',
-    swatches:[{c:'#84A59D',n:'Sage'},{c:'#F6B060',n:'Honey'}],
+    imageAlt:'Beach Club Orange Crab wall art by Jones & Co',
+    cat:'wallart', catLabel:'Wall Art',
+    price:89, comparePrice:null,
+    rating:4.7, reviews:16, stock:'in', isNew:false,
+    desc:'From the Beach Club collection — bold, graphic and unashamedly joyful. An orange crab rendered in confident illustration style, printed on archival paper at A3 size. The Beach Club range brings the energy and warmth of a long summer afternoon to any wall — instantly lifts a living room, a child\'s bedroom or a gallery wall arrangement. Unframed and ready to frame in any standard A3 frame. A brilliant gift that ships flat.',
+    swatches:[{c:'#F6B060',n:'Orange'},{c:'#84A59D',n:'Sage'}],
+    galleryImages:['assets/products/BEACH CLUB ORANGE CRAB.webp'],
     accordion:{
-      details:'Giclée print on archival paper, A3 size. Unframed.',
-      care:'Keep out of direct sunlight.',
-      shipping:'Free tracked shipping over $75.'
+      details:'Giclée print on archival heavyweight paper. A3 size (42cm × 30cm). Unframed — fits all standard A3 frames. Part of the Beach Club collection.',
+      care:'Keep away from prolonged direct sunlight to prevent fading. Frame behind UV-protective glass for best longevity.',
+      shipping:'Free tracked shipping over $75. Ships flat in a protective sleeve. Allow to flatten overnight before framing.'
     }
   },
+
   { id:'bloom',
-    name:'BEACH CLUB MINNOW',
+    name:'Beach Club — Minnow',
     image:'assets/products/BEACH CLUB MINNOW.webp',
-    imageAlt:'BEACH CLUB MINNOW',
-    cat:'wallart',
-    catLabel:'Wall Art',
-    price:95,
-    comparePrice:120, 
-    rating:4.8, 
-    reviews:11, 
-    tock:'in', 
-    isNew:false,
-    desc:'Warm honey-toned Capiz shell wall disc. Catches light beautifully.',
+    imageAlt:'Beach Club Minnow wall art by Jones & Co',
+    cat:'wallart', catLabel:'Wall Art',
+    price:95, comparePrice:120,
+    rating:4.8, reviews:11, stock:'in', isNew:false,
+    desc:'A warm honey-toned Capiz shell wall disc from the Beach Club collection. Handmade in the Philippines from individually cleaned and prepared Capiz shells, the Minnow catches light beautifully and brings natural organic warmth to any wall. Works equally well alone or grouped with other Beach Club and Fable Sun pieces in a gallery arrangement. Each disc is unique — no two Capiz shells are identical in translucency or natural tone.',
     swatches:[{c:'#F6B060',n:'Honey'},{c:'#E26963',n:'Coral'}],
+    galleryImages:['assets/products/BEACH CLUB MINNOW.webp'],
     accordion:{
-      details:'Capiz shell and bamboo, approx. 35cm diameter.',
-      care:'Dust with a soft cloth.',
-      shipping:'Free tracked shipping over $75.'
+      details:'Handmade Capiz shell and bamboo. Approx. 35cm diameter. Handmade in the Philippines — each piece is unique. Includes hanging hardware.',
+      care:'Dust with a soft dry cloth. Avoid prolonged direct sunlight.',
+      shipping:'Free tracked shipping over $75. Ships in 1–2 business days.'
+    }
+  },
+
+  { id:'samira-arch',
+    name:'Samira Wall Art — Flower Arch',
+    image:'assets/products/SAMIRA WALL ART FLOWER ARCH.webp',
+    imageAlt:'Samira Wall Art Flower Arch by Jones & Co',
+    cat:'wallart', catLabel:'Wall Art',
+    price:110, comparePrice:null,
+    rating:4.9, reviews:7, stock:'in', isNew:true,
+    desc:'From the Samira wall art collection — a handmade Capiz shell piece in an arch form, adorned with bold blue flower motifs in the signature Samira palette. The arch shape gives it a graphic, almost architectural quality that works beautifully as a centrepiece or as part of a gallery wall arrangement alongside the Samira circle and other curved forms. Handmade in the Philippines by craftspeople working in a tradition passed down across generations.',
+    swatches:[{c:'#2B4580',n:'Blue Flower'},{c:'#F7F1E8',n:'Cream'}],
+    galleryImages:[
+      'assets/products/SAMIRA WALL ART FLOWER ARCH.webp',
+      'assets/products/SAMIRA WALL ART FLOWER ARCH2.webp'
+    ],
+    accordion:{
+      details:'Handmade Capiz shell and bamboo frame. Arch form. Part of the Samira collection. Handmade in the Philippines. Includes hanging hardware.',
+      care:'Dust with a soft dry cloth. Avoid prolonged direct sunlight. Do not wet.',
+      shipping:'Free tracked shipping over $75. Ships in 1–2 business days, packed carefully for fragile wall art.'
+    }
+  },
+
+  { id:'samira-circle',
+    name:'Samira Wall Art — Flower Circle',
+    image:'assets/products/SAMIRA WALL ART FLOWER CIRCLE.webp',
+    imageAlt:'Samira Wall Art Flower Circle by Jones & Co',
+    cat:'wallart', catLabel:'Wall Art',
+    price:95, comparePrice:null,
+    rating:4.8, reviews:9, stock:'in', isNew:false,
+    desc:'A circular wall piece from the Samira collection, featuring bold hand-painted flower motifs in the signature blue and cream palette. The circle form is a classic in the Jones & Co wall art vocabulary — it works as a standalone statement piece or grouped with the Samira Arch and other forms from the range. Because each piece is individually assembled from Capiz shells, no two are ever identical in the way they hold or reflect light.',
+    swatches:[{c:'#2B4580',n:'Blue'},{c:'#F7F1E8',n:'Cream'}],
+    galleryImages:[
+      'assets/products/SAMIRA WALL ART FLOWER CIRCLE.webp',
+      'assets/products/SAMIRA WALL ART FLOWER CIRCLE2.webp'
+    ],
+    accordion:{
+      details:'Handmade Capiz shell and bamboo. Approx. 38cm diameter. Part of the Samira collection. Handmade in the Philippines. Includes hanging hardware.',
+      care:'Dust with a soft dry cloth. Avoid prolonged direct sunlight.',
+      shipping:'Free tracked shipping over $75. Ships in 1–2 business days.'
+    }
+  },
+
+  { id:'barista',
+    name:'Barista Wall Art — Flat White',
+    image:'assets/products/BARISTA WALL ART FLAT WHITE.webp',
+    imageAlt:'Barista Wall Art Flat White by Jones & Co',
+    cat:'wallart', catLabel:'Wall Art',
+    price:79, comparePrice:null,
+    rating:4.8, reviews:13, stock:'in', isNew:true,
+    desc:'For the coffee lovers — a bold, graphic tribute to the one ritual that holds the morning together. The Barista Wall Art Flat White is illustrated in our confident Barista style: strong line work, a warm limited palette and a subject matter that needs no justification. Hang it in the kitchen, the café corner, the home office or anywhere that deserves a daily reminder of the good things. Archival giclée print, unframed, A3 size.',
+    swatches:[{c:'#2C2416',n:'Ink on Cream'}],
+    galleryImages:[
+      'assets/products/BARISTA WALL ART FLAT WHITE.webp',
+      'assets/products/BARISTA WALL ART FLAT WHITE-2.webp',
+      'assets/products/BARISTA WALL ART FLAT WHITE-3.webp'
+    ],
+    accordion:{
+      details:'Giclée print on archival heavyweight paper. A3 size (42cm × 30cm). Unframed — fits standard A3 frames. Part of the Barista collection.',
+      care:'Keep away from prolonged direct sunlight. Frame behind UV-protective glass for best longevity.',
+      shipping:'Free tracked shipping over $75. Ships flat in a protective sleeve.'
+    }
+  },
+
+  { id:'wallart-blue-p',
+    name:'Capiz Disc — Blue',
+    image:'assets/products/wallart-blue.webp',
+    imageAlt:'Capiz Disc Blue wall art by Jones & Co',
+    cat:'wallart', catLabel:'Wall Art',
+    price:89, comparePrice:null,
+    rating:4.7, reviews:8, stock:'in', isNew:false,
+    desc:'A classic Capiz shell disc in a rich, saturated blue — handmade in the Philippines from individually prepared shells. Simple in form and striking in presence. This disc works equally well alone on a feature wall or arranged alongside other circular pieces in a gallery grouping. The natural translucency of the Capiz shell means it responds to light differently at different times of day — always moving, always alive.',
+    swatches:[{c:'#2B4580',n:'Deep Blue'},{c:'#84A59D',n:'Sage Blue'}],
+    galleryImages:[
+      'assets/products/wallart-blue.webp',
+      'assets/products/wallart-blue-1.webp'
+    ],
+    accordion:{
+      details:'Handmade Capiz shell and bamboo. Approx. 35cm diameter. Handmade in the Philippines. Includes hanging hardware.',
+      care:'Dust with a soft dry cloth. Avoid prolonged direct sunlight.',
+      shipping:'Free tracked shipping over $75. Ships in 1–2 business days.'
+    }
+  },
+
+  { id:'pup-tile',
+    name:'Pup Beagle Tile',
+    image:'assets/products/PUP BEAGLE TILE.webp',
+    imageAlt:'Pup Beagle Tile by Jones & Co',
+    cat:'wallart', catLabel:'Wall Art',
+    price:45, comparePrice:null,
+    rating:4.8, reviews:31, stock:'in', isNew:false,
+    desc:'From the Pup collection — a hand-painted ceramic tile featuring an expressive beagle portrait. Bold, characterful and genuinely joyful, the Pup tiles celebrate the dogs that share our homes and make our days quietly better. Hang it, prop it on a shelf or frame it. A brilliant gift for the dog lover in your life and a piece you\'ll find yourself smiling at every time you walk past it. Hand-painted in Vietnam; each expression is unique.',
+    swatches:[{c:'#F7F1E8',n:'Cream'},{c:'#84A59D',n:'Sage'}],
+    galleryImages:['assets/products/PUP BEAGLE TILE.webp'],
+    accordion:{
+      details:'Hand-painted earthenware tile. Approx. 15cm × 15cm. Hanging hole on reverse. Part of the Pup collection.',
+      care:'Wipe with a soft dry cloth.',
+      shipping:'Free tracked shipping over $75. Ships in 1–2 business days — an ideal gift, packed ready to give.'
     }
   }
 
@@ -751,7 +1060,9 @@ function productPage() {
       .filter(x => x.cat === p.cat && x.id !== p.id)
       .sort((a, b) => b.rating - a.rating)
       .slice(0, 4);
-    const galleryImgs = (p.swatchImages && p.swatchImages.length > 1) ? p.swatchImages : [p.image];
+    const galleryImgs = p.galleryImages
+      ? p.galleryImages
+      : (p.swatchImages && p.swatchImages.length > 1) ? p.swatchImages : [p.image];
     return `
       <nav class="breadcrumb" aria-label="Breadcrumb">
         <button class="back-btn" data-route="shop">Back</button>
