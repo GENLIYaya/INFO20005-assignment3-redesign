@@ -843,30 +843,52 @@ letter-spacing: 0.06em;
 z-index: 2;
 }
 .wish-btn {
-position: absolute; 
-top: 52px; 
+position: absolute;
+top: 52px;
 left: 10px;
-width: 36px; 
+width: 36px;
 height: 36px;
 background: rgba(255, 255, 255, 0.92);
 border-radius: 999px;
-display: grid; 
+display: grid;
 place-items: center;
 z-index: 2;
-transition: background var(--t);
+transition: background var(--t), transform 0.15s ease;
 }
-.wish-btn:hover { 
-background: var(--white); }
+.wish-btn:hover {
+background: var(--white);
+transform: scale(1.12);
+}
+.wish-btn i {
+font-size: 15px;
+color: var(--ink-70);
+transition: color var(--t), transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.wish-btn.saved {
+background: #fff0f0;
+}
+.wish-btn.saved i {
+color: var(--coral);
+}
 .wish-btn svg {
-width: 16px; 
-height: 16px; 
-stroke: var(--ink); 
-fill: none; 
+width: 16px;
+height: 16px;
+stroke: var(--ink);
+fill: none;
 stroke-width: 1.8;
 }
-.wish-btn.saved svg { 
-fill: var(--coral); 
+.wish-btn.saved svg {
+fill: var(--coral);
 stroke: var(--coral); }
+@keyframes heartPop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.35); }
+  70%  { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+.wish-btn.saved i {
+animation: heartPop 0.35s ease forwards;
+}
 
 .card-body {
 padding: var(--sp-4);
@@ -883,17 +905,21 @@ gap: var(--sp-3);
 }
 .card-title {
 font-family: 'Fraunces', serif;
-font-size: var(--fs-md); 
+font-size: var(--fs-md);
 font-weight: 600;
-color: var(--ink); 
+color: var(--ink);
 line-height: 1.25;
 letter-spacing: -0.01em;
+flex: 1;
+min-width: 0;
 }
-.card-price { 
-font-size: var(--fs-md); 
-font-weight: 700; 
-color: var(--ink); 
-white-space: nowrap; }
+.card-price {
+font-size: var(--fs-md);
+font-weight: 700;
+color: var(--ink);
+white-space: nowrap;
+flex-shrink: 0;
+}
 .card-cat { 
 font-size: 11px; 
 color: var(--ink-70); 
@@ -1590,10 +1616,38 @@ min-width: 32px;
 text-align: center; 
 font-weight: 600; }
 
-.pdp-actions { 
-display: flex; 
-gap: var(--sp-3); 
+.pdp-actions {
+display: flex;
+gap: var(--sp-3);
 flex-wrap: wrap; }
+
+.pdp-wish-btn {
+display: inline-flex;
+align-items: center;
+gap: var(--sp-2);
+background: none;
+border: none;
+padding: var(--sp-2) 0;
+font-size: var(--fs-sm);
+color: var(--ink-70);
+cursor: pointer;
+transition: color var(--t);
+}
+.pdp-wish-btn i {
+font-size: 14px;
+transition: color var(--t), transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.pdp-wish-btn:hover,
+.pdp-wish-btn:hover i {
+color: var(--coral);
+}
+.pdp-wish-btn.saved,
+.pdp-wish-btn.saved i {
+color: var(--coral);
+}
+.pdp-wish-btn.saved i {
+animation: heartPop 0.35s ease forwards;
+}
 
 .pdp-accordion {
 border-top: 1px solid var(--line);
@@ -2847,4 +2901,19 @@ stroke-linejoin: round;
   .chino-story-imgs {
     gap: var(--sp-4);
   }
+}
+
+/* ── Wishlist page ─────────────────────────────────────────────────────── */
+.wishlist-header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-6);
+}
+.wishlist-header h1 {
+  font-size: var(--fs-2xl);
+}
+.wishlist-count {
+  font-size: var(--fs-sm);
+  color: var(--ink-70);
 }

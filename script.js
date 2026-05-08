@@ -736,8 +736,8 @@ function card(p, opts = {}) {
           ${newPill}
           <span class="stock-pill ${stockClass}">${stockText}</span>
   
-          <button class="wish-btn ${isSaved ? 'saved' : ''}" data-wish="${p.id}" aria-label="Save to wishlist">
-            <i class="fa-regular fa-heart"></i>
+          <button class="wish-btn ${isSaved ? 'saved' : ''}" data-wish="${p.id}" aria-label="${isSaved ? 'Remove from wishlist' : 'Save to wishlist'}">
+            <i class="fa-${isSaved ? 'solid' : 'regular'} fa-heart"></i>
           </button>
   
           <button class="quick-add" data-add="${p.id}" aria-label="Quick add ${esc(p.name)} to cart" title="Quick add">
@@ -1055,6 +1055,7 @@ function shopPage() {
 /* ----- PRODUCT DETAIL (with "You May Also Like" rail, non-AI) ----- */
 function productPage() {
     const p = PRODUCTS.find(x => x.id === state.currentId) || PRODUCTS[0];
+    const isSaved = state.wishlist.has(p.id);
     // Related = same category, exclude self, top 4 by rating
     const related = PRODUCTS
       .filter(x => x.cat === p.cat && x.id !== p.id)
@@ -1127,6 +1128,10 @@ function productPage() {
             <button class="btn btn-primary" id="pdpAdd">Add to cart</button>
             <button class="btn btn-secondary" data-route="cart">View cart</button>
           </div>
+          <button class="pdp-wish-btn ${isSaved ? 'saved' : ''}" data-wish="${p.id}">
+            <i class="fa-${isSaved ? 'solid' : 'regular'} fa-heart"></i>
+            <span>${isSaved ? 'Saved to wishlist' : 'Save to wishlist'}</span>
+          </button>
   
           <div class="pdp-accordion">
             <details open>
@@ -1429,6 +1434,39 @@ function checkoutPage() {
 
 
 
+
+/* ----- WISHLIST ----- */
+function wishlistPage() {
+  const saved = PRODUCTS.filter(p => state.wishlist.has(p.id));
+  return `
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <button class="back-btn" data-route="home">Back</button>
+      <div class="crumbs">
+        <a href="#home" data-route="home">Home</a>
+        <span class="sep">›</span>
+        <span class="current">Wishlist</span>
+      </div>
+    </nav>
+
+    <div class="wishlist-header">
+      <h1 class="serif">Wishlist</h1>
+      <span class="wishlist-count">${saved.length} item${saved.length !== 1 ? 's' : ''}</span>
+    </div>
+
+    ${saved.length === 0 ? `
+      <div class="empty" style="padding: var(--sp-10) 0;">
+        <i class="fa-regular fa-heart" style="font-size: 2.5rem; color: var(--ink-30); display:block; margin-bottom:var(--sp-4);"></i>
+        <h3 class="serif">Nothing saved yet</h3>
+        <p>Tap the heart on any product to save it here.</p>
+        <button class="btn btn-primary" style="margin-top: var(--sp-4);" data-route="shop">Browse products</button>
+      </div>
+    ` : `
+      <div class="product-grid">
+        ${saved.map(p => card(p)).join('')}
+      </div>
+    `}
+  `;
+}
 
 /* ----- CHINO COLLECTION ----- */
 function chinoPage() {
@@ -1971,6 +2009,7 @@ function renderSearchResults(query) {
 
 document.getElementById('menuOpen').addEventListener('click', openMenu);
 document.getElementById('menuClose').addEventListener('click', closeMenu);
+document.getElementById('wishOpen').addEventListener('click', () => go('wishlist'));
 document.getElementById('drawerScrim').addEventListener('click', closeMenu);
 document.getElementById('searchOpen').addEventListener('click', openSearch);
 document.getElementById('searchClose').addEventListener('click', closeSearch);
@@ -2075,6 +2114,7 @@ function render() {
       case 'checkout':     html = checkoutPage(); break;
       case 'confirmation': html = confirmationPage(); break;
       case 'account':      html = accountPage(); break;
+      case 'wishlist':     html = wishlistPage(); break;
       case 'chino':        html = chinoPage(); break;
       case 'journal':      html = journalPage(); break;
       case 'about':        html = aboutPage(); break;
