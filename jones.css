@@ -159,11 +159,22 @@ padding: 0 var(--sp-4);
 gap: var(--sp-3);
 }
 .brand {
-font-family: 'Fraunces', serif;
-font-size: 22px; 
-font-weight: 600;
-letter-spacing: -0.02em;
-color: var(--ink);
+display: flex;
+align-items: center;
+line-height: 0;
+}
+.brand-logo {
+height: 32px;
+width: auto;
+display: block;
+mix-blend-mode: multiply;
+}
+.brand-logo--drawer {
+height: 44px;
+}
+.brand-logo--footer {
+height: 52px;
+margin-bottom: var(--sp-3);
 }
 .desktop-nav { 
 display: none; 
@@ -1978,7 +1989,7 @@ to   { opacity: 1; transform: translateY(0); }
 }
 .topbar { padding: 0 var(--sp-6); 
   height: 80px; }
-.brand { font-size: 26px; }
+.brand-logo { height: 38px; }
 
 /* Hero becomes a wider landscape stage on desktop */
 .hero-stage {
