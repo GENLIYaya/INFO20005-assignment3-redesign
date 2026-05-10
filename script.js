@@ -1,4 +1,9 @@
 /* ---- CONFIG ---------------------------------------------------------- */
+/* 
+  Basic store settings.
+  I keep values like free shipping, shipping fee and coupon codes here
+  so they can be changed in one place instead of being repeated in the code.
+*/
 const CONFIG = {
   freeShippingOver: 75,
   shippingFee: 9,
@@ -36,6 +41,11 @@ document.getElementById('announcement').innerHTML =
      tableware   — bowls, platters, jugs
 
    `isNew` flags show the NEW ARRIVALS scroller content. */
+   /*
+  Product data used to generate the shop, product cards and product pages.
+  Each object stores the product name, price, category, images, colour options,
+  description and accordion information.
+*/
 const PRODUCTS = [
 
   /* ── TABLEWARE ─────────────────────────────────────────────────────── */
@@ -607,6 +617,11 @@ const PRODUCTS = [
 
 
 /* ---- STATE ----------------------------------------------------------- */
+/*
+  State stores the current user journey.
+  It remembers which page is showing, which product is open,
+  what is in the cart, wishlist, selected filter, sort option and coupon.
+*/
 const state = {
   route: 'home',
   currentId: null,
@@ -620,7 +635,12 @@ const state = {
 };
 
 
-/* ----  UTILITIES ------------------------------------------------------- */
+/*
+  Small helper functions.
+  esc() makes product text safe for HTML output.
+  dollars() formats prices.
+  stars() converts ratings into star symbols for product cards.These are reusable helper functions. They keep the main rendering code shorter and avoid repeating the same formatting logic.
+*/
 function esc(s) {
   return String(s).replace(/[&<>"']/g, c => (
     { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]
@@ -629,6 +649,11 @@ function esc(s) {
 function dollars(n) { return '$' + Math.round(n); }
 function stars(r) { return '★'.repeat(Math.round(r)) + '☆'.repeat(5 - Math.round(r)); }
 
+/*
+  Shows a short feedback message after user actions,
+  such as adding an item to cart or applying a coupon.
+  The timer clears the old message before showing a new one.
+*/
 let toastTimer;
 function toast(msg) {
   const t = document.getElementById('toast');
@@ -638,7 +663,12 @@ function toast(msg) {
   toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
 }
 
-
+/*
+  Adds a product to the cart.
+  If the product is already in the cart, only the quantity increases.
+  If it is new, a new cart line is created.
+  Then the cart badge and mini cart are updated to give instant feedback.
+*/
 // shopping cart， add to cart
 function addToCart(id, qty = 1) {
     const line = state.cart.find(l => l.id === id);
@@ -651,14 +681,21 @@ function addToCart(id, qty = 1) {
     toast('Added to cart ✓');
     openMiniCart();
   }
-  
+/*
+  Updates the small number on the cart icon.
+  It adds together all item quantities in the cart.
+*/
   function updateBadge() {
     const count = state.cart.reduce((n, l) => n + l.qty, 0);
     const el = document.getElementById('cartBadge');
     if (!el) return;
     el.textContent = count;
   }
-  
+/*
+  Calculates the order price.
+  It loops through the cart, finds each product price,
+  then calculates subtotal, shipping, discount and final total.
+*/
   function computeTotals() {
     let subtotal = 0;
   
@@ -683,7 +720,10 @@ function addToCart(id, qty = 1) {
       total: subtotal + shipping - discount
     };
   }
-  
+/*
+  Checks the discount code entered by the user.
+  The code is converted to uppercase so users can type either lowercase or uppercase.
+*/
   function applyCoupon(code) {
     const upper = code.trim().toUpperCase();
     const found = CONFIG.coupons[upper];
@@ -695,7 +735,11 @@ function addToCart(id, qty = 1) {
       toast('Invalid code — try JONES10 or FIRST10');
     }
   }
-  
+/*
+  Validates one checkout form field.
+  It uses the browser's built-in checkValidity(),
+  then adds an invalid class so the field can be styled when there is an error.
+*/
   function validateField(fieldEl) {
     const input = fieldEl.querySelector('input');
     if (!input) return true;
@@ -706,6 +750,11 @@ function addToCart(id, qty = 1) {
   }
 
 /* ---- ROUTER ---------------------------------------------------------- */
+/*
+  Simple page router.
+  It changes the current route in state, closes overlays,
+  re-renders the page, and scrolls back to the top.
+*/
 function go(route, productId) {
   state.route = route;
   if (productId) state.currentId = productId;
@@ -718,6 +767,11 @@ function go(route, productId) {
 /* ---- RENDERERS ------------------------------------------------------- */
 
 /* Single card template used in every grid and every scroller. */
+/*
+  Creates one reusable product card.
+  The same card template is used on the homepage, shop page,
+  new arrivals, best sellers and related products.
+*/
 function card(p, opts = {}) {
     const stockClass = p.stock === 'low' ? 'low' : '';
     const stockText  = p.stock === 'low' ? 'Low stock' : 'In stock';
@@ -764,7 +818,10 @@ function card(p, opts = {}) {
       </article>
     `;
   }
-
+/*
+  Filters and sorts the product list.
+  It responds to the selected category chip and sort dropdown.
+*/
 function filtered() {
   let list = PRODUCTS.slice();
   if (state.filter !== 'all' && state.filter !== 'sale') {
@@ -1053,6 +1110,11 @@ function shopPage() {
 
 
 /* ----- PRODUCT DETAIL (with "You May Also Like" rail, non-AI) ----- */
+/*
+  Renders the product detail page.
+  It shows the selected product, gallery images, colour swatches,
+  quantity selector, add-to-cart button, wishlist button and related products.
+*/
 function productPage() {
     const p = PRODUCTS.find(x => x.id === state.currentId) || PRODUCTS[0];
     const isSaved = state.wishlist.has(p.id);
@@ -1162,6 +1224,11 @@ function productPage() {
   }
   
   /* ----- CART ----- */
+  /*
+  Renders the full shopping cart page.
+  It shows each cart item, quantity controls, remove button,
+  promo code input and order summary.
+*/
   function cartPage() {
     const totals = computeTotals();
     const empty = state.cart.length === 0;
@@ -1771,7 +1838,13 @@ function aboutPage() {
     </div>
   `;
 }
-
+/*
+  Main click handler using event delegation.
+  Because many buttons are created dynamically by render(),
+  I listen on document.body and check which data attribute was clicked.
+  Some buttons do not exist when the page first loads because they are created by JavaScript later. 
+  Event delegation lets those dynamic buttons still work.
+*/
 document.body.addEventListener('click', (e) => {
   /* Mini-cart close */
   if (e.target.id === 'miniCartClose' || e.target.id === 'miniCartScrim') {
@@ -1935,6 +2008,11 @@ document.body.addEventListener('click', (e) => {
   }
 });
 
+/*
+  Handles checkout form submission.
+  It prevents the default page refresh, validates all fields,
+  creates a simple order ID, saves the order, then moves to confirmation.
+*/
 document.body.addEventListener('submit', (e) => {
   if (e.target.id !== 'checkoutForm') return;
   e.preventDefault();
@@ -1967,6 +2045,10 @@ document.body.addEventListener('change', (e) => {
 });
 
 /* Drawer + search overlay */
+/*
+  Opens and closes the mobile drawer menu.
+  The body locked class stops the background from scrolling while the menu is open.
+*/
 function openMenu()  { document.getElementById('drawer').classList.add('open');  document.getElementById('drawerScrim').classList.add('open');  document.body.classList.add('locked'); }
 function closeMenu() { document.getElementById('drawer').classList.remove('open'); document.getElementById('drawerScrim').classList.remove('open'); document.body.classList.remove('locked'); }
 function openSearch()  { document.getElementById('searchOverlay').classList.add('open'); }
@@ -2026,7 +2108,11 @@ document.getElementById('searchInput').addEventListener('keydown', (e) => {
     if (first) { closeSearch(); go('product', first.id); }
   }
 });
-
+/*
+  Builds the mini cart preview.
+  It shows the products currently in the cart,
+  updates the subtotal, and tells the user how much is left for free shipping.
+*/
 // mini cart 
 let miniCartTimer = null;
 
