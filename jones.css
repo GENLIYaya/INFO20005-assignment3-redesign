@@ -296,10 +296,18 @@ gap: var(--sp-5);
 }
 .footer-col h4 {
 font-family: 'Fraunces', serif;
-font-size: var(--fs-md); 
+font-size: var(--fs-md);
 font-weight: 600;
 margin-bottom: var(--sp-3);
 color: var(--white);
+}
+.footer-brand {
+font-family: 'Fraunces', serif;
+font-size: 26px;
+font-weight: 700;
+letter-spacing: -0.02em;
+color: var(--white);
+margin-bottom: var(--sp-3);
 }
 .footer-col a, .footer-col p { 
 font-size: 13px; 
