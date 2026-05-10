@@ -2011,7 +2011,7 @@ document.getElementById('menuOpen').addEventListener('click', openMenu);
 document.getElementById('menuClose').addEventListener('click', closeMenu);
 document.getElementById('wishOpen').addEventListener('click', () => go('wishlist'));
 document.getElementById('drawerScrim').addEventListener('click', closeMenu);
-document.getElementById('searchOpen').addEventListener('click', openSearch);
+document.querySelectorAll('.search-trigger').forEach(el => el.addEventListener('click', openSearch));
 document.getElementById('searchClose').addEventListener('click', closeSearch);
 document.getElementById('searchOverlay').addEventListener('click', (e) => {
   if (e.target.id === 'searchOverlay') closeSearch();

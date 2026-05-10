@@ -18,11 +18,18 @@
 
 <header class="site-header">
   <div class="topbar shell" style="width: 100%; max-width: none;">
-    <button class="menu-toggle" id="menuOpen" aria-label="Open menu">
-        <i class="fa-solid fa-bars"></i>
-    </button>
 
-    <!-- 5-item desktop nav: left of logo on desktop, hidden on mobile -->
+    <!-- Mobile left: hamburger + search -->
+    <div class="topbar-left">
+      <button class="menu-toggle" id="menuOpen" aria-label="Open menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <button class="btn-icon search-trigger" id="searchOpenMobile" aria-label="Search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </div>
+
+    <!-- Desktop nav: left of logo, hidden on mobile -->
     <nav class="desktop-nav" aria-label="Primary">
       <a href="#shop" data-route="shop">Shop</a>
       <a href="#shop" data-route="shop">Collections</a>
@@ -33,8 +40,9 @@
 
     <a href="#home" class="brand" data-route="home"><img src="assets/SYMBOL2.PNG" alt="Jones &amp; Co" class="brand-logo"></a>
 
+    <!-- Right icons: search+account desktop-only, wish+cart always -->
     <div class="header-actions">
-      <button class="btn-icon" id="searchOpen" aria-label="Search">
+      <button class="btn-icon search-trigger" id="searchOpen" aria-label="Search">
         <i class="fa-solid fa-magnifying-glass"></i>
       </button>
       <button class="btn-icon" id="wishOpen" aria-label="Wishlist">
@@ -64,33 +72,44 @@
 </main>
 
 
-<!-- mobie draweer -->
+<!-- mobile drawer -->
 <div class="drawer-scrim" id="drawerScrim"></div>
 <aside class="drawer" id="drawer" aria-hidden="true">
+
+  <!-- Close button only — no logo -->
   <div class="drawer-head">
-    <img src="assets/SYMBOL2.PNG" alt="Jones &amp; Co" class="brand-logo brand-logo--drawer">
     <button class="drawer-close" id="menuClose" aria-label="Close menu">
       <i class="fa-solid fa-x"></i>
     </button>
   </div>
+
   <ul class="drawer-nav">
-    <li><a href="#shop" data-route="shop">Shop</a></li>
+    <li><a href="#shop" data-route="shop">Shop <i class="fa-solid fa-chevron-right drawer-arrow"></i></a></li>
     <li>
-      <a href="#shop" data-route="shop">Collections</a>
-      <ul class="sub">
-        <li><a href="#shop" data-route="shop" data-filter="wallart">Wall Art</a></li>
-        <li><a href="#shop" data-route="shop" data-filter="decorating">Decorating</a></li>
-        <li><a href="#shop" data-route="shop" data-filter="tableware">Tableware</a></li>
-        <li><a href="#shop" data-route="shop" data-filter="sale">Sale</a></li>
-      </ul>
+      <details class="drawer-accordion">
+        <summary>Collections <i class="fa-solid fa-chevron-right drawer-chevron"></i></summary>
+        <ul class="sub">
+          <li><a href="#shop" data-route="shop" data-filter="wallart">Wall Art</a></li>
+          <li><a href="#shop" data-route="shop" data-filter="decorating">Decorating</a></li>
+          <li><a href="#shop" data-route="shop" data-filter="tableware">Tableware</a></li>
+          <li><a href="#shop" data-route="shop" data-filter="sale">Sale</a></li>
+        </ul>
+      </details>
     </li>
-    <li><a href="#journal" data-route="journal">Journal</a></li>
-    <li><a href="#about" data-route="about">About</a></li>
-    <li><a href="#shop" data-route="shop" data-filter="sale">Sale</a></li>
+    <li><a href="#journal" data-route="journal">Journal <i class="fa-solid fa-chevron-right drawer-arrow"></i></a></li>
+    <li><a href="#about" data-route="about">About us <i class="fa-solid fa-chevron-right drawer-arrow"></i></a></li>
+    <li><a href="#shop" data-route="shop" data-filter="sale">Sale <i class="fa-solid fa-chevron-right drawer-arrow"></i></a></li>
   </ul>
+
   <div class="drawer-foot">
-    Free shipping over $75.<br>
-    Use <strong>JONES10</strong> or <strong>FIRST10</strong> for 10% off.
+    <button class="drawer-wish-link" data-route="wishlist">
+      <i class="fa-solid fa-heart"></i>
+      <span>View my wishlist</span>
+    </button>
+    <button class="drawer-login-bar" data-route="account">
+      <i class="fa-regular fa-user"></i>
+      <span>Login / Register</span>
+    </button>
   </div>
 </aside>
 
