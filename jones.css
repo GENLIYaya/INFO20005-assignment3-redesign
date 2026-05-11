@@ -1099,10 +1099,38 @@ display: flex;
 }
 
 @media (min-width: 1200px) {
-.product-grid {
-grid-template-columns: repeat(4, minmax(0, 1fr));
+  .product-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
+
+/* ============================================================================
+  MOBILE 390×844 (iPhone 13 / 14) — targeted refinements
+  ========================================================================= */
+@media (max-width: 430px) {
+  /* Tighter vertical section rhythm */
+  .section { padding: 40px 0; }
+
+  /* Keep hero from consuming more than half the above-fold */
+  .hero-stage { max-height: 380px; }
+
+  /* Scale heading down one notch so it fits one line comfortably */
+  .hero-title { font-size: var(--fs-xl); }
+  .hero-sub   { font-size: var(--fs-sm); }
+
+  /* Give card body a bit less padding to reclaim space */
+  .card-body { padding: var(--sp-3); }
+
+  /* Tighter section headers on narrow screens */
+  .section-title { font-size: var(--fs-xl); }
+
+  /* Trust strip wraps to two rows max — reduce gap */
+  .trust-strip { gap: var(--sp-3); padding: var(--sp-3) var(--sp-4); }
+
+  /* Shell horizontal margin stays 16px each side, just make explicit */
+  .shell { width: calc(100% - 32px); }
 }
+
 /* ============================================================================
 FEATURED COLLECTION (homepage editorial block)
 给 .collection-card 加 desktop 的 grid-template-columns
@@ -2201,6 +2229,43 @@ to   { opacity: 1; transform: translateY(0); }
 .footer-grid {
   grid-template-columns: 1.2fr 1fr 1fr 1fr 1fr;
   gap: var(--sp-6); }
+}
+
+/* ============================================================================
+  LARGE DESKTOP 1200px+ — covers 1440×1024 frame
+  ========================================================================= */
+@media (min-width: 1200px) {
+  /* Wider content lane */
+  .shell { width: min(1380px, calc(100% - 80px)); }
+
+  /* Taller, more generous header */
+  .topbar { height: 88px; padding: 0 56px; }
+  .brand-logo { height: 38px; }
+
+  /* Nav links: more gap, slightly bigger type */
+  .desktop-nav { gap: 36px; }
+  .desktop-nav a { font-size: 15px; }
+
+  /* Hero: taller, bigger headline */
+  .hero-stage { min-height: 640px; }
+  .hero-title  { font-size: clamp(52px, 4.5vw, 76px); }
+  .hero-sub    { font-size: 18px; }
+  .hero-float  { padding: var(--sp-8); }
+
+  /* Section headings */
+  .section-title { font-size: var(--fs-2xl); }
+
+  /* Category grid bigger icons */
+  .cat-icon { width: 80px; height: 80px; }
+
+  /* PDP layout: wider image pane */
+  .pdp-layout { grid-template-columns: 1.1fr 1fr; gap: 56px; }
+
+  /* Footer brand text */
+  .footer-brand { font-size: 30px; }
+
+  /* Product grid keeps 4 columns */
+  .product-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 
 /* ============================================================================
