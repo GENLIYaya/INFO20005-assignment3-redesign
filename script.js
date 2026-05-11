@@ -1522,7 +1522,6 @@ function wishlistPage() {
 
     ${saved.length === 0 ? `
       <div class="empty" style="padding: var(--sp-10) 0;">
-        <i class="fa-regular fa-heart" style="font-size: 2.5rem; color: var(--ink-30); display:block; margin-bottom:var(--sp-4);"></i>
         <h3 class="serif">Nothing saved yet</h3>
         <p>Tap the heart on any product to save it here.</p>
         <button class="btn btn-primary" style="margin-top: var(--sp-4);" data-route="shop">Browse products</button>

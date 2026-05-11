@@ -9,7 +9,7 @@
 --teal:       #84A59D;
 --teal-d:     #3E6660;
 --honey:      #F6B060;
---coral:      #E26963;
+--coral:      #E26963; 
 --coral-d:    #BF4F4A;
 --line:       rgba(44, 36, 22, 0.10);
 --line-md:    rgba(44, 36, 22, 0.18);
@@ -17,6 +17,7 @@
 --warn:       #B8860B;
 --err:        #B5322B;
 --white:      #FFFFFF;
+
 
 /* spacing scale */
 --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; 
@@ -72,7 +73,8 @@ body {
 
 html { 
   scroll-behavior: smooth; }
-main { 
+html { overflow-x: clip; }
+main {
   padding-top: var(--sp-3); }
 body {
 font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
@@ -206,7 +208,7 @@ display: none;
 @media (max-width: 899px) {
   .topbar { padding: 0 var(--sp-2); }
   .topbar-left { gap: 0; }
-  .header-actions { gap: 0; }
+  .header-actions { gap: var(--sp-2); }
 
   /* Strip circular background from header icon buttons only */
   .topbar .btn-icon,
@@ -486,7 +488,7 @@ position: relative;
 transition: background var(--t), transform var(--t);
 }
 
-.btn-icon:hover { background: var(--cream); 
+.btn-icon:hover { background: var(--blush);
 transform: translateY(-1px); }
 
 .btn-icon .svg {
@@ -498,15 +500,26 @@ stroke-width: 1.8;
 stroke-linecap: round; 
 stroke-linejoin: round;
 }
-/* numbers on shopping cart */
-.btn-icon .badge {
-position: absolute; top: -4px; right: -4px;
-min-width: 20px; height: 20px; padding: 0 5px;
-background: var(--coral); color: var(--white);
+/* Coral pill cart button — replaces the icon+badge */
+.cart-pill {
+display: flex;
+align-items: center;
+gap: 5px;
+background: var(--coral);
+color: var(--white);
+border: none;
 border-radius: 999px;
-font-size: 11px; font-weight: 700;
-display: grid; place-items: center;
+padding: 0 14px;
+height: 38px;
+font-size: 14px;
+font-weight: 700;
+cursor: pointer;
+transition: background var(--t);
+line-height: 1;
+flex-shrink: 0;
 }
+.cart-pill:hover { background: var(--coral-d); }
+.cart-pill i { font-size: 14px; }
 
 /*SEARCH OVERLAY
 ========================================================================= */
@@ -994,7 +1007,7 @@ z-index: 2;
 transition: background var(--t), transform 0.15s ease;
 }
 .wish-btn:hover {
-background: var(--white);
+background: var(--blush);
 transform: scale(1.12);
 }
 .wish-btn i {
@@ -2340,6 +2353,7 @@ transition: background var(--t), color var(--t), transform var(--t);
 .footer-actions .btn-icon:hover {
 transform: translateY(-2px);
 color: var(--white);
+background: rgba(247, 241, 232, 0.15);
 }
 
 #insOpen:hover {
