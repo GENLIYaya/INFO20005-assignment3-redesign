@@ -959,7 +959,7 @@ function homePage() {
 
             <button class="cat-card" data-route="shop" data-filter="sale">
                 <div class="cat-icon sale">
-                <span style="color:white;font-family:'Fraunces',serif;font-weight:700;font-size:18px;">%</span>
+                <span style="color:white;font-family:'Fraunces',serif;font-weight:700;font-size:36px;line-height:1;">%</span>
                 </div>
                 <div class="cat-name">Sale</div>
                 <div class="cat-sub">Limited pieces at reduced prices — while stock lasts.</div>

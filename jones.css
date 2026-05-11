@@ -873,9 +873,13 @@ transition: transform var(--t), box-shadow var(--t);
 }
 .cat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
 .cat-icon {
-width: 56px; height: 56px;
+width: 100%;
+aspect-ratio: 3 / 2;
 border-radius: var(--radius-sm);
-display: grid; place-items: center;
+overflow: hidden;
+display: grid;
+place-items: center;
+flex-shrink: 0;
 }
 .cat-icon.wallart    { background: var(--blush); }
 .cat-icon.decorating { background: var(--teal); }
@@ -885,7 +889,6 @@ display: grid; place-items: center;
 width: 100%;
 height: 100%;
 object-fit: cover;
-border-radius: var(--radius-sm);
 display: block;
 }
 .cat-name {
@@ -1562,16 +1565,18 @@ transform: none;
 .pdp-media {
 background: var(--cream-2);
 border-radius: var(--radius-lg);
-overflow: hidden;
+/* no overflow:hidden — children handle their own clipping; removing it prevents
+   the parent's border-radius from cutting off thumbnail corners */
 display: flex;
 flex-direction: column;
 gap: var(--sp-3);
+padding: var(--sp-3);
 }
 
 .pdp-main-img-wrap {
 aspect-ratio: 1 / 1;
 overflow: hidden;
-border-radius: var(--radius-lg);
+border-radius: var(--radius-md);
 background: var(--cream-2);
 }
 
@@ -1589,8 +1594,8 @@ flex-wrap: wrap;
 }
 
 .pdp-thumb {
-width: 64px;
-height: 64px;
+width: 72px;
+height: 72px;
 border-radius: var(--radius-sm);
 overflow: hidden;
 border: 2px solid transparent;
@@ -2173,12 +2178,9 @@ to   { opacity: 1; transform: translateY(0); }
 .scroller-arrows { display: flex; }
 
 /* Category grid = 4 across */
-.cat-grid { 
-  grid-template-columns: repeat(4, 1fr); 
+.cat-grid {
+  grid-template-columns: repeat(4, 1fr);
   gap: var(--sp-5); }
-.cat-icon { 
-  width: 72px; 
-  height: 72px; }
 
 /* Featured collection = 2 col (media left, copy right) */
 .collection-card { 
@@ -2254,9 +2256,6 @@ to   { opacity: 1; transform: translateY(0); }
 
   /* Section headings */
   .section-title { font-size: var(--fs-2xl); }
-
-  /* Category grid bigger icons */
-  .cat-icon { width: 80px; height: 80px; }
 
   /* PDP layout: wider image pane */
   .pdp-layout { grid-template-columns: 1.1fr 1fr; gap: 56px; }
