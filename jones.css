@@ -202,6 +202,26 @@ gap: var(--sp-2);
 display: none;
 }
 
+/* Mobile header — tighter spacing, no circular pill backgrounds */
+@media (max-width: 899px) {
+  .topbar { padding: 0 var(--sp-2); }
+  .topbar-left { gap: 0; }
+  .header-actions { gap: 0; }
+
+  /* Strip circular background from header icon buttons only */
+  .topbar .btn-icon,
+  .topbar-left .menu-toggle {
+    background: none;
+    border: none;
+    box-shadow: none;
+  }
+  .topbar .btn-icon:hover,
+  .topbar-left .menu-toggle:hover {
+    background: none;
+    transform: none;
+  }
+}
+
 
 /* mobile drawer visible */
 
@@ -877,18 +897,22 @@ width: 100%;
 aspect-ratio: 3 / 2;
 border-radius: var(--radius-sm);
 overflow: hidden;
+position: relative;
+flex-shrink: 0;
 display: grid;
 place-items: center;
-flex-shrink: 0;
 }
 .cat-icon.wallart    { background: var(--blush); }
 .cat-icon.decorating { background: var(--teal); }
 .cat-icon.tableware  { background: var(--honey); }
 .cat-icon.sale       { background: var(--coral); }
 .cat-icon img.cat-thumb {
+position: absolute;
+inset: 0;
 width: 100%;
 height: 100%;
 object-fit: cover;
+object-position: center;
 display: block;
 }
 .cat-name {
