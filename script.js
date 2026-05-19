@@ -988,21 +988,28 @@ function homePage() {
             <p>Our Customer Care team is based in Surry Hills, Sydney. If you have a question about a product, an order, or you'd like us to track something down from our stockists — please get in touch.</p>
             <div class="contact-list">
               <div class="contact-item">
-                <div class="icon">✉</div>
+                <div class="icon">
+                 <i class="fa-solid fa-envelope"></i>
+                </div>
                 <div>
                   <strong>${esc(CONFIG.contact.email)}</strong>
                   <span>We reply within one business day.</span>
                 </div>
               </div>
               <div class="contact-item">
-                <div class="icon">☎</div>
+                <div class="icon">
+                 <i class="fa-solid fa-tty"></i>
+                
+                </div>
                 <div>
                   <strong>${esc(CONFIG.contact.phone)}</strong>
                   <span>${esc(CONFIG.contact.hours)}</span>
                 </div>
               </div>
               <div class="contact-item">
-                <div class="icon">◉</div>
+                <div class="icon">
+                 <i class="fa-solid fa-map-location-dot"></i>
+                </div>
                 <div>
                   <strong>${esc(CONFIG.contact.address)}</strong>
                   <span>Warehouse &amp; showroom by appointment.</span>
@@ -1211,7 +1218,7 @@ function productPage() {
           </div>
         </div>
       </div>
-  
+
       ${related.length ? `
         <section class="related-rail">
           <h2>You may also like</h2>
@@ -1220,9 +1227,13 @@ function productPage() {
           </div>
         </section>
       ` : ''}
+
     `;
   }
-  
+//    related = 推荐商品列表.map = 一个个拿出来.card(x) = 把商品变成卡片.join('') = 把所有卡片拼起来显示
+
+
+
   /* ----- CART ----- */
   /*
   Renders the full shopping cart page.
@@ -1232,18 +1243,25 @@ function productPage() {
   function cartPage() {
     const totals = computeTotals();
     const empty = state.cart.length === 0;
+    //   检查购物车是不是空的。如果 state.cart 里面没有商品，empty 就是 true。如果有商品，empty 就是 false。
+    // 如果 empty 是 true，就显示空购物车页面。否则，就显示正常购物车页面。
+
+         //   dataroute--你的点击监听器会识别它，然后调用 go('shop')。
     return `
       <nav class="breadcrumb" aria-label="Breadcrumb">
         <button class="back-btn" data-route="shop">Back</button>
         <div class="crumbs">
           <a href="#home" data-route="home">Home</a>
+   
           <span class="sep">›</span>
           <span class="current">Shopping cart</span>
         </div>
       </nav>
   
       <h1 class="serif" style="font-size: var(--fs-2xl); margin-bottom: var(--sp-5);">Your cart</h1>
-  
+
+
+
       ${empty ? `
         <div class="empty">
           <h3 class="serif">Your cart is empty</h3>
@@ -1255,6 +1273,7 @@ function productPage() {
           <div class="cart-rows">
             ${state.cart.map(line => {
               const p = PRODUCTS.find(x => x.id === line.id);
+            //   把购物车里的每一条商品记录都拿出来，生成一行购物车 HTML。line = 购物车里的其中一行商品。根据购物车里的商品 id，去 PRODUCTS 商品数据库里找到完整商品信息。
               return `
                 <div class="cart-row" data-line="${p.id}">
                   <div class="cart-thumb">
@@ -1814,6 +1833,38 @@ function aboutPage() {
       </div>
     </div>
 
+    <!-- MEET THE MAKER -->
+    <div class="about-meet-maker" id="aboutMeetMaker">
+      <div class="maker-blob maker-blob--tl" aria-hidden="true"></div>
+      <div class="maker-blob maker-blob--br" aria-hidden="true"></div>
+      <div class="maker-split">
+        <div class="maker-photo-wrap">
+          <img src="assets/meet-maker/maker3.webp" alt="Artisan painter at work — Jones &amp; Co ceramics">
+          <div class="maker-ceramics" aria-hidden="true">
+            <div class="maker-jar maker-jar-1"></div>
+            <div class="maker-jar maker-jar-2"></div>
+            <div class="maker-jar maker-jar-3"></div>
+            <div class="maker-jar maker-jar-4"></div>
+          </div>
+        </div>
+        <div class="maker-copy-panel">
+          <div class="maker-deco maker-deco-1" aria-hidden="true"></div>
+          <div class="maker-deco maker-deco-2" aria-hidden="true"></div>
+          <div class="maker-copy">
+            <h2 class="maker-heading">Meet the Maker</h2>
+            <p>Everything we make is touched by hand. We believe in small runs made with the highest level of attention to detail.</p>
+            <p>We collaborate with our factories to understand techniques and processes. If you would like to learn more about our artisan makers, read our blog series on each of our makers.</p>
+            <button class="maker-blog-link" data-route="journal">Read the blog →</button>
+          </div>
+        </div>
+      </div>
+      <div class="maker-wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 56" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,28 C180,56 360,0 540,28 C720,56 900,0 1080,28 C1260,56 1380,14 1440,28 L1440,56 L0,56 Z" fill="#F7F1E8"/>
+        </svg>
+      </div>
+    </div>
+
     <div class="about-timeline">
       <h2 class="serif">Twenty years in the making</h2>
       <div class="timeline-list">
@@ -1860,6 +1911,13 @@ document.body.addEventListener('click', (e) => {
       const cardW = scroller.querySelector('.card')?.offsetWidth || 220;
       scroller.scrollBy({ left: dir * (cardW + 16), behavior: 'smooth' });
     }
+    return;
+  }
+
+  /* Cart pill → always open mini-cart, never navigate */
+  if (e.target.closest('#cartOpen')) {
+    e.preventDefault();
+    openMiniCart();
     return;
   }
 
@@ -2048,6 +2106,7 @@ document.body.addEventListener('change', (e) => {
   Opens and closes the mobile drawer menu.
   The body locked class stops the background from scrolling while the menu is open.
 */
+
 function openMenu()  { document.getElementById('drawer').classList.add('open');  document.getElementById('drawerScrim').classList.add('open');  document.body.classList.add('locked'); }
 function closeMenu() { document.getElementById('drawer').classList.remove('open'); document.getElementById('drawerScrim').classList.remove('open'); document.body.classList.remove('locked'); }
 function openSearch()  { document.getElementById('searchOverlay').classList.add('open'); }
@@ -2058,7 +2117,7 @@ function closeSearch() {
   const res = document.getElementById('searchResults');
   if (res) { res.hidden = true; res.innerHTML = ''; }
 }
-
+// 根据用户输入的词，显示搜索结果。找到搜索结果容器。如果页面上没有这个容器，就停止，不继续运行。
 function renderSearchResults(query) {
   const el = document.getElementById('searchResults');
   if (!el) return;
@@ -2074,6 +2133,7 @@ function renderSearchResults(query) {
     el.innerHTML = '<p class="search-no-results">No products found for "' + esc(query) + '"</p>';
     return;
   }
+//   如果一个商品都没找到，就显示：这里的 esc(query) 是为了防止用户输入奇怪符号导致 HTML 出错。
   el.innerHTML = matches.map(p => `
     <button class="search-result-item" data-pid="${esc(p.id)}">
       <div class="search-result-img">
@@ -2107,19 +2167,34 @@ document.getElementById('searchInput').addEventListener('keydown', (e) => {
     if (first) { closeSearch(); go('product', first.id); }
   }
 });
+
+
+
+
+
+
+
+
+
+
 /*
   Builds the mini cart preview.
   It shows the products currently in the cart,
   updates the subtotal, and tells the user how much is left for free shipping.
 */
-// mini cart 
-let miniCartTimer = null;
 
+
+// mini cart 
+
+let miniCartTimer = null;
+// 先检查小购物车需要的 HTML 元素存不存在；如果购物车是空的，就显示空购物车提示。
 function renderMiniCart() {
   const body = document.getElementById('miniCartBody');
   const foot = document.getElementById('miniCartFoot');
   if (!body || !foot) return;
 
+
+//   因为购物车空的时候，不需要显示 subtotal、checkout 按钮这些东西。
   if (state.cart.length === 0) {
     body.innerHTML = '<div class="mini-cart-empty">Your bag is empty.</div>';
     foot.hidden = true;
@@ -2127,7 +2202,7 @@ function renderMiniCart() {
   }
 
   foot.hidden = false;
-
+// 读取 state.cart 里的商品，去 PRODUCTS 里找商品图片、名字、价格。把 newArrivals 里的每一个商品 p，都交给 card(p) 变成一个商品卡片 HTML，最后 join('') 把这些卡片拼成一整段 HTML。如果没有找到这个商品，就返回一个空字符串，不显示任何东西。
   body.innerHTML = state.cart.map(line => {
     const p = PRODUCTS.find(x => x.id === line.id);
     if (!p) return '';
@@ -2160,9 +2235,11 @@ function renderMiniCart() {
 
 function openMiniCart() {
   renderMiniCart();
+//  让右侧 mini cart 滑出来
 
   const panel = document.getElementById('miniCart');
   const scrim = document.getElementById('miniCartScrim');
+//   背景变暗
   if (!panel || !scrim) return;
 
   panel.classList.add('open');
@@ -2184,6 +2261,7 @@ function closeMiniCart() {
 
   clearTimeout(miniCartTimer);
 }
+// 加入商品后，addToCart() 会把商品存进 state.cart，然后调用 openMiniCart()。openMiniCart() 会先用 renderMiniCart() 生成小购物车内容，再给 mini cart 加上 open class，让它从右边弹出来。
 
 
   /* ---- put in last page RENDER + INIT --------------------------------------------------- */
@@ -2206,6 +2284,20 @@ function render() {
       default:             html = homePage();
     }
     app.innerHTML = `<div class="page-content">${html}</div>`;
+
+    // Trigger Meet the Maker animation when section scrolls into view
+    const mmEl = document.getElementById('aboutMeetMaker');
+    if (mmEl) {
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      obs.observe(mmEl);
+    }
   }
   
   render();

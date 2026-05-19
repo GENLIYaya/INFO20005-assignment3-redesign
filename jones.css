@@ -45,7 +45,7 @@
 }
 
 
-/* eyebrow label — small uppercase tag above section titles */
+/* eyebrow label — small uppercase tag above section titles green color */
 .eyebrow {
 font-size: 11px;
 font-weight: 700;
@@ -706,13 +706,23 @@ background: none;
 aspect-ratio: 4 / 5;
 }
 
-.hero-picture,
+.hero-picture {
+  position: absolute;
+  inset: 0;
+  padding-right: 56px;
+  padding-left: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  display: block;
+}
+
 .hero-img {
-position: absolute;
-inset: 0;
-width: 100%;
-height: 100%;
-display: block;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center center;
+  border-radius: var(--radius-lg);
 }
 
 
@@ -1397,7 +1407,9 @@ transform: translateX(100%);
 transition: transform 320ms cubic-bezier(0.4, 0, 0.2, 1);
 z-index: 220;
 }
-
+/* mini cart 在屏幕右边外面
+加 open 后：滑进屏幕
+transition：让这个滑动过程变顺滑 */
 .mini-cart.open {
 transform: translateX(0);
 }
@@ -1448,10 +1460,11 @@ padding: var(--sp-6) var(--sp-4);
 color: var(--ink-70);
 font-size: 14px;
 }
-
+/* [商品图片 64px] [商品信息 自动撑开] [价格/按钮 按内容宽度] */
 .mini-line {
 display: grid;
 grid-template-columns: 64px 1fr auto;
+
 gap: var(--sp-3);
 align-items: center;
 padding: var(--sp-3) 0;
@@ -1480,7 +1493,7 @@ display: block;
 .mini-line-info {
 min-width: 0;
 }
-
+/* 允许这个元素在空间不够的时候变窄。 */
 .mini-line-name {
 font-size: 13px;
 font-weight: 600;
@@ -1499,22 +1512,26 @@ font-size: 14px;
 font-weight: 700;
 color: var(--ink);
 white-space: nowrap;
+
 }
 
+
+/* 文字不要换行，保持在一行里。 */
 .mini-cart-foot {
 border-top: 1px solid var(--line);
 padding: var(--sp-4) var(--sp-5) var(--sp-5);
 background: var(--cream);
 flex-shrink: 0;
 }
-
+/* 按钮保持原本大小，不会被挤扁。 */
 .mini-cart-subtotal {
 display: flex;
 justify-content: space-between;
 align-items: baseline;
+
 margin-bottom: var(--sp-3);
 }
-
+/* 让同一行里的文字按照“文字底线”对齐。 */
 .mini-cart-subtotal span:first-child {
 font-size: 14px;
 color: var(--ink);
@@ -1574,7 +1591,7 @@ stroke-width: 1.8;
 stroke-linecap: round;
 stroke-linejoin: round;
 }
-
+/* 图标线条颜色跟随当前文字颜色。fill=图标里面不填充颜色，只显示线条。线条的两端变圆。 线条转角变圆。*/
 .card:hover .quick-add,
 .card:focus-within .quick-add {
 opacity: 1;
@@ -1629,7 +1646,10 @@ display: flex;
 gap: var(--sp-2);
 flex-wrap: wrap;
 }
+/* flex 一行放不下的时候，允许自动换行。 */
 
+
+/* 让 focus 轮廓线离元素边缘 1px。常见在按钮、链接、输入框被键盘选中时： */
 .pdp-thumb {
 width: 72px;
 height: 72px;
@@ -1641,6 +1661,7 @@ outline-offset: 1px;
 flex-shrink: 0;
 transition: border-color var(--t), outline-color var(--t);
 }
+/* 这个元素保持原本宽度，文字不换行，不要被旁边内容挤变形。 */
 
 .pdp-thumb img {
 width: 100%;
@@ -1653,7 +1674,9 @@ display: block;
 .pdp-thumb.is-active { border-color: var(--ink); outline-color: var(--ink); }
 
 
-
+/* thumb = thumbnail 缩略图，
+现在大图显示的是哪一张小图。
+.pdp-thumb = 商品详情页的小图片按钮 */
 
 /* ============================================================================
 17. SHOP PAGE
@@ -2140,6 +2163,7 @@ to   { opacity: 1; transform: translateY(0); }
   24. DESKTOP BREAKPOINT (≥900px) — ADAPTS, does not just scale
   ========================================================================= */
 @media (min-width: 900px) {
+.shell { width: min(1280px, calc(100% - 64px)); }
 .menu-toggle { display: none; }
 .topbar-left { display: none; }
 #searchOpen,
@@ -3005,9 +3029,206 @@ stroke-linejoin: round;
 }
 
 /* ============================================================================
+   MEET THE MAKER — About page feature section
+   ========================================================================== */
+.about-meet-maker {
+  position: relative;
+  margin: var(--sp-7) calc(50% - 50vw);
+  width: 100vw;
+  overflow: hidden;
+}
+
+.maker-split {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .maker-split {
+    grid-template-columns: 1fr 1fr;
+    min-height: 540px;
+  }
+}
+
+/* Left: photo */
+.maker-photo-wrap {
+  position: relative;
+  overflow: hidden;
+  min-height: 320px;
+}
+.maker-photo-wrap > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Blob decorations on the photo side */
+.maker-blob {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+}
+.maker-blob--tl {
+  width: 200px; height: 180px;
+  background: var(--honey);
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  top: -35px; left: -35px;
+  opacity: 0.88;
+}
+.maker-blob--br {
+  width: 130px; height: 120px;
+  background: #d98a8a;
+  border-radius: 40% 60% 70% 30% / 40% 70% 30% 60%;
+  bottom: 50px; right: 30px;
+  opacity: 0.65;
+  z-index: 2;
+}
+
+/* Animated ceramic jar silhouettes (appear first) */
+.maker-ceramics {
+  position: absolute;
+  bottom: 0;
+  left: var(--sp-6);
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  z-index: 3;
+  pointer-events: none;
+  height: 110px;
+}
+.maker-jar {
+  opacity: 0;
+  transform: translateY(40px) scale(0.75);
+  transform-origin: bottom center;
+}
+.about-meet-maker.is-visible .maker-jar {
+  animation: jarPopIn 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+.maker-jar-1 {
+  width: 42px; height: 80px;
+  background: #8fa0d4;
+  border-radius: 48% 52% 42% 58% / 60% 60% 40% 40%;
+  animation-delay: 0.05s;
+}
+.maker-jar-2 {
+  width: 36px; height: 60px;
+  background: var(--honey);
+  border-radius: 45% 55% 35% 65% / 55% 45% 55% 45%;
+  animation-delay: 0.18s;
+}
+.maker-jar-3 {
+  width: 34px; height: 70px;
+  background: var(--coral);
+  border-radius: 42% 58% 50% 50% / 60% 60% 40% 40%;
+  animation-delay: 0.30s;
+}
+.maker-jar-4 {
+  width: 44px; height: 64px;
+  background: var(--blush);
+  border-radius: 55% 45% 45% 55% / 60% 60% 40% 40%;
+  animation-delay: 0.42s;
+}
+@keyframes jarPopIn {
+  0%   { opacity: 0; transform: translateY(40px) scale(0.7); }
+  65%  { opacity: 1; transform: translateY(-8px) scale(1.06); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Right: pink panel */
+.maker-copy-panel {
+  background: var(--blush);
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: var(--sp-8) var(--sp-7);
+  overflow: hidden;
+}
+
+/* Decorative blob shapes on the pink side (appear after jars) */
+.maker-deco {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+}
+.about-meet-maker.is-visible .maker-deco {
+  animation: decoBloom 0.6s ease-out forwards;
+}
+.maker-deco-1 {
+  width: 180px; height: 170px;
+  background: rgba(255,255,255,0.35);
+  border-radius: 60% 40% 70% 30% / 40% 60% 40% 60%;
+  top: -60px; right: -40px;
+  animation-delay: 0.62s;
+}
+.maker-deco-2 {
+  width: 120px; height: 110px;
+  background: rgba(226,105,99,0.18);
+  border-radius: 40% 60% 30% 70% / 60% 40% 60% 40%;
+  bottom: -30px; left: 40px;
+  animation-delay: 0.76s;
+}
+@keyframes decoBloom {
+  from { opacity: 0; transform: scale(0.5); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.maker-copy {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  max-width: 46ch;
+}
+.maker-heading {
+  font-family: 'Fraunces', serif;
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.05;
+}
+.maker-copy p {
+  font-size: 15px;
+  color: var(--ink-70);
+  line-height: 1.75;
+}
+.maker-blog-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  margin-top: var(--sp-2);
+  text-align: left;
+}
+.maker-blog-link:hover { color: var(--coral-d); }
+
+/* Wavy bottom: pink → cream page background */
+.maker-wave {
+  background: var(--blush);
+  line-height: 0;
+}
+.maker-wave svg {
+  display: block;
+  width: 100%;
+  height: 56px;
+}
+
+/* ============================================================================
    CHINO COLLECTION PAGE
    ========================================================================= */
-.chino-hero {
+/* .chino-hero {
   display: grid;
   background: var(--white);
   border: 1px solid var(--line);
@@ -3140,7 +3361,7 @@ stroke-linejoin: round;
   .chino-story-imgs {
     gap: var(--sp-4);
   }
-}
+} */
 
 /* ── Wishlist page ─────────────────────────────────────────────────────── */
 .wishlist-header {
@@ -3155,4 +3376,95 @@ stroke-linejoin: round;
 .wishlist-count {
   font-size: var(--fs-sm);
   color: var(--ink-70);
+}
+
+
+/* FINAL HERO FIX — put this at the very bottom of jones.css */
+
+/* make the hero container show a cream frame on the right */
+/* FINAL HERO FIX — put this at the very bottom of jones.css */
+
+/* 去掉奶油色边框，背景改为透明或保持原样 */
+main .hero-stage {
+  background: transparent !important;  /* 或者删除这行，看原来是什么颜色 */
+  overflow: hidden !important;
+}
+
+/* 图片容器去掉右边距，不再留白 */
+main .hero-stage .hero-picture {
+  position: absolute !important;
+  inset: 0 !important;
+  display: block !important;
+  box-sizing: border-box !important;
+  padding-right: 0 !important;  /* 把 96px 改成 0 */
+}
+
+/* 图片本身不变 */
+main .hero-stage .hero-picture .hero-img {
+  position: static !important;
+  inset: auto !important;
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  border-radius: var(--radius-lg) !important;
+}
+
+/* 徽章位置可以调回原样，或者保持微调 */
+main .hero-stage .hero-badge {
+  right: 20px !important;  
+ 
+}
+ /* 改回靠近右边 */
+/* 桌面尺寸控制保持不变 */
+@media (min-width: 900px) {
+  main .hero-stage {
+    aspect-ratio: 16 / 7 !important;
+    min-height: 500px !important;
+    max-height: 600px !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  main .hero-stage {
+    min-height: 520px !important;
+    max-height: 600px !important;
+  }
+}
+
+/* 手机端保持不变 */
+@media (max-width: 899px) {
+  main .hero-stage .hero-picture {
+    padding-right: 0 !important;
+  }
+
+  main .hero-stage .hero-badge {
+    right: 20px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-stage {
+    aspect-ratio: auto;
+    height: 620px;
+    border-radius: 28px;
+  }
+/* 不要强制这个盒子保持某个固定宽高比例，让它按自己的内容或 height 来决定高度。 */
+  .trust-strip {
+    margin-top: 32px;
+    padding: 24px 18px;
+    gap: 18px 24px;
+    font-size: 15px;
+    justify-content: center;
+  }
+
+  .hero-badge {
+    display: none;
+  }
+/* 
+  .hero-float .hero{
+
+  } */
+
 }
