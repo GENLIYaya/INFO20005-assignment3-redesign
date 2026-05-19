@@ -897,32 +897,58 @@ function homePage() {
       </section>
   
       <!-- FEATURED NEW COLLECTION editorial block (Chino Sweetheart) -->
-      <section class="section">
-        <div class="section-head">
-          <div class="lhs">
-            <span class="eyebrow">New collection</span>
-            <h2 class="section-title">Chino Mug — Sweetheart edition</h2>
-          </div>
-        </div>
-        <div class="collection-card">
-            <div class="collection-media">
-            <img
-                class="collection-img"
-                src="assets/collection.jpg"
-                alt="Chino Mug Sweetheart edition"
-                loading="lazy"
-            >
+      <div class="floral-card-section">
+        <svg class="fc-flower" style="top:16px;right:24px;width:52px;height:52px;" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <ellipse cx="26" cy="13" rx="6" ry="11" fill="#F6B060"/>
+          <ellipse cx="26" cy="13" rx="6" ry="11" fill="#F6B060" transform="rotate(60 26 26)"/>
+          <ellipse cx="26" cy="13" rx="6" ry="11" fill="#F6B060" transform="rotate(120 26 26)"/>
+          <ellipse cx="26" cy="13" rx="6" ry="11" fill="#F6B060" transform="rotate(180 26 26)"/>
+          <ellipse cx="26" cy="13" rx="6" ry="11" fill="#F6B060" transform="rotate(240 26 26)"/>
+          <ellipse cx="26" cy="13" rx="6" ry="11" fill="#F6B060" transform="rotate(300 26 26)"/>
+          <circle cx="26" cy="26" r="7" fill="#F5CAC3"/>
+        </svg>
+        <svg class="fc-flower" style="bottom:20px;left:16px;width:36px;height:36px;" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <ellipse cx="26" cy="13" rx="6" ry="11" fill="#E26963"/>
+          <ellipse cx="26" cy="13" rx="6" ry="11" fill="#E26963" transform="rotate(72 26 26)"/>
+          <ellipse cx="26" cy="13" rx="6" ry="11" fill="#E26963" transform="rotate(144 26 26)"/>
+          <ellipse cx="26" cy="13" rx="6" ry="11" fill="#E26963" transform="rotate(216 26 26)"/>
+          <ellipse cx="26" cy="13" rx="6" ry="11" fill="#E26963" transform="rotate(288 26 26)"/>
+          <circle cx="26" cy="26" r="7" fill="#F6B060"/>
+        </svg>
+        <svg class="fc-flower" style="top:40px;left:10%;width:24px;height:24px;" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <ellipse cx="26" cy="13" rx="6" ry="11" fill="#84A59D"/>
+          <ellipse cx="26" cy="13" rx="6" ry="11" fill="#84A59D" transform="rotate(90 26 26)"/>
+          <ellipse cx="26" cy="13" rx="6" ry="11" fill="#84A59D" transform="rotate(180 26 26)"/>
+          <ellipse cx="26" cy="13" rx="6" ry="11" fill="#84A59D" transform="rotate(270 26 26)"/>
+          <circle cx="26" cy="26" r="6" fill="#F6B060"/>
+        </svg>
+        <section class="section" style="padding:0;">
+          <div class="section-head">
+            <div class="lhs">
+              <span class="eyebrow">New collection</span>
+              <h2 class="section-title">Chino Mug — Sweetheart edition</h2>
             </div>
-          <div class="collection-copy">
-            <div class="collection-title">Small moments of joy, every day.</div>
-            <p class="collection-desc">That's exactly what our hand-painted Chino Mugs were made for, small unspoken moments of joy that repeat every single day. Our newest Sweetheart colourway is released in a limited run from our Vietnam factory — once it's gone, it's gone.</p>
-            <div style="display: flex; gap: var(--sp-3); flex-wrap: wrap;">
-              <button class="btn btn-primary" data-route="product" data-pid="sweetheart">Shop the collection</button>
-              <button class="btn btn-ghost" data-route="chino">Explore all Chino Mugs</button>
+          </div>
+          <div class="collection-card">
+              <div class="collection-media">
+              <img
+                  class="collection-img"
+                  src="assets/collection.jpg"
+                  alt="Chino Mug Sweetheart edition"
+                  loading="lazy"
+              >
+              </div>
+            <div class="collection-copy">
+              <div class="collection-title">Small moments of joy, every day.</div>
+              <p class="collection-desc">That's exactly what our hand-painted Chino Mugs were made for, small unspoken moments of joy that repeat every single day. Our newest Sweetheart colourway is released in a limited run from our Vietnam factory — once it's gone, it's gone.</p>
+              <div style="display: flex; gap: var(--sp-3); flex-wrap: wrap;">
+                <button class="btn btn-primary" data-route="product" data-pid="sweetheart">Shop the collection</button>
+                <button class="btn btn-ghost" data-route="chino">Explore all Chino Mugs</button>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
   
       <!-- SHOP BY CATEGORY — task-oriented labels -->
       <section class="section">
@@ -979,6 +1005,66 @@ function homePage() {
         <div class="product-grid">${bestSellers.map(p => card(p)).join('')}</div>
       </section>
   
+      <!-- SHOP BY COLLECTION — wavy peach bg + image tile scroller -->
+      <div class="sbc-wave-bg">
+        <!-- top wave: cream → peach -->
+        <div class="sbc-wave-top" aria-hidden="true">
+          <svg viewBox="0 0 1440 56" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,20 C160,44 320,0 480,22 C640,44 800,0 960,22 C1120,44 1280,4 1440,20 L1440,56 L0,56 Z" fill="#FFF8F4"/>
+          </svg>
+        </div>
+
+        <section class="section sbc-inner">
+          <div class="section-head">
+            <div class="lhs">
+              <span class="eyebrow">Shop by Collection</span>
+              <h2 class="section-title">Find your style</h2>
+            </div>
+            <div style="display:flex;align-items:center;gap:var(--sp-4);">
+              <div class="scroller-arrows" id="sbcArrows">
+                <button class="scroller-arrow" data-scroll="sbc" data-dir="-1" aria-label="Scroll left">‹</button>
+                <button class="scroller-arrow" data-scroll="sbc" data-dir="1" aria-label="Scroll right">›</button>
+              </div>
+            </div>
+          </div>
+          <div class="scroller-wrap">
+            <div class="sbc-scroller" id="sbcScroller">
+              <button class="sbc-tile" data-route="shop" data-filter="wallart">
+                <img src="assets/products/SAMIRA WALL ART FLOWER ARCH.webp" alt="Wall Art" loading="lazy">
+                <div class="sbc-label">Wall Art<small>Capiz shell &amp; prints</small></div>
+              </button>
+              <button class="sbc-tile" data-route="shop" data-filter="tableware">
+                <img src="assets/products/mug1.webp" alt="Love Notes" loading="lazy">
+                <div class="sbc-label">Love Notes<small>Expressive ceramics</small></div>
+              </button>
+              <button class="sbc-tile" data-route="chino">
+                <img src="assets/products/sweet-heart.webp" alt="Chino Mugs" loading="lazy">
+                <div class="sbc-label">Chino Mugs<small>Hand-painted earthenware</small></div>
+              </button>
+              <button class="sbc-tile" data-route="shop" data-filter="decorating">
+                <img src="assets/products/BEACH CLUB ORANGE CRAB.webp" alt="Beach Club" loading="lazy">
+                <div class="sbc-label">Beach Club<small>Coastal collection</small></div>
+              </button>
+              <button class="sbc-tile" data-route="shop" data-filter="tableware">
+                <img src="assets/products/paradis-collection.webp" alt="Paradis" loading="lazy">
+                <div class="sbc-label">Paradis<small>Bold &amp; playful</small></div>
+              </button>
+              <button class="sbc-tile" data-route="shop" data-filter="wallart">
+                <img src="assets/products/wallart.webp" alt="Statement Wall Art" loading="lazy">
+                <div class="sbc-label">Statement Pieces<small>For every wall</small></div>
+              </button>
+            </div>
+          </div>
+        </section>
+        <!-- bottom wave: peach → cream, double-layer -->
+        <div class="sbc-wave-btm" aria-hidden="true">
+          <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,50 C240,80 480,20 720,50 C960,80 1200,20 1440,50 L1440,80 L0,80 Z" fill="#F7F1E8" opacity="0.55"/>
+            <path d="M0,34 C180,62 360,6 540,34 C720,62 900,6 1080,34 C1260,62 1380,18 1440,34 L1440,80 L0,80 Z" fill="#FFF8F4"/>
+          </svg>
+        </div>
+      </div>
+
       <!-- CONTACT & FAQ block -->
       <section class="section" id="contact">
         <div class="contact-block">
@@ -1905,10 +1991,12 @@ document.body.addEventListener('click', (e) => {
   /* Scroller arrows */
   const sa = e.target.closest('[data-scroll]');
   if (sa) {
-    const scroller = document.getElementById('newArrivalsScroller');
+    const idMap = { new: 'newArrivalsScroller', sbc: 'sbcScroller' };
+    const scroller = document.getElementById(idMap[sa.dataset.scroll] || 'newArrivalsScroller');
     if (scroller) {
       const dir = parseInt(sa.dataset.dir, 10);
-      const cardW = scroller.querySelector('.card')?.offsetWidth || 220;
+      const child = scroller.firstElementChild;
+      const cardW = child?.offsetWidth || 240;
       scroller.scrollBy({ left: dir * (cardW + 16), behavior: 'smooth' });
     }
     return;
