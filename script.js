@@ -851,7 +851,7 @@ function homePage() {
         </picture>
 
         <div class="hero-float">
-            <span class="eyebrow">Handmade in Vietnam &amp; the Philippines</span>
+           
             <h1 class="hero-title serif">Decorative <em>joy</em><br>for the home.</h1>
             <p class="hero-sub">Designed in Australia, Jones &amp; Co makes hand-painted ceramics, Capiz shell wall art, tableware and gifts. Every piece is full of colour, pattern, life and energy.</p>
             <div class="hero-ctas">
@@ -1816,14 +1816,7 @@ function journalPage() {
 
 /* ----- ABOUT ----- */
 function aboutPage() {
-  const timeline = [
-    { year: '2004', text: "Jones & Co is founded by Kate Jones in Surry Hills, Sydney, with a belief that everyday objects should bring genuine joy." },
-    { year: '2006', text: "The brand's first stockists come on board across New South Wales and Victoria. Word spreads quickly about the quality and character of the pieces." },
-    { year: '2010', text: "The Capiz shell wall art range launches, bringing a new material and a new craft tradition — handmade in the Philippines — into the Jones & Co family." },
-    { year: '2015', text: "Jones & Co launches its online store, taking handmade Australian-designed ceramics to homes across the country and internationally." },
-    { year: '2020', text: "The Chino Mug series expands with new colourways, cementing it as one of Australia's most recognised ceramic pieces." },
-    { year: '2024', text: "Twenty years of Jones & Co. The brand is still designing from Surry Hills, still handmade, and still bringing colour to Australian homes." }
-  ];
+
   return `
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <button class="back-btn" data-route="home">Back</button>
@@ -1842,129 +1835,87 @@ function aboutPage() {
       </div>
     </div>
 
-    <div class="about-story">
-      <div class="about-story-text">
+
+
+    <div class="about-story-text">
         <span class="eyebrow">Who we are</span>
-        <h2 class="serif">Bringing colour and character to Australian homes since 2004.</h2>
-        <p>Jones &amp; Co was born out of a belief that the objects we surround ourselves with every day should carry character. Founded by Kate Jones in Sydney's Surry Hills, we set out to design hand-painted ceramics that felt genuinely joyful — full of colour, pattern and life.</p>
-        <p>Twenty years on, our pieces sit on dining tables, open shelves and walls across Australia and around the world. Every mug, vase, bowl and Capiz shell wall piece is still designed here in Sydney and made by craftspeople we've worked with for years.</p>
-        <p>We are not a fast-fashion homewares brand. We do not design for trends. We design for the long haul — for the mug you reach for every morning, the vase that makes the corner of a room feel alive, the wall piece your guests always ask about.</p>
-      </div>
-      <div class="about-story-img">
-        <img src="assets/collection.jpg" alt="Jones &amp; Co ceramics collection" loading="lazy">
-      </div>
+        <h2 class="serif">Colourful homewares, designed in Sydney and made with care.</h2>
+        <p>Jones &amp; Co creates joyful ceramics, tableware and Capiz shell wall art for everyday homes. Each piece is designed in Sydney and made by artisan partners, bringing colour, pattern and personality into daily life.</p>
+    </div>
     </div>
 
-    <div class="about-mission">
-      <p class="about-mission-quote">"We make things that make people happy. That sounds simple, but it's genuinely hard to do — and it requires good design, honest colour, quality materials, and the skill of the people who paint each piece by hand."</p>
-      <p class="about-mission-attr">— Kate Jones, Founder</p>
-    </div>
 
-    <div class="about-values">
-      <h2 class="serif">What we stand for</h2>
-      <div class="about-values-grid">
-        <div class="about-value-card">
-          <div class="about-value-icon">✦</div>
-          <h3 class="serif">Handmade character</h3>
-          <p>Every item is painted by hand. That means no two pieces are exactly alike — each one carries the mark of the person who made it.</p>
-        </div>
-        <div class="about-value-card">
-          <div class="about-value-icon">◉</div>
-          <h3 class="serif">Designed in Australia</h3>
-          <p>All our designs originate in our Surry Hills studio. Our team works from colour studies, pattern research and a love of objects that make everyday life better.</p>
-        </div>
-        <div class="about-value-card">
-          <div class="about-value-icon">♡</div>
-          <h3 class="serif">Made with care</h3>
-          <p>We work with long-term factory partners in Vietnam and the Philippines — skilled family workshops we've collaborated with for years, who bring our designs to life.</p>
-        </div>
-        <div class="about-value-card">
-          <div class="about-value-icon">⊛</div>
-          <h3 class="serif">Built to last</h3>
-          <p>Our ceramics aren't trend pieces. They're made from quality earthenware and stoneware, designed to be used every day, season after season.</p>
-        </div>
-      </div>
-    </div>
+    <section class="about-values">
+    <h2 class="serif">What we care about</h2>
 
-    <div class="about-makers">
-      <div class="section-head">
-        <div class="lhs">
-          <span class="eyebrow">Where it's made</span>
-          <h2 class="section-title serif">Skilled hands, two countries.</h2>
+    <div class="about-values-grid">
+        <div class="about-value-card">
+        <div class="about-value-icon">✦</div>
+        <h3 class="serif">Handmade character</h3>
+        <p>Every piece carries the mark of the person who made it.</p>
         </div>
-      </div>
-      <div class="makers-grid">
-        <div class="maker-card">
-          <div class="maker-card-img">
-            <img src="assets/products/sweet-heart.webp" alt="Ceramic workshop — Vietnam" loading="lazy">
-          </div>
-          <div class="maker-card-copy">
-            <span class="eyebrow">Vietnam</span>
-            <h3 class="serif">Ceramic tableware &amp; decorating</h3>
-            <p>Our ceramic tableware and decorative pieces are handmade at our partner workshops in Vietnam's ceramic heartland. Each piece is shaped and painted by craftspeople who have worked in this industry for generations.</p>
-            <p>The deep industry knowledge, the confident brushstrokes, the consistency across every run — these are the things that simply cannot be replicated by machine. It's why we've worked with the same factories since the beginning.</p>
-          </div>
+
+        <div class="about-value-card">
+        <div class="about-value-icon">◉</div>
+        <h3 class="serif">Designed in Australia</h3>
+        <p>Our collections begin in our Surry Hills studio.</p>
         </div>
-        <div class="maker-card">
-          <div class="maker-card-img">
-            <img src="assets/products/FABLE SUN PINK HEART.webp" alt="Capiz shell craft — Philippines" loading="lazy">
-          </div>
-          <div class="maker-card-copy">
-            <span class="eyebrow">Philippines</span>
-            <h3 class="serif">Capiz shell wall art</h3>
-            <p>Our Capiz shell wall art is handmade in the Philippines, where traditional shell crafting has been practiced for generations. Each panel and disc is assembled by hand from individually cleaned and prepared Capiz shells.</p>
-            <p>The natural variation in each shell — its translucency, the way it catches light — makes every piece genuinely unique. No two wall pieces will ever be exactly the same.</p>
-          </div>
+
+        <div class="about-value-card">
+        <div class="about-value-icon">♡</div>
+        <h3 class="serif">Made with care</h3>
+        <p>We work with long-term artisan partners in Vietnam and the Philippines.</p>
         </div>
-      </div>
+
+        <div class="about-value-card">
+        <div class="about-value-icon">⊛</div>
+        <h3 class="serif">Built to last</h3>
+        <p>Made for everyday use, not short-term trends.</p>
+        </div>
     </div>
+    </section>
+
+
 
     <!-- MEET THE MAKER -->
     <div class="about-meet-maker" id="aboutMeetMaker">
-      <div class="maker-blob maker-blob--tl" aria-hidden="true"></div>
-      <div class="maker-blob maker-blob--br" aria-hidden="true"></div>
-      <div class="maker-split">
+    <div class="maker-blob maker-blob--tl" aria-hidden="true"></div>
+    <div class="maker-blob maker-blob--br" aria-hidden="true"></div>
+
+    <div class="maker-split">
         <div class="maker-photo-wrap">
-          <img src="assets/meet-maker/maker3.webp" alt="Artisan painter at work — Jones &amp; Co ceramics">
-          <div class="maker-ceramics" aria-hidden="true">
+        <img src="assets/meet-maker/maker3.webp" alt="Artisan painter at work — Jones &amp; Co ceramics">
+        <div class="maker-ceramics" aria-hidden="true">
             <div class="maker-jar maker-jar-1"></div>
             <div class="maker-jar maker-jar-2"></div>
             <div class="maker-jar maker-jar-3"></div>
             <div class="maker-jar maker-jar-4"></div>
-          </div>
         </div>
+        </div>
+
         <div class="maker-copy-panel">
-          <div class="maker-deco maker-deco-1" aria-hidden="true"></div>
-          <div class="maker-deco maker-deco-2" aria-hidden="true"></div>
-          <div class="maker-copy">
+        <div class="maker-deco maker-deco-1" aria-hidden="true"></div>
+        <div class="maker-deco maker-deco-2" aria-hidden="true"></div>
+
+        <div class="maker-copy">
             <h2 class="maker-heading">Meet the Maker</h2>
-            <p>Everything we make is touched by hand. We believe in small runs made with the highest level of attention to detail.</p>
-            <p>We collaborate with our factories to understand techniques and processes. If you would like to learn more about our artisan makers, read our blog series on each of our makers.</p>
+            <p>Every piece is touched by hand. We work closely with skilled artisan partners so each object carries warmth, variation and character.</p>
             <button class="maker-blog-link" data-route="journal">Read the blog →</button>
-          </div>
         </div>
-      </div>
-      <div class="maker-wave" aria-hidden="true">
-        <svg viewBox="0 0 1440 56" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0,28 C180,56 360,0 540,28 C720,56 900,0 1080,28 C1260,56 1380,14 1440,28 L1440,56 L0,56 Z" fill="#F7F1E8"/>
-        </svg>
-      </div>
+        </div>
     </div>
 
-    <div class="about-timeline">
-      <h2 class="serif">Twenty years in the making</h2>
-      <div class="timeline-list">
-        ${timeline.map(t => `
-          <div class="timeline-item">
-            <div class="timeline-year">${esc(t.year)}</div>
-            <p class="timeline-text">${esc(t.text)}</p>
-          </div>
-        `).join('')}
-      </div>
+    <div class="maker-wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 64" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,30 C180,62 360,2 540,30 C720,62 900,2 1080,30 C1260,62 1380,14 1440,30 L1440,64 L0,64 Z" fill="#FFF8F4"/>
+        </svg>
     </div>
+    </div>
+
+
 
     <div class="about-cta">
-      <span class="eyebrow" style="color:var(--honey)">Ready to explore?</span>
+     
       <h2 class="serif">Find your next favourite piece.</h2>
       <p>Browse our latest collections — from hand-painted Chino Mugs to Capiz shell wall art. Designed in Sydney, made with love.</p>
       <div style="display:flex;gap:var(--sp-3);flex-wrap:wrap;justify-content:center;">
@@ -1974,6 +1925,7 @@ function aboutPage() {
     </div>
   `;
 }
+
 /*
   Main click handler using event delegation.
   Because many buttons are created dynamically by render(),
