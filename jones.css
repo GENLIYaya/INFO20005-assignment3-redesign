@@ -3653,3 +3653,50 @@ main .hero-stage .hero-badge {
   gap: 10px;
   pointer-events: none;
 } */
+
+
+/* Mobile shop filters: compact horizontal filter bar */
+@media (max-width: 767px) {
+  .shop-layout {
+    display: block;
+  }
+
+  .filter-sidebar {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin-bottom: var(--sp-5);
+    border-radius: 0;
+    gap: var(--sp-3);
+  }
+
+  .filter-group {
+    gap: var(--sp-2);
+  }
+
+  .filter-label {
+    font-size: 11px;
+    margin-left: 2px;
+  }
+
+  .chip-stack {
+    display: flex;
+    flex-direction: row;
+    gap: var(--sp-2);
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding: 2px 0 8px;
+  }
+
+  .chip-stack::-webkit-scrollbar {
+    display: none;
+  }
+
+  .chip-stack .chip {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+  }
+}
