@@ -870,7 +870,7 @@ function homePage() {
           <span>Hand-painted</span>
           <span>Free shipping over $${CONFIG.freeShippingOver}</span>
           <span>21-day returns</span>
-          <span>Designed in Sydney</span>
+        
         </div>
       </section>
   

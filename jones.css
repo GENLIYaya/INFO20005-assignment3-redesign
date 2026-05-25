@@ -3655,6 +3655,7 @@ main .hero-stage .hero-badge {
 } */
 
 
+
 /* Mobile shop filters: compact horizontal filter bar */
 @media (max-width: 767px) {
   .shop-layout {
@@ -3700,3 +3701,98 @@ main .hero-stage .hero-badge {
     scroll-snap-align: start;
   }
 }
+/* =========================================================
+   MOBILE HOME CLEAN-UP 
+   ========================================================= */
+   @media (max-width: 767px) {
+
+    /* Turn green pill labels into simple green text */
+    .eyebrow {
+      background: none !important;
+      padding: 0 !important;
+      border-radius: 0 !important;
+      color: var(--teal-d) !important;
+      font-size: 10px !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.09em !important;
+      line-height: 1.2 !important;
+    }
+  
+    /* Reduce section spacing */
+    .section {
+      padding: 28px 0 !important;
+    }
+  
+    .section-head {
+      margin-bottom: 14px !important;
+      gap: 6px !important;
+    }
+  
+    .section-head .lhs {
+      gap: 5px !important;
+    }
+  
+    .section-title {
+      font-size: 22px !important;
+      line-height: 1.1 !important;
+    }
+  
+    /* Hero bottom spacing smaller */
+    .hero {
+      padding-bottom: 18px !important;
+    }
+  
+    .hero-stage {
+      margin-bottom: 10px !important;
+    }
+  
+    /* Trust strip becomes small horizontal row */
+    .trust-strip {
+      display: flex !important;
+      flex-wrap: nowrap !important;
+      overflow-x: auto !important;
+      justify-content: flex-start !important;
+      gap: 0 !important;
+  
+      margin-top: 10px !important;
+      padding: 7px 10px !important;
+  
+      background: var(--cream-2) !important;
+      border: 1px solid var(--line) !important;
+      border-radius: 999px !important;
+  
+      font-size: 9px !important;
+      color: var(--ink-70) !important;
+      font-weight: 600 !important;
+  
+      scrollbar-width: none !important;
+    }
+  
+    .trust-strip::-webkit-scrollbar {
+      display: none !important;
+    }
+  
+    .trust-strip span {
+      flex: 0 0 auto !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 0 !important;
+      white-space: nowrap !important;
+      padding: 0 13px !important;
+    }
+  
+    .trust-strip span::before {
+      display: none !important;
+    }
+  
+    /* Add thin dividers between trust items */
+    .trust-strip span + span {
+      border-left: 1px solid var(--line-md) !important;
+    }
+  
+    /* Reduce gap before next section title */
+    .trust-strip + .section,
+    .hero + .section {
+      padding-top: 24px !important;
+    }
+  }
