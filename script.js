@@ -367,7 +367,7 @@ const PRODUCTS = [
 
   { id:'jug2-p',
     name:'Paradis Jug — Spot',
-    image:'assets/products/jug2.webp',
+    image:'assets/products/jug2-3.webp',
     imageAlt:'Paradis Jug Spot by Jones & Co',
     cat:'decorating', catLabel:'Decorating',
     price:65, comparePrice:null,
@@ -633,6 +633,35 @@ const state = {
   sort: 'featured',
   appliedCoupon: null
 };
+
+
+
+function emptyCartIllustration() {
+    return `
+      <svg class="cart-empty-art" viewBox="0 0 600 300" role="img" aria-label="Colourful ceramic shapes">
+        <path d="M36 224 L47 201 L58 224 L82 236 L58 246 L47 272 L36 246 L12 236 Z" fill="none" stroke="#1A2372" stroke-width="6" stroke-linejoin="round"/>
+        <path d="M50 221 L55 209" stroke="#1A2372" stroke-width="4" stroke-linecap="round"/>
+        <path d="M47 252 L43 266" stroke="#1A2372" stroke-width="4" stroke-linecap="round"/>
+  
+        <path d="M124 72 C124 32 173 32 173 72 C173 92 162 102 162 116 C162 128 196 150 196 213 C196 260 174 282 126 282 C78 282 56 260 56 213 C56 150 90 128 90 116 C90 102 124 92 124 72 Z" fill="#A7BBF0"/>
+  
+        <path d="M236 164 C282 158 322 164 322 164 C325 208 294 231 279 238 L279 279 L218 279 L218 238 C203 231 172 208 175 164 C175 164 192 162 236 164 Z" fill="#FFD573"/>
+        <rect x="222" y="112" width="116" height="42" rx="21" fill="#F7AEC4"/>
+        <rect x="219" y="71" width="116" height="42" rx="21" fill="#F7AEC4"/>
+  
+        <rect x="348" y="72" width="90" height="160" rx="32" fill="#FF8157"/>
+        <path d="M359 72 C376 62 410 62 427 72" fill="none" stroke="#FF8157" stroke-width="12" stroke-linecap="round"/>
+        <path d="M346 232 H442 V281 H346 Z" fill="#A7BBF0"/>
+  
+        <path d="M461 72 C506 66 551 72 551 72 C551 120 531 148 497 154 L542 279 H437 L482 154 C445 147 428 121 428 72 C428 72 441 74 461 72 Z" fill="#F7AEC4"/>
+  
+        <path d="M570 124 C555 130 546 137 540 146" stroke="#1A2372" stroke-width="6" stroke-linecap="round"/>
+        <path d="M584 154 C570 154 558 158 548 164" stroke="#1A2372" stroke-width="6" stroke-linecap="round"/>
+        <path d="M580 190 C567 184 557 176 549 166" stroke="#1A2372" stroke-width="6" stroke-linecap="round"/>
+        <path d="M555 214 C550 200 543 188 534 180" stroke="#1A2372" stroke-width="6" stroke-linecap="round"/>
+      </svg>
+    `;
+  }
 
 
 /*
@@ -1349,10 +1378,16 @@ function productPage() {
 
 
       ${empty ? `
-        <div class="empty">
-          <h3 class="serif">Your cart is empty</h3>
-          <p>Browse our collection and add a piece you love.</p>
-          <button class="btn btn-primary" style="margin-top: var(--sp-4);" data-route="shop">Shop now</button>
+        <div class="cart-empty-state">
+        <div class="cart-empty-inner">
+            ${emptyCartIllustration()}
+            <h2 class="cart-empty-title">Nothing here yet!</h2>
+            <p class="cart-empty-copy">Your cart is ready for something joyful.</p>
+            <div class="cart-empty-actions">
+            <button class="btn btn-primary" data-route="shop">Shop now</button>
+            <button class="btn btn-secondary" data-route="checkout">Checkout</button>
+            </div>
+        </div>
         </div>
       ` : `
         <div class="cart-layout">
@@ -1481,18 +1516,18 @@ function checkoutPage() {
           </div>
           <div class="field">
             <label for="fCard">Card number</label>
-            <input id="fCard" name="card" type="text" required pattern="[0-9 ]{13,19}" inputmode="numeric" placeholder="4242 4242 4242 4242" autocomplete="cc-number">
+            <input id="fCard" name="card" type="text" required pattern="[0-9 ]{13,19}" inputmode="numeric" placeholder="4242 4242 4242 4242" autocomplete="cc-number" maxlength="19">
             <span class="err">Please enter a valid card number.</span>
           </div>
-          <div class="row-2">
+          <div class="row-2 row-card">
             <div class="field">
               <label for="fExp">Expiry</label>
-              <input id="fExp" name="exp" type="text" required pattern="[0-9]{2}/[0-9]{2}" placeholder="MM/YY" autocomplete="cc-exp">
+              <input id="fExp" name="exp" type="text" required pattern="[0-9]{2}/[0-9]{2}" placeholder="MM/YY" inputmode="numeric" autocomplete="cc-exp" maxlength="5">
               <span class="err">Format MM/YY.</span>
             </div>
             <div class="field">
               <label for="fCvc">CVC</label>
-              <input id="fCvc" name="cvc" type="text" required pattern="[0-9]{3,4}" inputmode="numeric" autocomplete="cc-csc">
+              <input id="fCvc" name="cvc" type="text" required pattern="[0-9]{3,4}" inputmode="numeric" autocomplete="cc-csc" maxlength="4">
               <span class="err">3–4 digits.</span>
             </div>
           </div>
@@ -2137,6 +2172,18 @@ document.body.addEventListener('submit', (e) => {
 document.body.addEventListener('blur', (e) => {
   if (e.target.matches('#checkoutForm input')) validateField(e.target.closest('.field'));
 }, true);
+
+/* Auto-format card number (space every 4 digits) and expiry (MM/YY slash) */
+document.body.addEventListener('input', (e) => {
+  if (e.target.id === 'fCard') {
+    const raw = e.target.value.replace(/\D/g, '').slice(0, 16);
+    e.target.value = raw.match(/.{1,4}/g)?.join(' ') ?? raw;
+  }
+  if (e.target.id === 'fExp') {
+    const raw = e.target.value.replace(/\D/g, '').slice(0, 4);
+    e.target.value = raw.length > 2 ? raw.slice(0, 2) + '/' + raw.slice(2) : raw;
+  }
+});
 document.body.addEventListener('change', (e) => {
   if (e.target.id === 'sortSel') { state.sort = e.target.value; render(); }
 });
@@ -2235,8 +2282,20 @@ function renderMiniCart() {
 
 
 //   因为购物车空的时候，不需要显示 subtotal、checkout 按钮这些东西。
-  if (state.cart.length === 0) {
-    body.innerHTML = '<div class="mini-cart-empty">Your bag is empty.</div>';
+if (state.cart.length === 0) {
+    body.innerHTML = `
+      <div class="mini-cart-empty-art-state">
+        <div class="cart-empty-inner">
+          ${emptyCartIllustration()}
+          <h2 class="cart-empty-title">Nothing here yet!</h2>
+          <p class="cart-empty-copy">Your bag is waiting for a favourite piece.</p>
+          <div class="cart-empty-actions">
+            <button class="btn btn-primary" data-route="shop">Shop now</button>
+            <button class="btn btn-secondary" data-route="checkout">Checkout</button>
+          </div>
+        </div>
+      </div>
+    `;
     foot.hidden = true;
     return;
   }

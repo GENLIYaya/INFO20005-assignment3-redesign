@@ -1225,6 +1225,18 @@ MOBILE 390×844 (iPhone 13 / 14) — targeted refinements
 
 /* Shell horizontal margin stays 16px each side, just make explicit */
 .shell { width: calc(100% - 32px); }
+
+/* Checkout: stack two-column rows so inputs never overflow */
+.row-2 { grid-template-columns: 1fr; }
+
+/* Checkout: keep expiry + CVC side by side (short fields) */
+.row-2.row-card { grid-template-columns: 1fr 1fr; }
+
+/* Stepper pills: allow smaller text */
+.stepper .step { font-size: 11px; padding: 6px 10px; }
+
+/* Checkout h1 */
+.cart-layout h1.serif { font-size: var(--fs-lg); }
 }
 
 /* ============================================================================
@@ -1445,7 +1457,7 @@ right: 0;
 width: 100%;
 max-width: 400px;
 height: 100dvh;
-background: var(--white);
+background: var(--cream-2);
 box-shadow: var(--shadow-lg);
 display: flex;
 flex-direction: column;
@@ -2116,12 +2128,14 @@ gap: var(--sp-2); }
 font-size: 13px; 
 font-weight: 600; }
 .field input, .field select {
+width: 100%;
+min-width: 0;
 min-height: 48px;
 padding: 0 var(--sp-4);
 background: var(--white);
 border: 1px solid var(--line-md);
 border-radius: var(--radius-sm);
-font-size: 15px;
+font-size: 16px;
 color: var(--ink);
 }
 .field input:focus, .field select:focus {
@@ -2632,6 +2646,91 @@ fill: none;
 stroke-width: 1.8;
 stroke-linecap: round;
 stroke-linejoin: round;
+}
+
+
+/* Empty cart illustration state */
+.cart-empty-state,
+.mini-cart-empty-art-state {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  background: var(--cream-2);
+}
+
+.cart-empty-state {
+  min-height: min(620px, calc(100vh - 260px));
+  padding: var(--sp-8) var(--sp-4);
+  border-radius: var(--radius-lg);
+}
+
+.mini-cart-empty-art-state {
+  min-height: 100%;
+  padding: var(--sp-6) var(--sp-5);
+}
+
+.cart-empty-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-4);
+  width: min(560px, 100%);
+}
+
+.cart-empty-art {
+  width: min(430px, 92vw);
+  height: auto;
+  display: block;
+  background: var(--cream-2);
+}
+
+.mini-cart-empty-art-state .cart-empty-art {
+  width: min(280px, 80vw);
+  background: var(--cream-2);
+}
+
+.cart-empty-title {
+  margin: 0;
+  color: #2C2416;
+  font-family: 'Fraunces', Georgia, serif ;
+  font-size: clamp(32px, 6vw, 54px);
+  line-height: 0.95;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.mini-cart-empty-art-state .cart-empty-title {
+  font-size: 30px;
+}
+
+.cart-empty-copy {
+  max-width: 36ch;
+  margin: 0;
+  color: var(--ink-70);
+  font-size: var(--fs-md);
+  font-family: 'Fraunces', Georgia, serif;
+}
+
+.mini-cart-empty-art-state .cart-empty-copy {
+  font-size: 13px;
+}
+
+.cart-empty-actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+  margin-top: var(--sp-2);
+}
+
+.mini-cart-empty-art-state .cart-empty-actions {
+  width: 100%;
+  flex-direction: column;
+}
+
+.mini-cart-empty-art-state .btn {
+  width: 100%;
 }
 
 /* ============================================================================
