@@ -1695,35 +1695,39 @@ function chinoPage() {
       </div>
     </nav>
 
-    <div class="chino-hero">
-      <div class="chino-hero-media">
-        <img src="assets/collection.jpg" alt="The Jones &amp; Co Chino Mug collection" loading="lazy">
-      </div>
-      <div class="chino-hero-copy">
-        <span class="eyebrow">Signature Collection</span>
-        <h1 class="serif">The Chino Mug</h1>
-        <p>The piece that started it all. Our hand-painted Chino Mug has been at the heart of Jones &amp; Co since the very beginning — made in Vietnam from quality earthenware, with every stripe and motif applied by hand. It's the mug you reach for every morning, the one that feels like a small ritual.</p>
-        <p>Available in a range of colourways, from the classic Navy Lines to the new limited-edition Sweetheart. Each piece is unique — a small variation that tells you a person made this, not a machine.</p>
-        <div style="display:flex;gap:var(--sp-3);flex-wrap:wrap;">
-          <button class="btn btn-primary" data-route="product" data-pid="sweetheart">Shop Sweetheart edition</button>
-          <button class="btn btn-ghost" data-route="product" data-pid="chino">Shop Navy Lines</button>
+    <div class="chino-intro-block">
+      <div class="chino-blob chino-blob--honey" aria-hidden="true"></div>
+      <div class="chino-blob chino-blob--teal" aria-hidden="true"></div>
+      <div class="chino-hero">
+        <div class="chino-hero-media">
+          <img src="assets/collection.jpg" alt="The Jones &amp; Co Chino Mug collection" loading="lazy">
         </div>
-        <div class="chino-hero-stats">
-          <div class="chino-stat">
-            <strong>${avgRating}★</strong>
-            <span>Avg rating</span>
+        <div class="chino-hero-copy">
+          <span class="eyebrow" style="background:rgba(44,36,22,0.1);color:var(--ink);">Signature Collection</span>
+          <h1 class="serif">The Chino Mug</h1>
+          <p>The piece that started it all. Our hand-painted Chino Mug has been at the heart of Jones &amp; Co since the very beginning — made in Vietnam from quality earthenware, with every stripe and motif applied by hand. It's the mug you reach for every morning, the one that feels like a small ritual.</p>
+          <p>Available in a range of colourways, from the classic Navy Lines to the limited-edition Sweetheart. Each piece is subtly unique — a small variation that tells you a person made this, not a machine.</p>
+          <div style="display:flex;gap:var(--sp-3);flex-wrap:wrap;margin-top:var(--sp-3);">
+            <button class="btn btn-primary" data-route="product" data-pid="sweetheart">Shop Sweetheart edition</button>
+            <button class="btn btn-ghost" data-route="product" data-pid="chino">Shop Navy Lines</button>
           </div>
-          <div class="chino-stat">
-            <strong>${totalReviews}+</strong>
-            <span>Reviews</span>
-          </div>
-          <div class="chino-stat">
-            <strong>Free</strong>
-            <span>Shipping over $${CONFIG.freeShippingOver}</span>
-          </div>
-          <div class="chino-stat">
-            <strong>Hand</strong>
-            <span>Painted in Vietnam</span>
+          <div class="chino-hero-stats">
+            <div class="chino-stat">
+              <strong>${avgRating}★</strong>
+              <span>Avg rating</span>
+            </div>
+            <div class="chino-stat">
+              <strong>${totalReviews}+</strong>
+              <span>Reviews</span>
+            </div>
+            <div class="chino-stat">
+              <strong>Free</strong>
+              <span>Shipping over $${CONFIG.freeShippingOver}</span>
+            </div>
+            <div class="chino-stat">
+              <strong>Hand</strong>
+              <span>Painted in Vietnam</span>
+            </div>
           </div>
         </div>
       </div>
@@ -1746,6 +1750,7 @@ function chinoPage() {
         <h2 class="serif">Every stripe, every heart — painted one at a time.</h2>
         <p>Each Chino Mug begins as a plain earthenware body at our partner workshop in Vietnam. The stripes, motifs and colour accents are all applied by hand using practiced brushwork — the kind of steady, repetitive skill that takes years to develop.</p>
         <p>Because each piece is hand-painted, there will always be a small variation between mugs. That's not a flaw. It's the thing that makes each one yours. The mug holds approximately 320ml and is both microwave and dishwasher safe — made to be used every single day.</p>
+        <p>We've worked with the same Vietnam workshop since 2006. Over nearly two decades, we've built a relationship based on trust, respect and a shared commitment to quality that you can feel in the weight of the mug in your hand.</p>
         <div style="margin-top:var(--sp-3);">
           <button class="btn btn-primary" data-route="product" data-pid="sweetheart">Shop the Sweetheart edition →</button>
         </div>
@@ -1812,7 +1817,7 @@ function journalPage() {
 
     <div class="journal-featured">
       <div class="journal-featured-img">
-        <img src="assets/HERO.png" alt="Jones &amp; Co ceramics in a home setting" loading="lazy">
+        <img src="assets/About-us-img2.webp" alt="Jones &amp; Co ceramics in a home setting" loading="lazy">
       </div>
       <div class="journal-featured-copy">
         <span class="journal-cat">Behind the Scenes</span>
@@ -1851,6 +1856,13 @@ function journalPage() {
 
 /* ----- ABOUT ----- */
 function aboutPage() {
+  const timeline = [
+    { year: '2006', text: 'Kate Jones launches Jones & Co from her Sydney dining table. The first Chino Mug is hand-painted in Vietnam and immediately sells out.' },
+    { year: '2010', text: 'The studio moves to Surry Hills. We launch our first Capiz shell wall art series in collaboration with artisan partners in the Philippines.' },
+    { year: '2014', text: 'Jones & Co is stocked in over 200 stores across Australia and New Zealand. The Chino Mug wins "Best Homewares Product" at the Reed Gift Fairs.' },
+    { year: '2019', text: 'We launch our first dedicated online store, bringing hand-painted ceramics directly into homes around the world.' },
+    { year: '2026', text: 'Twenty years on, every piece is still designed in Surry Hills and made by the same artisan partners — with the same conviction that beautiful things should be part of daily life.' }
+  ];
 
   return `
     <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -1862,95 +1874,103 @@ function aboutPage() {
       </div>
     </nav>
 
-    <div class="about-hero">
-      <img src="assets/HERO.png" alt="Jones &amp; Co ceramics — handmade joy for the home" loading="lazy">
-      <div class="about-hero-overlay">
-        <span class="eyebrow" style="color:var(--white);background:rgba(255,255,255,0.18);margin-bottom:var(--sp-3);">Our Story</span>
-        <h1 class="serif">Made with love.<br>Designed in Sydney.</h1>
+    <!-- INTRO: full-bleed blush, image left + text right -->
+    <div class="about-intro-block">
+      <div class="about-blob about-blob--honey" aria-hidden="true"></div>
+      <div class="about-blob about-blob--periwinkle" aria-hidden="true"></div>
+      <div class="about-intro-split">
+        <div class="about-intro-img">
+          <img src="assets/About-us-img1.webp" alt="Jones &amp; Co ceramics — handmade joy for the home" loading="lazy">
+        </div>
+        <div class="about-intro-copy">
+          <span class="eyebrow" style="background:rgba(44,36,22,0.1);color:var(--ink);">Our Story</span>
+          <h1 class="serif">Living with joy — made with care, since 2006.</h1>
+          <p>Jones &amp; Co began on a Sydney dining table with a conviction that everyday objects should make you feel something. Two decades on, we still design everything in our Surry Hills studio and still believe that a well-made mug, a thoughtful vase, or a hand-strung wall piece can turn an ordinary morning into a small ceremony.</p>
+          <p>At Jones &amp; Co, our mission is simple: to live a little. We bring fun, delight and the spirit of the abundant host to every corner of what we make — and to the homes of every person who uses it.</p>
+          <div class="about-color-swatches" aria-hidden="true">
+            <span style="background:#8fa0d4"></span>
+            <span style="background:var(--honey)"></span>
+            <span style="background:var(--coral)"></span>
+            <span style="background:var(--blush)"></span>
+          </div>
+        </div>
       </div>
     </div>
 
-
-
-    <div class="about-story-text">
-        <span class="eyebrow">Who we are</span>
-        <h2 class="serif">Colourful homewares, designed in Sydney and made with care.</h2>
-        <p>Jones &amp; Co creates joyful ceramics, tableware and Capiz shell wall art for everyday homes. Each piece is designed in Sydney and made by artisan partners, bringing colour, pattern and personality into daily life.</p>
-    </div>
-    </div>
-
-
+    <!-- WHAT WE CARE ABOUT -->
     <section class="about-values">
-    <h2 class="serif">What we care about</h2>
-
-    <div class="about-values-grid">
+      <h2 class="serif">What we care about</h2>
+      <div class="about-values-grid">
         <div class="about-value-card">
-        <div class="about-value-icon">✦</div>
-        <h3 class="serif">Handmade character</h3>
-        <p>Every piece carries the mark of the person who made it.</p>
+          <div class="about-value-icon">✦</div>
+          <h3 class="serif">Handmade character</h3>
+          <p>Every piece carries the mark of the person who made it. Small variations aren't flaws — they're proof that a person, not a machine, touched this object.</p>
         </div>
-
         <div class="about-value-card">
-        <div class="about-value-icon">◉</div>
-        <h3 class="serif">Designed in Australia</h3>
-        <p>Our collections begin in our Surry Hills studio.</p>
+          <div class="about-value-icon">◉</div>
+          <h3 class="serif">Designed in Sydney</h3>
+          <p>Our collections begin in our Surry Hills studio with a mood board, a conversation, and a question: what does joy look like this season?</p>
         </div>
-
         <div class="about-value-card">
-        <div class="about-value-icon">♡</div>
-        <h3 class="serif">Made with care</h3>
-        <p>We work with long-term artisan partners in Vietnam and the Philippines.</p>
+          <div class="about-value-icon">♡</div>
+          <h3 class="serif">Made with care</h3>
+          <p>We work with long-term artisan partners in Vietnam and the Philippines — built on mutual respect, fair pay and shared pride in craft.</p>
         </div>
-
         <div class="about-value-card">
-        <div class="about-value-icon">⊛</div>
-        <h3 class="serif">Built to last</h3>
-        <p>Made for everyday use, not short-term trends.</p>
+          <div class="about-value-icon">⊛</div>
+          <h3 class="serif">Built for every day</h3>
+          <p>Our pieces are made to be used, not kept behind glass. Microwave safe, dishwasher safe, and designed to look more beautiful with age and use.</p>
         </div>
-    </div>
+      </div>
     </section>
-
-
 
     <!-- MEET THE MAKER -->
     <div class="about-meet-maker" id="aboutMeetMaker">
-    <div class="maker-blob maker-blob--tl" aria-hidden="true"></div>
-    <div class="maker-blob maker-blob--br" aria-hidden="true"></div>
-
-    <div class="maker-split">
+      <div class="maker-blob maker-blob--tl" aria-hidden="true"></div>
+      <div class="maker-blob maker-blob--br" aria-hidden="true"></div>
+      <div class="maker-split">
         <div class="maker-photo-wrap">
-        <img src="assets/meet-maker/maker3.webp" alt="Artisan painter at work — Jones &amp; Co ceramics">
-        <div class="maker-ceramics" aria-hidden="true">
+          <img src="assets/meet-maker/maker3.webp" alt="Artisan painter at work — Jones &amp; Co ceramics">
+          <div class="maker-ceramics" aria-hidden="true">
             <div class="maker-jar maker-jar-1"></div>
             <div class="maker-jar maker-jar-2"></div>
             <div class="maker-jar maker-jar-3"></div>
             <div class="maker-jar maker-jar-4"></div>
+          </div>
         </div>
-        </div>
-
         <div class="maker-copy-panel">
-        <div class="maker-deco maker-deco-1" aria-hidden="true"></div>
-        <div class="maker-deco maker-deco-2" aria-hidden="true"></div>
-
-        <div class="maker-copy">
+          <div class="maker-deco maker-deco-1" aria-hidden="true"></div>
+          <div class="maker-deco maker-deco-2" aria-hidden="true"></div>
+          <div class="maker-copy">
             <h2 class="maker-heading">Meet the Maker</h2>
             <p>Every piece is touched by hand. We work closely with skilled artisan partners so each object carries warmth, variation and character.</p>
+            <p>We believe in small runs made with the highest level of attention to detail. We collaborate deeply with our factories to understand techniques and processes — and we'd love for you to hear their stories directly.</p>
             <button class="maker-blog-link" data-route="journal">Read the blog →</button>
+          </div>
         </div>
-        </div>
-    </div>
-
-    <div class="maker-wave" aria-hidden="true">
+      </div>
+      <div class="maker-wave" aria-hidden="true">
         <svg viewBox="0 0 1440 64" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0,30 C180,62 360,2 540,30 C720,62 900,2 1080,30 C1260,62 1380,14 1440,30 L1440,64 L0,64 Z" fill="#FFF8F4"/>
+          <path d="M0,30 C180,62 360,2 540,30 C720,62 900,2 1080,30 C1260,62 1380,14 1440,30 L1440,64 L0,64 Z" fill="#FFF8F4"/>
         </svg>
+      </div>
     </div>
+
+    <!-- TIMELINE -->
+    <div class="about-timeline">
+      <h2 class="serif">Twenty years in the making</h2>
+      <div class="timeline-list">
+        ${timeline.map(t => `
+          <div class="timeline-item">
+            <div class="timeline-year">${esc(t.year)}</div>
+            <p class="timeline-text">${esc(t.text)}</p>
+          </div>
+        `).join('')}
+      </div>
     </div>
 
-
-
+    <!-- CTA -->
     <div class="about-cta">
-     
       <h2 class="serif">Find your next favourite piece.</h2>
       <p>Browse our latest collections — from hand-painted Chino Mugs to Capiz shell wall art. Designed in Sydney, made with love.</p>
       <div style="display:flex;gap:var(--sp-3);flex-wrap:wrap;justify-content:center;">
