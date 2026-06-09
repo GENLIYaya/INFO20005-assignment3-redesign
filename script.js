@@ -631,8 +631,45 @@ const state = {
   currentOrderId: null,
   filter: 'all',
   sort: 'featured',
-  appliedCoupon: null
+  appliedCoupon: null,
+  auth: { loggedIn: false, name: '', email: '' }
 };
+
+/* ---- PERSISTENCE ---- */
+function saveState() {
+  try {
+    localStorage.setItem('jc_cart', JSON.stringify(state.cart));
+    localStorage.setItem('jc_wishlist', JSON.stringify([...state.wishlist]));
+    localStorage.setItem('jc_auth', JSON.stringify(state.auth));
+    localStorage.setItem('jc_orders', JSON.stringify(state.orders));
+  } catch(e2) {}
+}
+
+function loadState() {
+  try {
+    const c = localStorage.getItem('jc_cart');
+    if (c) state.cart = JSON.parse(c);
+    const w = localStorage.getItem('jc_wishlist');
+    if (w) state.wishlist = new Set(JSON.parse(w));
+    const a = localStorage.getItem('jc_auth');
+    if (a) state.auth = JSON.parse(a);
+    const o = localStorage.getItem('jc_orders');
+    if (o) state.orders = JSON.parse(o);
+  } catch(e2) {}
+}
+
+function updateAuthIcon() {
+  const btn = document.getElementById('accountOpen');
+  if (!btn) return;
+  if (state.auth.loggedIn) {
+    const initials = state.auth.name
+      ? state.auth.name.split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase()
+      : state.auth.email[0].toUpperCase();
+    btn.innerHTML = `<span class="account-initials-pill">${initials}</span>`;
+  } else {
+    btn.innerHTML = `<i class="fa-regular fa-user"></i>`;
+  }
+}
 
 
 
@@ -698,7 +735,7 @@ function toast(msg) {
   If it is new, a new cart line is created.
   Then the cart badge and mini cart are updated to give instant feedback.
 */
-// shopping cart， add to cart
+// shopping cart, add to cart
 function addToCart(id, qty = 1) {
     const line = state.cart.find(l => l.id === id);
     if (line) {
@@ -709,6 +746,7 @@ function addToCart(id, qty = 1) {
     updateBadge();
     toast('Added to cart ✓');
     openMiniCart();
+    saveState();
   }
 /*
   Updates the small number on the cart icon.
@@ -1345,7 +1383,6 @@ function productPage() {
 
     `;
   }
-//    related = 推荐商品列表.map = 一个个拿出来.card(x) = 把商品变成卡片.join('') = 把所有卡片拼起来显示
 
 
 
@@ -1358,10 +1395,6 @@ function productPage() {
   function cartPage() {
     const totals = computeTotals();
     const empty = state.cart.length === 0;
-    //   检查购物车是不是空的。如果 state.cart 里面没有商品，empty 就是 true。如果有商品，empty 就是 false。
-    // 如果 empty 是 true，就显示空购物车页面。否则，就显示正常购物车页面。
-
-         //   dataroute--你的点击监听器会识别它，然后调用 go('shop')。
     return `
       <nav class="breadcrumb" aria-label="Breadcrumb">
         <button class="back-btn" data-route="shop">Back</button>
@@ -1394,7 +1427,6 @@ function productPage() {
           <div class="cart-rows">
             ${state.cart.map(line => {
               const p = PRODUCTS.find(x => x.id === line.id);
-            //   把购物车里的每一条商品记录都拿出来，生成一行购物车 HTML。line = 购物车里的其中一行商品。根据购物车里的商品 id，去 PRODUCTS 商品数据库里找到完整商品信息。
               return `
                 <div class="cart-row" data-line="${p.id}">
                   <div class="cart-thumb">
@@ -1571,6 +1603,73 @@ function checkoutPage() {
 
   /* ----- ACCOUNT / ORDER HISTORY ----- */
   function accountPage() {
+    if (!state.auth.loggedIn) {
+      return `
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <button class="back-btn" data-route="home">Back</button>
+          <div class="crumbs">
+            <a href="#home" data-route="home">Home</a>
+            <span class="sep">›</span>
+            <span class="current">My Account</span>
+          </div>
+        </nav>
+        <div class="auth-wrap">
+          <div class="auth-blob auth-blob--honey" aria-hidden="true"></div>
+          <div class="auth-blob auth-blob--blush" aria-hidden="true"></div>
+          <div class="auth-card">
+            <div class="auth-brand">
+              <img src="assets/SYMBOL2.PNG" alt="Jones &amp; Co" class="auth-logo">
+            </div>
+            <h2 class="serif auth-heading">Welcome back</h2>
+            <div class="auth-tabs" role="tablist">
+              <button class="auth-tab-btn active" data-auth-tab="login" role="tab">Sign In</button>
+              <button class="auth-tab-btn" data-auth-tab="register" role="tab">Create Account</button>
+            </div>
+            <div id="authLogin">
+              <form id="loginForm" novalidate>
+                <div class="field">
+                  <label for="lEmail">Email address</label>
+                  <input type="email" id="lEmail" placeholder="hello@example.com" autocomplete="email">
+                </div>
+                <div class="field">
+                  <label for="lPass">Password</label>
+                  <input type="password" id="lPass" placeholder="Your password" autocomplete="current-password">
+                </div>
+                <button type="submit" class="btn btn-primary auth-submit">Sign In</button>
+              </form>
+              <p class="auth-switch">Don't have an account? <button class="auth-link" data-auth-tab="register">Create one</button></p>
+            </div>
+            <div id="authRegister" class="hidden">
+              <form id="registerForm" novalidate>
+                <div class="field">
+                  <label for="rName">Full name</label>
+                  <input type="text" id="rName" placeholder="Kate Jones" autocomplete="name">
+                </div>
+                <div class="field">
+                  <label for="rEmail">Email address</label>
+                  <input type="email" id="rEmail" placeholder="hello@example.com" autocomplete="email">
+                </div>
+                <div class="field">
+                  <label for="rPass">Password</label>
+                  <input type="password" id="rPass" placeholder="Choose a password" autocomplete="new-password">
+                </div>
+                <div class="field">
+                  <label for="rPass2">Confirm password</label>
+                  <input type="password" id="rPass2" placeholder="Repeat password" autocomplete="new-password">
+                </div>
+                <button type="submit" class="btn btn-primary auth-submit">Create Account</button>
+              </form>
+              <p class="auth-switch">Already have an account? <button class="auth-link" data-auth-tab="login">Sign in</button></p>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    const initials = state.auth.name
+      ? state.auth.name.split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase()
+      : state.auth.email[0].toUpperCase();
+
     return `
       <nav class="breadcrumb" aria-label="Breadcrumb">
         <button class="back-btn" data-route="home">Back</button>
@@ -1580,19 +1679,19 @@ function checkoutPage() {
           <span class="current">My Account</span>
         </div>
       </nav>
-
       <div class="account-layout">
         <aside class="account-sidebar">
-          <div class="account-avatar"><i class="fa-regular fa-user"></i></div>
-          <div class="account-name">My Account</div>
+          <div class="account-avatar account-avatar--initials">${esc(initials)}</div>
+          <div class="account-name">${esc(state.auth.name || state.auth.email)}</div>
+          ${state.auth.name ? `<div class="account-email">${esc(state.auth.email)}</div>` : ''}
           <div class="account-meta">
             <span>${state.orders.length} order${state.orders.length !== 1 ? 's' : ''}</span>
             <span>·</span>
             <span>${state.wishlist.size} saved</span>
           </div>
           <button class="btn btn-ghost full-w" data-route="shop" style="margin-top:var(--sp-3);">Continue shopping</button>
+          <button class="btn btn-outline full-w auth-logout" style="margin-top:var(--sp-2);">Sign Out</button>
         </aside>
-
         <div class="account-main">
           <h2 class="serif account-section-title">Order History</h2>
           ${state.orders.length === 0 ? `
@@ -2055,6 +2154,26 @@ document.body.addEventListener('click', (e) => {
       toast('Saved to wishlist ♥');
     }
 
+    saveState();
+    render();
+    return;
+  }
+
+  /* Auth tab switching */
+  const authTab = e.target.closest('[data-auth-tab]');
+  if (authTab) {
+    const tab = authTab.dataset.authTab;
+    document.querySelectorAll('.auth-tab-btn').forEach(b => b.classList.toggle('active', b.dataset.authTab === tab));
+    document.getElementById('authLogin').classList.toggle('hidden', tab !== 'login');
+    document.getElementById('authRegister').classList.toggle('hidden', tab !== 'register');
+    return;
+  }
+
+  /* Sign out */
+  if (e.target.closest('.auth-logout')) {
+    state.auth = { loggedIn: false, name: '', email: '' };
+    saveState();
+    updateAuthIcon();
     render();
     return;
   }
@@ -2166,6 +2285,45 @@ document.body.addEventListener('click', (e) => {
   creates a simple order ID, saves the order, then moves to confirmation.
 */
 document.body.addEventListener('submit', (e) => {
+  /* Login */
+  if (e.target.id === 'loginForm') {
+    e.preventDefault();
+    const email = document.getElementById('lEmail').value.trim();
+    const pass  = document.getElementById('lPass').value;
+    if (!email || !pass) { toast('Please fill in all fields'); return; }
+    let users = [];
+    try { users = JSON.parse(localStorage.getItem('jc_users') || '[]'); } catch(_e) {}
+    const user = users.find(u => u.email === email && u.password === pass);
+    if (!user) { toast('Incorrect email or password'); return; }
+    state.auth = { loggedIn: true, name: user.name, email: user.email };
+    saveState();
+    updateAuthIcon();
+    render();
+    return;
+  }
+
+  /* Register */
+  if (e.target.id === 'registerForm') {
+    e.preventDefault();
+    const nameVal = document.getElementById('rName').value.trim();
+    const email   = document.getElementById('rEmail').value.trim();
+    const pass    = document.getElementById('rPass').value;
+    const pass2   = document.getElementById('rPass2').value;
+    if (!nameVal || !email || !pass) { toast('Please fill in all fields'); return; }
+    if (pass !== pass2) { toast('Passwords do not match'); return; }
+    let users = [];
+    try { users = JSON.parse(localStorage.getItem('jc_users') || '[]'); } catch(_e) {}
+    if (users.find(u => u.email === email)) { toast('An account with this email already exists'); return; }
+    users.push({ name: nameVal, email, password: pass });
+    localStorage.setItem('jc_users', JSON.stringify(users));
+    state.auth = { loggedIn: true, name: nameVal, email };
+    saveState();
+    updateAuthIcon();
+    render();
+    toast('Welcome to Jones & Co, ' + nameVal + '!');
+    return;
+  }
+
   if (e.target.id !== 'checkoutForm') return;
   e.preventDefault();
   const fields = e.target.querySelectorAll('.field');
@@ -2187,6 +2345,7 @@ document.body.addEventListener('submit', (e) => {
   go('confirmation');
   state.cart = [];
   state.appliedCoupon = null;
+  saveState();
   updateBadge();
 });
 document.body.addEventListener('blur', (e) => {
@@ -2224,7 +2383,6 @@ function closeSearch() {
   const res = document.getElementById('searchResults');
   if (res) { res.hidden = true; res.innerHTML = ''; }
 }
-// 根据用户输入的词，显示搜索结果。找到搜索结果容器。如果页面上没有这个容器，就停止，不继续运行。
 function renderSearchResults(query) {
   const el = document.getElementById('searchResults');
   if (!el) return;
@@ -2240,7 +2398,6 @@ function renderSearchResults(query) {
     el.innerHTML = '<p class="search-no-results">No products found for "' + esc(query) + '"</p>';
     return;
   }
-//   如果一个商品都没找到，就显示：这里的 esc(query) 是为了防止用户输入奇怪符号导致 HTML 出错。
   el.innerHTML = matches.map(p => `
     <button class="search-result-item" data-pid="${esc(p.id)}">
       <div class="search-result-img">
@@ -2294,15 +2451,12 @@ document.getElementById('searchInput').addEventListener('keydown', (e) => {
 // mini cart 
 
 let miniCartTimer = null;
-// 先检查小购物车需要的 HTML 元素存不存在；如果购物车是空的，就显示空购物车提示。
 function renderMiniCart() {
   const body = document.getElementById('miniCartBody');
   const foot = document.getElementById('miniCartFoot');
   if (!body || !foot) return;
 
-
-//   因为购物车空的时候，不需要显示 subtotal、checkout 按钮这些东西。
-if (state.cart.length === 0) {
+  if (state.cart.length === 0) {
     body.innerHTML = `
       <div class="mini-cart-empty-art-state">
         <div class="cart-empty-inner">
@@ -2321,7 +2475,6 @@ if (state.cart.length === 0) {
   }
 
   foot.hidden = false;
-// 读取 state.cart 里的商品，去 PRODUCTS 里找商品图片、名字、价格。把 newArrivals 里的每一个商品 p，都交给 card(p) 变成一个商品卡片 HTML，最后 join('') 把这些卡片拼成一整段 HTML。如果没有找到这个商品，就返回一个空字符串，不显示任何东西。
   body.innerHTML = state.cart.map(line => {
     const p = PRODUCTS.find(x => x.id === line.id);
     if (!p) return '';
@@ -2354,11 +2507,8 @@ if (state.cart.length === 0) {
 
 function openMiniCart() {
   renderMiniCart();
-//  让右侧 mini cart 滑出来
-
   const panel = document.getElementById('miniCart');
   const scrim = document.getElementById('miniCartScrim');
-//   背景变暗
   if (!panel || !scrim) return;
 
   panel.classList.add('open');
@@ -2380,11 +2530,8 @@ function closeMiniCart() {
 
   clearTimeout(miniCartTimer);
 }
-// 加入商品后，addToCart() 会把商品存进 state.cart，然后调用 openMiniCart()。openMiniCart() 会先用 renderMiniCart() 生成小购物车内容，再给 mini cart 加上 open class，让它从右边弹出来。
 
-
-  /* ---- put in last page RENDER + INIT --------------------------------------------------- */
-//   看 state.route 是什么如果是 home → 调用 homePage()，如果是 shop → 调用 shopPage()。如果是 product → 调用 productPage()...最后把得到的 HTML 放进 #app
+  /* ---- RENDER + INIT ---- */
 function render() {
     const app = document.getElementById('app');
     let html;
@@ -2419,6 +2566,8 @@ function render() {
     }
   }
   
+  loadState();
+  updateAuthIcon();
   render();
   updateBadge();
 
